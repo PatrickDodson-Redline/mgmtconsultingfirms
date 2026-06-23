@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,700&family=JetBrains+Mono:wght@500&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'DM Sans',sans-serif;color:#1A1D24;background:#FAF8F4;padding:8px 4px 22px;line-height:1.5}
+.os-head{padding:4px 4px 14px;border-bottom:1px solid #E2DDCF;margin-bottom:16px}
+.os-eye{font:500 10.5px/1.3 'JetBrains Mono',monospace;letter-spacing:0.12em;text-transform:uppercase;color:#C87041;margin-bottom:8px}
+.os-h{font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:24px;letter-spacing:-0.4px;color:#1A1D24}
+.os-sub{font-size:13.5px;color:#464B55;margin:7px 0 0;max-width:78ch;line-height:1.55}
+.os-tag{display:inline-block;margin-top:12px;font:500 10px/1 'JetBrains Mono',monospace;letter-spacing:0.08em;text-transform:uppercase;color:#6E7388;background:#F0EDE4;border:1px solid #E2DDCF;border-radius:6px;padding:6px 10px}
+
+.row{display:grid;grid-template-columns:38px 1fr;gap:6px;background:#fff;border:1px solid #E2DDCF;border-radius:12px;padding:16px 18px 17px;margin-bottom:12px}
+.rnum{font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:20px;color:#C87041;line-height:1.1}
+.rtop{display:flex;justify-content:space-between;align-items:flex-start;gap:14px}
+.rname{font-family:'Space Grotesk',sans-serif;font-weight:600;font-size:15.5px;color:#1A1D24}
+.rtitle{display:block;font-size:12.5px;color:#464B55;margin-top:1px}
+.rscore{flex:none;font:500 11px/1 'JetBrains Mono',monospace;letter-spacing:0.06em;color:#1A1D24;background:#F7F2E8;border:1px solid #E4D9BF;border-radius:6px;padding:6px 9px;white-space:nowrap}
+.rco{font-size:13px;color:#1A1D24;margin-top:9px;font-weight:500}
+.cr{display:inline-block;margin-left:6px;font:500 9.5px/1 'JetBrains Mono',monospace;letter-spacing:0.07em;text-transform:uppercase;border-radius:5px;padding:4px 7px;vertical-align:middle}
+.cr-green{color:#5b6a46;background:rgba(138,155,114,0.16);border:1px solid rgba(138,155,114,0.4)}
+.cr-amber{color:#9a5326;background:rgba(200,112,65,0.13);border:1px solid rgba(200,112,65,0.4)}
+.rcontact{font:500 10.5px/1.5 'JetBrains Mono',monospace;color:#6E7388;margin-top:7px;word-break:break-word}
+.lbl{display:block;font:500 9px/1 'JetBrains Mono',monospace;letter-spacing:0.12em;text-transform:uppercase;color:#6E7388;margin-bottom:4px}
+.rwhy{font-size:12.9px;color:#464B55;line-height:1.55;margin-top:12px}
+.ropen{font-size:12.9px;color:#3a3f49;line-height:1.6;margin-top:12px;background:rgba(200,112,65,0.06);border-left:2px solid #C87041;border-radius:0 7px 7px 0;padding:11px 14px}
+
+.os-foot{margin-top:18px;padding-top:12px;border-top:1px solid #E2DDCF;font:500 10px/1.4 'JetBrains Mono',monospace;letter-spacing:0.06em;color:#6E7388;display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap}
+.rname,.os-h,.rco{text-wrap:balance}
+
+/* standalone (open full view) gets side margins; embed stays full-width */
+body.standalone{max-width:1200px;margin-left:auto;margin-right:auto}
+</style></head>
+<body>
+
+<div class="os-head">
+  <div class="os-eye">Weekly outreach sheet · Data and analytics</div>
+  <h1 class="os-h">Galweather Stearn</h1>
+  <p class="os-sub">Seattle metro retail and consumer goods. Five ranked targets to reach this week, each with the reason to reach out and an opener. Worked top to bottom, no prep.</p>
+  <div class="os-tag">5 this week · ranked by account fit, then prospect priority</div>
+</div>
+
+<div class="row">
+  <div class="rnum">1</div>
+  <div class="rmain">
+    <div class="rtop"><div><span class="rname">Ryan Prokesch</span><span class="rtitle">Director of Data &amp; Analytics</span></div><span class="rscore">A · 85</span></div>
+    <div class="rco">The Shade Store · Bellevue, WA<span class="cr cr-green">Greenfield</span></div>
+    <div class="rcontact">theshadestore.com · rprokesch@theshadestore.com · linkedin.com/in/ryan-prokesch-9470873b</div>
+    <div class="rwhy"><span class="lbl">Why</span>Built the modern stack on Snowflake, dbt, and Looker and is hiring into AI and analytics. The build is live, and the strategy-to-execution gap is the opening.</div>
+    <div class="ropen"><span class="lbl">Opening line</span>Ryan, the analytics engineer role naming dbt, Snowflake, Looker, and AI use cases tells me the build is real and already moving. Where it usually gets hard is adoption, getting the org to trust the numbers and run on them. How are you thinking about that part?</div>
+  </div>
+</div>
+
+<div class="row">
+  <div class="rnum">2</div>
+  <div class="rmain">
+    <div class="rtop"><div><span class="rname">Brock Stashick</span><span class="rtitle">Supply Chain Director</span></div><span class="rscore">A · 85</span></div>
+    <div class="rco">Outdoor Research · Seattle, WA<span class="cr cr-green">Greenfield</span></div>
+    <div class="rcontact">outdoorresearch.com · bstashick@outdoorresearch.com · linkedin.com/in/brockstashick</div>
+    <div class="rwhy"><span class="lbl">Why</span>Just stood up Centric market-intelligence and visual planning tools. The value is won or lost in post go-live adoption by planners and merchants.</div>
+    <div class="ropen"><span class="lbl">Opening line</span>Brock, standing up Centric Market Intelligence and Visual Boards is the easy half. The value tends to show up after go-live, when planners and merchants actually forecast and allocate off it. How is that landing with your teams so far?</div>
+  </div>
+</div>
+
+<div class="row">
+  <div class="rnum">3</div>
+  <div class="rmain">
+    <div class="rtop"><div><span class="rname">Audrey Crandall</span><span class="rtitle">Senior Director, Customer Data</span></div><span class="rscore">A · 85</span></div>
+    <div class="rco">Aritzia · Seattle, WA<span class="cr cr-green">Greenfield</span></div>
+    <div class="rcontact">aritzia.com · acrandall@aritzia.com · linkedin.com/in/audrey-crandall</div>
+    <div class="rwhy"><span class="lbl">Why</span>Leads customer data at Aritzia as the company evolves its customer data architecture, with active data-engineering and visualization hiring on a modern GCP, BigQuery, and Snowflake stack. Greenfield, no services incumbent.</div>
+    <div class="ropen"><span class="lbl">Opening line</span>Audrey, now leading customer data at Aritzia, you are stepping into it right as the customer data architecture is being rebuilt, the recent data-engineering and visualization hiring points to it. Standing that up cleanly from the start beats inheriting it. As you get your arms around the data, where do you want to set the foundation first?</div>
+  </div>
+</div>
+
+<div class="row">
+  <div class="rnum">4</div>
+  <div class="rmain">
+    <div class="rtop"><div><span class="rname">Guillermo Hernandez Garcia</span><span class="rtitle">Group VP Supply Chain</span></div><span class="rscore">A · 82</span></div>
+    <div class="rco">Golden State Foods · Seattle, WA<span class="cr cr-amber">Incumbent present</span></div>
+    <div class="rcontact">goldenstatefoods.com · ghernandezgarcia@goldenstatefoods.com · linkedin.com/in/guillermo-hernandez-garcia</div>
+    <div class="rwhy"><span class="lbl">Why</span>New chief digital and information officer and an active supply-chain data agenda. Incumbent present, so a displacement or expansion conversation. Incumbent: Aviana Global, RSM, IBM.</div>
+    <div class="ropen"><span class="lbl">Opening line</span>Guillermo, a new chief digital and information officer usually means the data roadmap moves fast, and supply chain is first in line for both the upside and the strain. How are you sequencing what comes first?</div>
+  </div>
+</div>
+
+<div class="row">
+  <div class="rnum">5</div>
+  <div class="rmain">
+    <div class="rtop"><div><span class="rname">Spencer McKenney</span><span class="rtitle">CTO &amp; Co-Founder</span></div><span class="rscore">A · 78</span></div>
+    <div class="rco">Levanta · Seattle, WA<span class="cr cr-green">Greenfield</span></div>
+    <div class="rcontact">levanta.io · spencer@levanta.io · linkedin.com/in/spencermckenney</div>
+    <div class="rwhy"><span class="lbl">Why</span>Founder-CTO publishing on affiliate analytics across 390 brands. Scaling governance and trust is the next problem.</div>
+    <div class="ropen"><span class="lbl">Opening line</span>Spencer, your affiliate read on Prime Day, the year-over-year cut across 390 brands, is the kind of analysis most teams cannot run cleanly. The next problem it tends to surface is holding definitions and trust steady as volume climbs. Is that on your radar yet?</div>
+  </div>
+</div>
+
+<div class="os-foot"><span>Galweather Stearn · Seattle metro retail · Data and analytics</span><span>Demand intelligence by Redline Growth</span></div>
+
+<script>
+function reportH(){try{parent.postMessage({type:'resize',height:document.body.scrollHeight},'*');}catch(e){}}
+window.addEventListener('load',reportH);window.addEventListener('resize',reportH);setTimeout(reportH,300);
+</script>
+<script>if(window.self===window.top){document.documentElement&&document.addEventListener('DOMContentLoaded',function(){document.body.classList.add('standalone');});if(document.body){document.body.classList.add('standalone');}}</script>
+</body></html>

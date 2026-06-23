@@ -1,0 +1,1663 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Redline Growth · Management Consulting</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,700&family=JetBrains+Mono:wght@400;500&family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --nav-dark: #1A1D24;
+  --amber: #C87041;
+  --blue: #5D7E8A;
+  --green: #8A9B72;
+  --gold: #C9A44D;
+  --crimson: #9B1C24;
+  --vellum: #E8E4D8;
+  --gray: #6E7388;
+  --graphite: #464B55;
+  --linen: #B8A898;
+  --surface-1: #F0EDE4;
+  --surface-2: #FAF8F4;
+  --border-sub: rgba(26,29,36,0.10);
+  --border-acc: rgba(200,112,65,0.35);
+  --text-1: #1A1D24;
+  --text-2: #464B55;
+  --text-m: #6E7388;
+  --shadow-1: 0 1px 3px rgba(26,29,36,0.08), 0 1px 2px rgba(26,29,36,0.06);
+  --shadow-2: 0 4px 12px rgba(26,29,36,0.10), 0 2px 4px rgba(26,29,36,0.06);
+  --shadow-3: 0 12px 32px rgba(26,29,36,0.14), 0 4px 8px rgba(26,29,36,0.08);
+}
+
+html, body {
+  background: var(--vellum);
+  color: var(--text-2);
+  font-family: 'DM Sans', system-ui, sans-serif;
+  font-size: 15px;
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ============================================ NAV ============================================ */
+.nav {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  background: var(--nav-dark);
+  border-bottom: 2px solid var(--amber);
+  height: 64px;
+  display: flex;
+  align-items: center;
+  padding: 0 32px;
+  z-index: 100;
+}
+
+.nav-brand {
+  cursor: pointer;
+  display: flex;
+  align-items: flex-end;
+  gap: 4px;
+  user-select: none;
+}
+
+.nav-brand .dial {
+  height: 36px;
+  width: auto;
+  display: block;
+}
+
+.nav-brand .wordmark {
+  height: 24px;
+  width: auto;
+  display: block;
+}
+
+.nav-brand-mark {
+  display: none;
+}
+
+.nav-spacer { flex: 1; }
+
+.nav-links {
+  display: flex;
+  gap: 4px;
+}
+
+.nav-link {
+  font-family: 'DM Sans', sans-serif;
+  font-size: 13px;
+  font-weight: 500;
+  color: rgba(255,255,255,0.7);
+  background: transparent;
+  border: none;
+  padding: 10px 18px;
+  cursor: pointer;
+  letter-spacing: 0.3px;
+  border-radius: 2px;
+  transition: all 0.15s ease;
+}
+
+.nav-link:hover { color: #fff; background: rgba(255,255,255,0.05); }
+
+.nav-link.active {
+  color: var(--amber);
+  background: rgba(200,112,65,0.10);
+  border-bottom: 2px solid var(--amber);
+  border-radius: 0;
+  padding-bottom: 8px;
+}
+
+/* ============================================ PAGE STRUCTURE ============================================ */
+.main {
+  margin-top: 64px;
+  padding: 32px 48px 24px;
+  max-width: 1440px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.page { display: none; }
+.page.active { display: block; animation: fadeIn 0.25s ease; }
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(4px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.page-eyebrow {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  color: var(--amber);
+  margin-bottom: 8px;
+}
+
+.page-title {
+  font-family: 'Space Grotesk', sans-serif;
+  font-weight: 600;
+  font-size: 32px;
+  color: var(--text-1);
+  margin-bottom: 6px;
+  letter-spacing: -0.5px;
+}
+
+.page-subtitle {
+  font-family: 'DM Sans', sans-serif;
+  font-size: 15px;
+  color: var(--text-m);
+  margin-bottom: 24px;
+  max-width: 900px;
+}
+
+.page-strategy {
+  font-family: 'DM Sans', sans-serif;
+  font-size: 14px;
+  color: var(--text-2);
+  margin-bottom: 28px;
+  max-width: 1100px;
+  font-style: italic;
+}
+
+/* ============================================ LANDING PAGE ============================================ */
+.landing {
+  display: none;
+  text-align: center;
+  padding: 80px 20px 32px;
+}
+.landing.active { display: block; animation: fadeIn 0.3s ease; }
+
+.landing-eyebrow {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  color: var(--amber);
+  margin-bottom: 12px;
+}
+
+.landing-title {
+  font-family: 'Space Grotesk', sans-serif;
+  font-weight: 600;
+  font-size: 38px;
+  color: var(--text-1);
+  margin-bottom: 6px;
+  letter-spacing: -1px;
+  line-height: 1.15;
+}
+
+.landing-sub {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 12px;
+  color: var(--text-m);
+  margin-bottom: 24px;
+  letter-spacing: 0.5px;
+}
+
+.landing-intro {
+  max-width: 780px;
+  margin: 0 auto 32px;
+  font-size: 15px;
+  line-height: 1.6;
+  color: var(--text-2);
+}
+
+.landing-cards {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 14px;
+  max-width: 1320px;
+  margin: 0 auto;
+}
+
+.landing-card {
+  background: var(--surface-2);
+  border: 1px solid var(--border-sub);
+  border-radius: 4px;
+  padding: 24px 20px;
+  cursor: pointer;
+  text-align: left;
+  transition: all 0.2s ease;
+  font-family: inherit;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: flex-start;
+}
+
+.landing-card:hover {
+  border-color: var(--amber);
+  box-shadow: var(--shadow-2);
+  transform: translateY(-2px);
+}
+
+.landing-card-num {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 12px;
+  color: var(--amber);
+  margin-bottom: 10px;
+  letter-spacing: 1px;
+}
+
+.landing-card-title {
+  font-family: 'Space Grotesk', sans-serif;
+  font-weight: 600;
+  font-size: 19px;
+  color: var(--text-1);
+  line-height: 1.25;
+}
+
+.landing-context {
+  max-width: 1320px;
+  margin: 72px auto 0;
+  padding: 36px 8px 0;
+  display: grid;
+  grid-template-columns: 280px 1fr;
+  gap: 56px;
+  text-align: left;
+  border-top: 1px solid rgba(26,29,36,0.08);
+}
+
+.context-eyebrow {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: 1.6px;
+  color: var(--text-m);
+  margin-bottom: 12px;
+  font-weight: 500;
+}
+
+.context-about p {
+  font-family: 'DM Sans', sans-serif;
+  font-size: 13.5px;
+  line-height: 1.6;
+  color: var(--text-2);
+  margin-bottom: 10px;
+  text-wrap: pretty;
+}
+
+.context-about p.context-lede {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--amber);
+  line-height: 1.4;
+  margin-bottom: 14px;
+  letter-spacing: -0.2px;
+}
+
+.context-about p:last-of-type {
+  margin-bottom: 14px;
+}
+
+.context-about a {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 12px;
+  color: var(--amber);
+  text-decoration: none;
+  letter-spacing: 0.3px;
+}
+
+.context-about a:hover {
+  text-decoration: underline;
+}
+
+.context-services {
+  display: block;
+}
+
+.svc-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 32px;
+}
+
+.svc-group {
+  display: block;
+}
+
+.svc-group-name {
+  font-family: 'Space Grotesk', sans-serif;
+  font-weight: 600;
+  font-size: 12px;
+  color: var(--text-1);
+  line-height: 1.3;
+  margin-bottom: 10px;
+  padding-bottom: 8px;
+  border-bottom: 1px solid rgba(26,29,36,0.08);
+}
+
+.svc-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.svc-list li {
+  font-family: 'DM Sans', sans-serif;
+  font-size: 12px;
+  color: var(--text-2);
+  line-height: 1.45;
+  padding: 3px 0 3px 12px;
+  position: relative;
+  text-wrap: balance;
+}
+
+.svc-list li::before {
+  content: '·';
+  position: absolute;
+  left: 2px;
+  color: var(--amber);
+  font-weight: 700;
+}
+
+@media (max-width: 1100px) {
+  .landing-context {
+    grid-template-columns: 1fr;
+    gap: 36px;
+  }
+  .svc-grid {
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+}
+
+/* ============================================ CARDS (TAB PATTERN) ============================================ */
+.cards-row {
+  display: grid;
+  gap: 16px;
+  margin-bottom: 0;
+}
+
+.cards-row.cols-4 { grid-template-columns: repeat(5, 1fr); }
+.cards-row.cols-2x2 { grid-template-columns: repeat(2, 1fr); gap: 16px; }
+
+.card {
+  background: var(--surface-2);
+  border: 1px solid var(--border-sub);
+  border-radius: 4px;
+  padding: 18px 18px 14px;
+  cursor: pointer;
+  transition: all 0.18s ease;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  min-height: 200px;
+}
+
+.card:hover {
+  border-color: var(--border-acc);
+  box-shadow: var(--shadow-1);
+}
+
+.card.active {
+  border-color: var(--amber);
+  border-width: 2px;
+  padding: 17px 17px 13px;
+  box-shadow: var(--shadow-2);
+}
+
+.card-tag {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  font-weight: 500;
+  padding: 3px 8px;
+  border-radius: 2px;
+  display: inline-block;
+  margin-bottom: 10px;
+  align-self: flex-start;
+}
+
+.card-tag.required {
+  background: var(--amber);
+  color: #fff;
+}
+.card-tag.recommended {
+  background: rgba(93,126,138,0.15);
+  color: var(--blue);
+  border: 1px solid rgba(93,126,138,0.35);
+}
+.card-tag.consideration {
+  background: rgba(110,115,136,0.10);
+  color: var(--gray);
+  border: 1px solid rgba(110,115,136,0.30);
+}
+.card-tag.neutral {
+  background: rgba(70,75,85,0.08);
+  color: var(--graphite);
+  border: 1px solid rgba(70,75,85,0.20);
+}
+
+.card-num {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px;
+  color: var(--amber);
+  letter-spacing: 1px;
+  margin-bottom: 6px;
+  font-weight: 500;
+}
+
+.card-statement {
+  font-family: 'Space Grotesk', sans-serif;
+  font-weight: 600;
+  font-size: 15px;
+  color: var(--text-1);
+  line-height: 1.35;
+  margin-bottom: 10px;
+}
+
+.card-why {
+  font-family: 'DM Sans', sans-serif;
+  font-size: 13px;
+  color: var(--text-2);
+  line-height: 1.5;
+  flex: 1;
+}
+
+.card-expand {
+  margin-top: 12px;
+  padding-top: 10px;
+  border-top: 1px solid var(--border-sub);
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px;
+  color: var(--amber);
+  text-transform: uppercase;
+  letter-spacing: 0.8px;
+  font-weight: 500;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  user-select: none;
+}
+
+.card-expand-icon {
+  width: 14px;
+  height: 14px;
+  border: 1px solid var(--amber);
+  border-radius: 50%;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 12px;
+  line-height: 1;
+  transition: transform 0.2s ease;
+}
+
+.card.active .card-expand-icon {
+  background: var(--amber);
+  color: #fff;
+  transform: rotate(45deg);
+}
+
+/* Detail tray (single tray below card row) */
+.detail-tray {
+  margin-top: 16px;
+  background: var(--surface-2);
+  border: 1px solid var(--amber);
+  border-left: 4px solid var(--amber);
+  border-radius: 4px;
+  padding: 22px 26px;
+  display: none;
+  box-shadow: var(--shadow-2);
+  animation: traySlide 0.25s ease;
+}
+
+@keyframes traySlide {
+  from { opacity: 0; transform: translateY(-6px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.detail-tray.open { display: block; }
+
+.detail-tray-header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 16px;
+  margin-bottom: 12px;
+  padding-bottom: 12px;
+  border-bottom: 1px solid var(--border-sub);
+}
+
+.detail-tray-title {
+  font-family: 'Space Grotesk', sans-serif;
+  font-weight: 600;
+  font-size: 16px;
+  color: var(--text-1);
+}
+
+.detail-tray-eyebrow {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  color: var(--amber);
+  margin-bottom: 4px;
+}
+
+.detail-tray-close {
+  background: transparent;
+  border: 1px solid var(--border-sub);
+  color: var(--text-m);
+  width: 28px;
+  height: 28px;
+  border-radius: 2px;
+  cursor: pointer;
+  font-size: 16px;
+  line-height: 1;
+  flex-shrink: 0;
+  transition: all 0.15s ease;
+  font-family: inherit;
+}
+
+.detail-tray-close:hover {
+  background: var(--nav-dark);
+  color: #fff;
+  border-color: var(--nav-dark);
+}
+
+.detail-tray-body {
+  font-size: 13.5px;
+  color: var(--text-2);
+  line-height: 1.6;
+}
+
+.detail-tray-body ul {
+  list-style: none;
+  padding: 0;
+  column-count: 2;
+  column-gap: 32px;
+}
+
+.detail-tray-body li {
+  position: relative;
+  padding-left: 16px;
+  margin-bottom: 10px;
+  break-inside: avoid;
+  -webkit-column-break-inside: avoid;
+  page-break-inside: avoid;
+}
+
+.detail-tray-body li::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 9px;
+  width: 6px;
+  height: 1px;
+  background: var(--amber);
+}
+
+.detail-tray-body li strong {
+  color: var(--text-1);
+  font-weight: 600;
+}
+
+.detail-tray-callout {
+  margin-top: 14px;
+  padding: 12px 14px;
+  background: rgba(200,112,65,0.08);
+  border-left: 3px solid var(--amber);
+  border-radius: 2px;
+  font-size: 13px;
+  color: var(--text-2);
+  font-style: italic;
+}
+
+/* ============================================ PAGE 3: APPROACH SPECIFIC ============================================ */
+.dossier-section {
+  margin-top: 36px;
+  background: var(--nav-dark);
+  border-radius: 4px;
+  padding: 32px 36px;
+  color: #fff;
+  position: relative;
+  overflow: hidden;
+}
+
+.dossier-section::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0;
+  width: 4px;
+  height: 100%;
+  background: var(--amber);
+}
+
+.dossier-grid {
+  display: grid;
+  grid-template-columns: 1.4fr 1fr;
+  gap: 32px;
+  align-items: center;
+}
+
+.dossier-eyebrow {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  color: var(--amber);
+  margin-bottom: 8px;
+}
+
+.dossier-title {
+  font-family: 'Space Grotesk', sans-serif;
+  font-weight: 600;
+  font-size: 22px;
+  color: #fff;
+  margin-bottom: 10px;
+  line-height: 1.25;
+}
+
+.dossier-body {
+  font-size: 13.5px;
+  color: rgba(255,255,255,0.75);
+  line-height: 1.6;
+  margin-bottom: 16px;
+}
+
+.dossier-features {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 6px 20px;
+  list-style: none;
+  font-family: 'DM Sans', sans-serif;
+  font-size: 12.5px;
+  color: rgba(255,255,255,0.85);
+}
+
+.dossier-features li {
+  position: relative;
+  padding-left: 14px;
+}
+
+.dossier-features li::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 9px;
+  width: 6px;
+  height: 1px;
+  background: var(--amber);
+}
+
+.dossier-cta-wrap {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  align-items: flex-start;
+}
+
+.dossier-cta {
+  background: var(--amber);
+  color: #fff;
+  border: none;
+  padding: 16px 28px;
+  font-family: 'Space Grotesk', sans-serif;
+  font-weight: 600;
+  font-size: 14px;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+  cursor: pointer;
+  border-radius: 2px;
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  transition: all 0.18s ease;
+  width: 100%;
+  justify-content: center;
+}
+
+.dossier-cta:hover {
+  background: #B25E33;
+  box-shadow: 0 8px 24px rgba(200,112,65,0.35);
+  transform: translateY(-1px);
+}
+
+.dossier-cta-arrow {
+  font-size: 16px;
+  line-height: 1;
+}
+
+.dossier-cta-note {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px;
+  color: rgba(255,255,255,0.55);
+  text-transform: uppercase;
+  letter-spacing: 0.8px;
+  text-align: center;
+  width: 100%;
+}
+
+/* ============================================ PAGE 4: WHY REDLINE ============================================ */
+.shy-quote {
+  background: var(--surface-2);
+  border-left: 4px solid var(--amber);
+  padding: 20px 28px;
+  margin-bottom: 22px;
+  border-radius: 0 4px 4px 0;
+  display: flex;
+  align-items: center;
+  gap: 24px;
+}
+
+.shy-quote-text {
+  font-family: 'Space Grotesk', sans-serif;
+  font-weight: 500;
+  font-size: 17px;
+  color: var(--text-1);
+  line-height: 1.4;
+  font-style: italic;
+  flex: 1;
+}
+
+.shy-quote-attribution {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px;
+  color: var(--amber);
+  text-transform: uppercase;
+  letter-spacing: 0.8px;
+  white-space: nowrap;
+  border-left: 1px solid var(--border-sub);
+  padding-left: 24px;
+  line-height: 1.6;
+}
+
+.shy-quote-attribution strong {
+  display: block;
+  font-weight: 600;
+  color: var(--text-1);
+  margin-bottom: 2px;
+  font-size: 12px;
+}
+
+/* Why Redline Growth layout: venn on top, 3 cards row below */
+.why-grid {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+}
+
+.venn-wrap {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  padding: 0;
+}
+
+.venn-svg {
+  width: 540px;
+  height: 320px;
+  max-width: 100%;
+}
+
+.why-cards {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+  width: 100%;
+}
+
+.why-card {
+  min-height: 180px;
+}
+
+/* ============================================ PAGE 5: SUMMARY ============================================ */
+.summary-grid {
+  display: grid;
+  grid-template-columns: 1fr 1.1fr 1fr;
+  gap: 20px;
+  margin-bottom: 28px;
+}
+
+.summary-col {
+  background: var(--surface-2);
+  border: 1px solid var(--border-sub);
+  border-radius: 4px;
+  padding: 28px 26px;
+  display: flex;
+  flex-direction: column;
+}
+
+.summary-col.investment {
+  background: var(--nav-dark);
+  color: #fff;
+  border-color: var(--nav-dark);
+  position: relative;
+  overflow: hidden;
+}
+
+.summary-col.investment::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0;
+  width: 100%;
+  height: 4px;
+  background: var(--amber);
+}
+
+.summary-eyebrow {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  color: var(--amber);
+  margin-bottom: 10px;
+  font-weight: 500;
+}
+
+.summary-col.investment .summary-eyebrow {
+  color: var(--amber);
+}
+
+.summary-header {
+  font-family: 'Space Grotesk', sans-serif;
+  font-weight: 600;
+  font-size: 18px;
+  color: var(--text-1);
+  margin-bottom: 18px;
+}
+
+.summary-col.investment .summary-header {
+  color: #fff;
+}
+
+.summary-list {
+  list-style: none;
+  padding: 0;
+}
+
+.summary-list li {
+  font-size: 14px;
+  color: var(--text-2);
+  margin-bottom: 12px;
+  padding-left: 16px;
+  position: relative;
+  line-height: 1.45;
+}
+
+.summary-list li::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 9px;
+  width: 8px;
+  height: 1px;
+  background: var(--amber);
+}
+
+.summary-list li strong {
+  color: var(--text-1);
+  font-weight: 600;
+  display: block;
+  margin-bottom: 2px;
+}
+
+.summary-note {
+  font-size: 12px;
+  color: var(--text-m);
+  font-style: italic;
+  margin-top: auto;
+  padding-top: 16px;
+  border-top: 1px solid var(--border-sub);
+  line-height: 1.5;
+}
+
+.invest-range {
+  font-family: 'Space Grotesk', sans-serif;
+  font-weight: 600;
+  font-size: 56px;
+  color: var(--amber);
+  letter-spacing: -2px;
+  line-height: 1;
+  margin: 8px 0 16px;
+}
+
+.invest-subline {
+  font-size: 13px;
+  color: rgba(255,255,255,0.75);
+  line-height: 1.55;
+  margin-bottom: 18px;
+}
+
+.invest-honest {
+  font-size: 12px;
+  color: rgba(255,255,255,0.55);
+  font-style: italic;
+  padding: 12px 14px;
+  background: rgba(200,112,65,0.10);
+  border-left: 2px solid var(--amber);
+  margin-top: auto;
+  line-height: 1.5;
+}
+
+.summary-footer {
+  margin-top: 24px;
+  padding: 16px 24px;
+  background: var(--surface-2);
+  border: 1px solid var(--border-sub);
+  border-radius: 4px;
+  text-align: center;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px;
+  color: var(--text-m);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+/* ============================================ CHALLENGE PAGE BRIDGE ============================================ */
+.bridge-line {
+  margin-top: 24px;
+  padding: 14px 20px;
+  background: var(--surface-2);
+  border-left: 3px solid var(--amber);
+  border-radius: 0 4px 4px 0;
+  font-size: 13.5px;
+  color: var(--text-2);
+  font-style: italic;
+  display: none;
+}
+
+
+/* ============================================ ROADMAP PAGE ============================================ */
+
+:root {
+  --month-px: 80px;
+  --label-w: 280px;
+  --row-h: 64px;
+  --time-h: 44px;
+  --light-vellum: #F5F1E8;
+  --text: var(--text-1);
+}
+
+
+
+
+
+/* Legend */
+.legend {
+  background: var(--light-vellum);
+  padding: 14px 32px;
+  display: flex;
+  gap: 36px;
+  flex-wrap: wrap;
+  border-bottom: 1px solid rgba(70,75,85,0.25);
+  align-items: center;
+}
+.legend-group {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+.legend-label {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 9px;
+  color: var(--graphite);
+  text-transform: uppercase;
+  letter-spacing: 1.2px;
+  font-weight: 500;
+}
+.legend-item {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 11.5px;
+  color: var(--graphite);
+}
+.legend-swatch {
+  width: 16px;
+  height: 12px;
+  border-radius: 2px;
+  flex-shrink: 0;
+}
+
+/* Roadmap scroll container */
+.roadmap-scroll {
+  max-height: 70vh;
+  overflow: auto;
+  background: var(--vellum);
+  border-bottom: 1px solid rgba(70,75,85,0.4);
+  position: relative;
+}
+.roadmap {
+  position: relative;
+  width: max-content;
+}
+
+/* Time axis (sticky top) */
+.time-axis {
+  position: sticky;
+  top: 0;
+  z-index: 5;
+  background: var(--vellum);
+  display: flex;
+  height: var(--time-h);
+  border-bottom: 2px solid var(--graphite);
+}
+.time-axis-corner {
+  width: var(--label-w);
+  position: sticky;
+  left: 0;
+  z-index: 6;
+  background: var(--vellum);
+  border-right: 1px solid var(--graphite);
+  display: flex;
+  align-items: center;
+  padding: 0 16px;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 9px;
+  color: var(--graphite);
+  text-transform: uppercase;
+  letter-spacing: 1.2px;
+  font-weight: 500;
+}
+.time-months {
+  position: relative;
+  height: 100%;
+}
+.month-label {
+  position: absolute;
+  top: 0;
+  width: var(--month-px);
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: 11px;
+  color: var(--graphite);
+  font-weight: 500;
+}
+.month-label .m {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 11px;
+  font-weight: 600;
+  line-height: 1;
+}
+.month-label .y {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 9px;
+  color: var(--gray);
+  margin-top: 2px;
+  line-height: 1;
+}
+.month-divider {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 1px;
+  background: rgba(70,75,85,0.18);
+}
+.month-divider.quarter {
+  background: rgba(70,75,85,0.45);
+}
+.month-divider.year {
+  background: var(--amber);
+  width: 2px;
+}
+
+/* Active engagement window background shading */
+.active-window-bg {
+  position: absolute;
+  top: var(--time-h);
+  bottom: 0;
+  background: rgba(200,112,65,0.04);
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* Section headers */
+.section-header {
+  display: flex;
+  align-items: center;
+  height: 36px;
+  background: var(--light-vellum);
+  border-top: 1px solid rgba(70,75,85,0.35);
+  border-bottom: 1px solid rgba(70,75,85,0.35);
+  position: relative;
+  z-index: 2;
+}
+.section-header .sh-content {
+  position: sticky;
+  left: 0;
+  display: flex;
+  align-items: center;
+  padding: 0 16px;
+  height: 100%;
+  background: var(--light-vellum);
+  border-right: 1px solid rgba(70,75,85,0.2);
+  min-width: var(--label-w);
+}
+.section-header h2 {
+  font-family: 'Space Grotesk', sans-serif;
+  font-weight: 600;
+  font-size: 12px;
+  margin: 0;
+  color: var(--graphite);
+  text-transform: uppercase;
+  letter-spacing: 0.8px;
+}
+.section-header .sh-note {
+  font-size: 11px;
+  color: var(--gray);
+  margin-left: 14px;
+  font-style: italic;
+}
+
+/* Block rows */
+.row {
+  display: flex;
+  height: var(--row-h);
+  border-bottom: 1px solid rgba(70,75,85,0.12);
+  position: relative;
+  z-index: 1;
+}
+.row:hover {
+  background: rgba(255,255,255,0.25);
+}
+
+.label {
+  width: var(--label-w);
+  padding: 8px 14px 8px 16px;
+  position: sticky;
+  left: 0;
+  z-index: 3;
+  background: var(--vellum);
+  border-right: 1px solid var(--graphite);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+.row:hover .label {
+  background: #EFEBDF;
+}
+.label.tier-accent-required { border-right: 4px solid var(--crimson); }
+.label.tier-accent-recommended { border-right: 4px solid var(--blue); }
+.label.tier-accent-suggested { border-right: 4px solid var(--gold); }
+.label.tier-accent-optional { border-right: 4px solid var(--gray); }
+
+.label .row-block-id {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px;
+  color: var(--amber);
+  font-weight: 500;
+  letter-spacing: 0.5px;
+  margin-bottom: 2px;
+}
+.label .row-block-name {
+  font-family: 'Space Grotesk', sans-serif;
+  font-weight: 500;
+  font-size: 13px;
+  color: var(--text);
+  line-height: 1.25;
+}
+.label .row-investment {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px;
+  color: var(--graphite);
+  margin-top: 3px;
+  font-weight: 500;
+}
+
+.track {
+  position: relative;
+  height: 100%;
+  cursor: pointer;
+}
+
+/* Phase segments */
+.phase {
+  position: absolute;
+  top: 16px;
+  height: 32px;
+  z-index: 2;
+}
+.phase + .phase {
+  border-left: 1px solid rgba(255,255,255,0.5);
+}
+
+.phase-build-required {
+  background: var(--amber);
+}
+.phase-stabilize-required {
+  background: var(--amber);
+  background-image: linear-gradient(135deg, rgba(255,255,255,0.18) 25%, transparent 25%, transparent 50%, rgba(255,255,255,0.18) 50%, rgba(255,255,255,0.18) 75%, transparent 75%, transparent);
+  background-size: 8px 8px;
+}
+.phase-stabilize-recommended {
+  background: var(--blue);
+  background-image: linear-gradient(135deg, rgba(255,255,255,0.18) 25%, transparent 25%, transparent 50%, rgba(255,255,255,0.18) 50%, rgba(255,255,255,0.18) 75%, transparent 75%, transparent);
+  background-size: 8px 8px;
+}
+.phase-stabilize-optionalqa {
+  background: rgba(110,115,136,0.55);
+  background-image: linear-gradient(135deg, rgba(255,255,255,0.2) 25%, transparent 25%, transparent 50%, rgba(255,255,255,0.2) 50%, rgba(255,255,255,0.2) 75%, transparent 75%, transparent);
+  background-size: 8px 8px;
+}
+.phase-maintain-optional {
+  background: repeating-linear-gradient(90deg, rgba(110,115,136,0.32) 0, rgba(110,115,136,0.32) 4px, rgba(110,115,136,0.12) 4px, rgba(110,115,136,0.12) 8px);
+}
+.phase-advisory {
+  background: rgba(110,115,136,0.22);
+  border: 1px solid var(--gray);
+}
+.phase-planning {
+  background: rgba(201,164,77,0.15);
+  border: 2px dashed var(--gold);
+  border-radius: 3px;
+}
+
+.phase-id-label {
+  position: absolute;
+  left: 8px;
+  top: 50%;
+  transform: translateY(-50%);
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px;
+  color: white;
+  font-weight: 600;
+  pointer-events: none;
+  letter-spacing: 0.3px;
+}
+.phase-id-label.dark { color: var(--graphite); }
+
+.phase-investment-label {
+  position: absolute;
+  right: 8px;
+  top: 50%;
+  transform: translateY(-50%);
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px;
+  color: white;
+  font-weight: 600;
+  pointer-events: none;
+  text-shadow: 0 1px 2px rgba(0,0,0,0.3);
+}
+.phase-investment-label.dark { color: var(--graphite); text-shadow: none; }
+
+/* Earliest start dotted box */
+.earliest-box {
+  position: absolute;
+  top: 18px;
+  height: 28px;
+  border: 1.5px dashed var(--graphite);
+  border-radius: 3px;
+  background: transparent;
+  pointer-events: none;
+  z-index: 1;
+}
+.earliest-box::after {
+  content: 'earliest';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%,-50%);
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 8px;
+  color: var(--graphite);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  white-space: nowrap;
+  opacity: 0.7;
+}
+
+/* F1 Overlay row */
+.row.overlay-row {
+  height: 56px;
+  background: rgba(110,115,136,0.06);
+  border-top: 1px solid rgba(70,75,85,0.3);
+}
+.row.overlay-row .label {
+  background: rgba(232,228,216,0.95);
+}
+.row.overlay-row:hover .label {
+  background: #EFEBDF;
+}
+.overlay-band {
+  position: absolute;
+  top: 12px;
+  height: 32px;
+  background: repeating-linear-gradient(45deg, rgba(110,115,136,0.18) 0, rgba(110,115,136,0.18) 6px, rgba(110,115,136,0.06) 6px, rgba(110,115,136,0.06) 12px);
+  border: 1px solid var(--gray);
+  border-radius: 3px;
+  display: flex;
+  align-items: center;
+  padding: 0 14px;
+  font-size: 10.5px;
+  color: var(--graphite);
+  font-weight: 500;
+  font-family: 'DM Sans', sans-serif;
+}
+
+/* Tooltip */
+.tooltip {
+  position: fixed;
+  background: var(--nav-dark);
+  color: white;
+  padding: 14px 16px;
+  border-radius: 4px;
+  border-left: 3px solid var(--crimson);
+  max-width: 380px;
+  font-size: 12px;
+  line-height: 1.5;
+  pointer-events: none;
+  z-index: 1000;
+  box-shadow: 0 6px 24px rgba(0,0,0,0.35);
+  opacity: 0;
+  transition: opacity 0.12s ease;
+  font-family: 'DM Sans', sans-serif;
+}
+.tooltip.visible { opacity: 1; }
+.tooltip.tier-recommended { border-left-color: var(--blue); }
+.tooltip.tier-suggested { border-left-color: var(--gold); }
+.tooltip.tier-optional { border-left-color: var(--gray); }
+
+.tt-tier {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 9px;
+  letter-spacing: 1.2px;
+  text-transform: uppercase;
+  color: var(--crimson);
+  margin-bottom: 4px;
+  font-weight: 500;
+}
+.tooltip.tier-recommended .tt-tier { color: var(--blue); }
+.tooltip.tier-suggested .tt-tier { color: var(--gold); }
+.tooltip.tier-optional .tt-tier { color: var(--gray); }
+
+.tt-id {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px;
+  font-weight: 600;
+  color: rgba(255,255,255,0.6);
+  margin-bottom: 2px;
+}
+.tt-name {
+  font-family: 'Space Grotesk', sans-serif;
+  font-weight: 600;
+  font-size: 14px;
+  margin-bottom: 10px;
+  line-height: 1.3;
+}
+.tt-row {
+  margin: 5px 0;
+  display: flex;
+  gap: 8px;
+}
+.tt-label {
+  color: rgba(255,255,255,0.5);
+  font-weight: 500;
+  flex-shrink: 0;
+  min-width: 92px;
+  font-size: 11px;
+}
+.tt-value {
+  color: rgba(255,255,255,0.92);
+  font-size: 12px;
+  flex: 1;
+}
+.tt-rationale {
+  margin-top: 10px;
+  padding-top: 10px;
+  border-top: 1px solid rgba(255,255,255,0.12);
+  color: rgba(255,255,255,0.78);
+  font-size: 11.5px;
+  font-style: italic;
+  line-height: 1.5;
+}
+.tt-investment-detail {
+  margin-top: 6px;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px;
+  color: rgba(255,255,255,0.7);
+  line-height: 1.5;
+}
+
+
+
+ 
+.nav{background:#F0EDE4;border-bottom:2px solid #C87041}
+.nav-link{color:#1A1D24}
+.nav-link:hover,.nav-link.active{color:#C87041}
+.nav-brand{cursor:pointer}
+.brand-logo{height:40px;width:auto;display:block}
+.cards-row.cols-2{grid-template-columns:repeat(2,1fr)}
+.cards-row.cols-3{grid-template-columns:repeat(3,1fr)}
+@media(max-width:820px){.cards-row.cols-2,.cards-row.cols-3{grid-template-columns:1fr}}
+.tray-intro{font-size:15px;line-height:1.65;color:#464B55;margin:2px 0 16px;max-width:760px}
+.af{margin:14px 0 6px;border:1px solid #E2DDCF;border-radius:12px;overflow:hidden;background:#FAF8F4}
+.afl{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:10px 16px;background:#F0EDE4;border-bottom:1px solid #E2DDCF;font:600 12px/1 'JetBrains Mono',monospace;letter-spacing:.04em;text-transform:uppercase;color:#1A1D24}
+.eb{font:500 12px/1 'DM Sans',sans-serif;color:#C87041;background:none;border:1px solid #C87041;border-radius:6px;padding:6px 11px;cursor:pointer;text-transform:none;letter-spacing:0}
+.eb:hover{background:#C87041;color:#fff}
+.af iframe{width:100%;border:none;display:block}
+.v4-snap{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin:30px auto 0;max-width:1040px;text-align:left}
+.v4-tile{background:#FAF8F4;border:1px solid #E2DDCF;border-radius:14px;padding:22px}
+.v4-lab{font:600 11px/1 'JetBrains Mono',monospace;letter-spacing:.08em;text-transform:uppercase;color:#C87041;margin-bottom:10px}
+.v4-tx{font-size:14px;line-height:1.6;color:#464B55}
+.v4-engage{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;margin-top:24px}
+.v4-engage span{font:600 12px/1 'JetBrains Mono',monospace;letter-spacing:.06em;text-transform:uppercase;color:#1A1D24;background:#F0EDE4;border:1px solid #E2DDCF;border-radius:999px;padding:8px 16px}
+@media(max-width:820px){.v4-snap{grid-template-columns:1fr}}
+.held{background:#F0EDE4;border:1px dashed #C9C2B0;border-radius:12px;padding:22px 24px;color:#6E7388;font-size:14px;line-height:1.6;max-width:760px}
+.notes-body{max-width:820px}.notes-body h3{font:600 15px/1.3 'Space Grotesk',sans-serif;color:#1A1D24;margin:22px 0 8px}.notes-body p{font-size:14px;line-height:1.7;color:#464B55;margin-bottom:10px}
+
+
+/* About + Capabilities band */
+.about-band{max-width:1280px;margin:44px auto 0;padding:38px 0 6px;border-top:1px solid var(--border-sub);display:grid;grid-template-columns:1fr 1.9fr;gap:46px;text-align:left}
+.about-eyebrow{font:600 11px/1 'JetBrains Mono',monospace;letter-spacing:.14em;text-transform:uppercase;color:var(--amber);margin-bottom:14px}
+.about-h{font:600 22px/1.25 'Space Grotesk',sans-serif;color:var(--text-1);letter-spacing:-.4px;margin-bottom:14px}
+.about-p{font-size:14px;line-height:1.66;color:var(--text-2);margin:0}
+.about-url{font:600 12px/1 'JetBrains Mono',monospace;color:var(--amber);margin-top:18px}
+.caps-eyebrow{font:600 11px/1 'JetBrains Mono',monospace;letter-spacing:.14em;text-transform:uppercase;color:var(--text-m);margin-bottom:18px}
+.caps-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:26px}
+.cap-h{font:600 14px/1.3 'Space Grotesk',sans-serif;color:var(--text-1);margin-bottom:12px;padding-bottom:8px;border-bottom:1px solid var(--border-sub)}
+.cap-list{list-style:none;margin:0;padding:0}
+.cap-list li{font-size:12.5px;line-height:1.5;color:var(--text-2);padding-left:14px;position:relative;margin-bottom:8px}
+.cap-list li::before{content:'·';position:absolute;left:2px;color:var(--amber);font-weight:700}
+/* How We Engage */
+.eng-tiers{display:grid;grid-template-columns:1fr 1fr;gap:20px;margin:6px 0 26px}
+.eng-tier{background:var(--surface-2);border:1px solid var(--border-sub);border-top:3px solid var(--amber);border-radius:12px;padding:22px 24px}
+.eng-tier.t2{border-top-color:var(--blue)}
+.eng-tn{font:600 11px/1 'JetBrains Mono',monospace;letter-spacing:.1em;text-transform:uppercase;color:var(--amber);margin-bottom:8px}
+.eng-tier.t2 .eng-tn{color:var(--blue)}
+.eng-th{font:600 18px/1.25 'Space Grotesk',sans-serif;color:var(--text-1);margin-bottom:4px}
+.eng-tsub{font-size:12.5px;color:var(--text-m);font-style:italic;margin-bottom:14px}
+.eng-list{list-style:none;margin:0;padding:0}
+.eng-list li{font-size:13px;line-height:1.5;color:var(--text-2);padding-left:16px;position:relative;margin-bottom:7px}
+.eng-list li::before{content:'';position:absolute;left:2px;top:7px;width:5px;height:5px;border-radius:50%;background:var(--amber)}
+.eng-tier.t2 .eng-list li::before{background:var(--blue)}
+.eng-scale{border-top:1px solid var(--border-sub);margin-top:14px;padding-top:13px}
+.eng-srow{margin-bottom:11px}
+.eng-srow:last-child{margin-bottom:0}
+.eng-slab{font:600 12.5px 'Space Grotesk',sans-serif;color:var(--text-1)}
+.eng-stx{font-size:12.5px;color:var(--text-2);line-height:1.5}
+.eng-bands{margin:6px 0 22px;border:1px solid var(--border-sub);border-radius:12px;overflow:hidden}
+.eng-bands table{width:100%;border-collapse:collapse}
+.eng-bands th{font:600 10.5px 'JetBrains Mono',monospace;letter-spacing:.07em;text-transform:uppercase;color:var(--text-m);text-align:left;padding:12px 18px;background:var(--surface-1);border-bottom:1px solid var(--border-sub)}
+.eng-bands td{font-size:13.5px;color:var(--text-2);padding:12px 18px;border-bottom:1px solid var(--border-sub)}
+.eng-bands tr:last-child td{border-bottom:none}
+.eng-bands td.fee{font-weight:600;color:var(--text-1);font-family:'Space Grotesk',sans-serif}
+.eng-note{font-size:11.5px;color:var(--text-m);line-height:1.55;font-style:italic;margin:0 2px}
+.eng-adjacent{background:var(--surface-1);border-radius:12px;padding:18px 22px;margin-top:6px}
+.eng-adjacent .eng-tn{color:var(--graphite)}
+.eng-adjacent p{font-size:13px;line-height:1.6;color:var(--text-2);margin:0}
+@media(max-width:860px){.about-band{grid-template-columns:1fr}.caps-grid{grid-template-columns:1fr}}
+@media(max-width:760px){.eng-tiers{grid-template-columns:1fr}}
+
+.eng-modes{display:grid;grid-template-columns:1fr 1fr;gap:20px;margin:6px 0 30px}
+.eng-mode{border:1px solid var(--border-sub);border-radius:12px;padding:24px 26px;background:var(--surface-2)}
+.eng-mode.proj{border-top:3px solid var(--amber)}
+.eng-mode.sub{border-top:3px solid var(--green)}
+.eng-mh{font:600 18px/1.25 'Space Grotesk',sans-serif;color:var(--text-1);margin-bottom:6px}
+.eng-msub{font-size:13px;font-style:italic;margin-bottom:14px}
+.eng-mode.proj .eng-msub{color:var(--amber)}
+.eng-mode.sub .eng-msub{color:#6f7e54}
+.eng-mp{font-size:13px;line-height:1.62;color:var(--text-2);margin:0 0 8px}
+.eng-glab{font:600 10px/1 'JetBrains Mono',monospace;letter-spacing:.12em;text-transform:uppercase;color:var(--text-m);margin:18px 0 9px}
+.eng-grp{margin-bottom:12px}
+.eng-grp b{font:600 13px 'Space Grotesk',sans-serif;color:var(--text-1);display:block;margin-bottom:3px}
+.eng-grp .ln{font-size:12.5px;line-height:1.55;color:var(--text-2)}
+.eng-srv{font-size:12.8px;line-height:1.55;color:var(--text-2);margin-bottom:8px}
+.eng-srv b{color:var(--text-1)}
+.eng-modefoot{font-size:12px;font-style:italic;color:var(--text-m);line-height:1.55;border-top:1px solid var(--border-sub);margin-top:14px;padding-top:12px}
+.eng-divider{font:600 11px/1 'JetBrains Mono',monospace;letter-spacing:.12em;text-transform:uppercase;color:var(--amber);margin:6px 0 14px}
+@media(max-width:760px){.eng-modes{grid-template-columns:1fr}}
+
+/* v7 engage: full-width tier bands */
+.eng-tiers{grid-template-columns:1fr;gap:16px}
+.eng-tier{display:grid;grid-template-columns:1.1fr 1fr;column-gap:40px;align-items:start}
+.eng-tier>.eng-tn,.eng-tier>.eng-th,.eng-tier>.eng-tsub{grid-column:1 / -1}
+.eng-tier>.eng-list{margin:6px 0 0}
+.eng-tier>.eng-scale{border-top:none;border-left:1px solid var(--border-sub);margin-top:6px;padding-top:0;padding-left:28px}
+@media(max-width:760px){.eng-tier{grid-template-columns:1fr}.eng-tier>.eng-scale{border-left:none;border-top:1px solid var(--border-sub);margin-top:14px;padding-top:13px;padding-left:0}}
+
+/* v7 widow control */
+h1,h2,h3,h4,.page-title,.card-statement,.eng-mh,.eng-th,.eng-tn,.ph,.pn,.acc-title,.blk,.vh,.mh,.cyclelab,.sig-head,.lab,.ft-cap,.def{text-wrap:balance}
+
+/* v10 advantage accordions */
+.adv-acc{border:1px solid var(--border-sub);border-radius:12px;overflow:hidden;margin-bottom:14px;background:var(--surface-2)}
+.adv-head{display:flex;align-items:center;justify-content:space-between;gap:16px;padding:18px 24px;cursor:pointer;user-select:none}
+.adv-head:hover{background:var(--nav)}
+.adv-h-t{font-family:'Space Grotesk',system-ui,sans-serif;font-size:17px;font-weight:600;color:var(--text-1);text-wrap:balance}
+.adv-head-actions{display:flex;align-items:center;gap:14px;flex-shrink:0}
+.adv-chev{width:18px;height:18px;color:var(--text-m);transition:transform .25s}
+.adv-acc.open .adv-chev{transform:rotate(180deg)}
+.adv-body{max-height:0;overflow:hidden;transition:max-height .4s ease}
+.adv-acc.open .adv-body{max-height:6000px}
+.adv-body iframe{display:block;width:100%;border:0;background:transparent}
+
+.val-cards{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin:26px 0 24px}
+@media(max-width:820px){.val-cards{grid-template-columns:1fr}}
+.val-card{background:#fff;border:1px solid var(--border-sub);border-radius:14px;padding:22px 22px 24px;display:flex;flex-direction:column}
+.val-num{font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--amber);letter-spacing:1px;font-weight:500;margin-bottom:9px}
+.val-t{font-family:'Space Grotesk',sans-serif;font-weight:600;font-size:16px;color:var(--text-1);line-height:1.28;margin-bottom:10px}
+.val-b{font-family:'DM Sans',sans-serif;font-size:13.2px;color:var(--text-2);line-height:1.55}
+</style>
+<style>.nav-overview{font-weight:600}.nav-overview::after{content:"";display:inline-block;width:1px;height:14px;background:var(--border-sub);margin-left:14px;vertical-align:middle}</style></head>
+<body>
+<nav class="nav"><div class="nav-brand" onclick="showPage('landing')" title="Redline Growth"><svg class="brand-logo" viewBox="0 0 264 138" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path d="M159.15 62.69L159.17 65.25C159.17 65.4489 159.091 65.6397 158.95 65.7803C158.81 65.921 158.619 66 158.42 66H155.36C155.206 66 155.059 65.9399 154.95 65.833C154.841 65.7262 154.78 65.5812 154.78 65.43V64.66C154.779 64.5889 154.76 64.5192 154.724 64.4579C154.688 64.3966 154.636 64.346 154.575 64.3114C154.514 64.2767 154.445 64.2593 154.376 64.2608C154.306 64.2623 154.239 64.2827 154.18 64.32C149.093 67.4533 144.533 66.8867 140.5 62.62" stroke="#9B1C24" stroke-width="2"/>
+<path d="M133.77 62.95C128.357 67.6433 122.817 67.55 117.15 62.67" stroke="#9B1C24" stroke-width="2"/>
+<path d="M231.83 62.87C226.417 67.6567 220.86 67.59 215.16 62.67" stroke="#9B1C24" stroke-width="2"/>
+<path d="M208.04 62.61L208.05 65.16C208.05 65.3881 207.959 65.6068 207.798 65.7681C207.637 65.9294 207.418 66.02 207.19 66.02H204.31C204.081 66.02 203.861 65.9297 203.698 65.7687C203.535 65.6077 203.443 65.389 203.44 65.16L203.42 62.61" stroke="#9B1C24" stroke-width="2"/>
+<path d="M193.58 62.62C193.433 63.5533 193.427 64.3967 193.56 65.15C193.577 65.2572 193.571 65.3669 193.542 65.4715C193.513 65.5762 193.461 65.6732 193.391 65.7559C193.321 65.8387 193.233 65.9051 193.134 65.9507C193.036 65.9963 192.929 66.0199 192.82 66.02H189.76C189.548 66.02 189.344 65.9347 189.194 65.7827C189.044 65.6308 188.96 65.4248 188.96 65.21L188.97 62.67" stroke="#9B1C24" stroke-width="2"/>
+<path d="M182 62.62L182.04 65.14C182.041 65.2551 182.02 65.3693 181.977 65.476C181.934 65.5827 181.87 65.6798 181.789 65.7617C181.708 65.8435 181.611 65.9085 181.505 65.9528C181.399 65.9972 181.285 66.02 181.17 66.02H178.32C178.204 66.02 178.089 65.9971 177.982 65.9526C177.875 65.9081 177.779 65.843 177.698 65.761C177.617 65.679 177.553 65.5818 177.51 65.4752C177.468 65.3686 177.447 65.2546 177.45 65.14L177.49 62.63" stroke="#9B1C24" stroke-width="2"/>
+<path d="M105.56 62.64V65.2C105.56 65.4175 105.474 65.626 105.32 65.7798C105.166 65.9336 104.957 66.02 104.74 66.02H101.76C101.654 66.02 101.549 65.999 101.452 65.9581C101.354 65.9173 101.265 65.8575 101.191 65.7821C101.116 65.7068 101.058 65.6174 101.018 65.5192C100.978 65.421 100.959 65.3159 100.96 65.21L100.97 62.68" stroke="#9B1C24" stroke-width="2"/>
+<path d="M170.64 62.7L170.67 65.21C170.671 65.3146 170.652 65.4184 170.613 65.5154C170.574 65.6124 170.516 65.7006 170.442 65.7751C170.369 65.8495 170.281 65.9086 170.185 65.9489C170.088 65.9892 169.985 66.01 169.88 66.01H166.88C166.775 66.01 166.672 65.9892 166.575 65.9489C166.479 65.9086 166.391 65.8495 166.318 65.7751C166.244 65.7006 166.186 65.6124 166.147 65.5154C166.108 65.4184 166.089 65.3146 166.09 65.21L166.12 62.69" stroke="#9B1C24" stroke-width="2"/>
+<path d="M236.61 95.29L236.62 95.96" stroke="#9B1C24" stroke-width="2"/>
+<path d="M59.49 79.34C59.4522 79.3385 59.4149 79.349 59.3834 79.3699C59.3518 79.3909 59.3277 79.4212 59.3144 79.4567C59.3011 79.4921 59.2994 79.5308 59.3093 79.5673C59.3193 79.6038 59.3405 79.6363 59.37 79.66C71.89 90.04 79.0567 95.9967 80.87 97.53C81.63 98.1767 82.34 99.2967 83 100.89C85.14 106.07 85.4633 111.76 83.97 117.96C83.8602 118.409 83.5853 118.801 83.1998 119.057C82.8143 119.312 82.3467 119.414 81.89 119.34C81.69 119.307 81.4767 119.2 81.25 119.02C77.51 116 60.08 101.897 28.96 76.71C28.8085 76.5849 28.6859 76.4316 28.6 76.26C26.3133 71.8933 27.05 67.8867 30.81 64.24C31.1367 63.9267 32.1367 63.5767 33.81 63.19C34.0426 63.1369 34.2808 63.11 34.52 63.11L65.85 63.03C66.3405 63.0273 66.8198 62.8858 67.2323 62.622C67.6448 62.3582 67.9735 61.983 68.18 61.54C69.8 58.0467 69.3633 55.2233 66.87 53.07C66.6252 52.8572 66.3091 52.74 65.98 52.74H11.11C10.9441 52.7406 10.7802 52.7039 10.6302 52.6328C10.4801 52.5616 10.3477 52.4577 10.2424 52.3285C10.1372 52.1993 10.0617 52.0481 10.0215 51.8858C9.98134 51.7235 9.9774 51.5542 10.01 51.39C10.5567 48.6433 11.5233 46.2267 12.91 44.14C16.62 38.58 20.29 35.26 27.26 35.24C47.5467 35.1533 61.86 35.2333 70.2 35.48C70.5581 35.4866 70.9149 35.5438 71.26 35.65C86.72 40.23 90.3 59.06 81.81 71.54C78.87 75.86 75.0333 78.4733 70.3 79.38C70.2603 79.3933 70.2197 79.4001 70.18 79.4L59.49 79.34Z" fill="#9B1C24"/>
+<path d="M179.84 43.7C181.386 43.7 182.64 42.4464 182.64 40.9C182.64 39.3536 181.386 38.1 179.84 38.1C178.294 38.1 177.04 39.3536 177.04 40.9C177.04 42.4464 178.294 43.7 179.84 43.7Z" fill="#0F1117"/>
+<path d="M159.15 62.69L159.17 65.25C159.17 65.4489 159.091 65.6397 158.95 65.7803C158.81 65.921 158.619 66 158.42 66H155.36C155.206 66 155.059 65.9399 154.95 65.833C154.841 65.7261 154.78 65.5812 154.78 65.43V64.66C154.779 64.5889 154.76 64.5192 154.724 64.4579C154.688 64.3966 154.636 64.346 154.575 64.3114C154.514 64.2767 154.445 64.2592 154.376 64.2608C154.306 64.2623 154.239 64.2827 154.18 64.32C149.093 67.4533 144.533 66.8867 140.5 62.62C137.873 57.9867 138.073 53.63 141.1 49.55C141.292 49.298 141.518 49.0758 141.77 48.89C145.81 45.9033 149.917 45.7567 154.09 48.45C154.144 48.4836 154.206 48.5023 154.27 48.5041C154.333 48.5059 154.397 48.4908 154.452 48.4603C154.508 48.4298 154.555 48.385 154.588 48.3305C154.621 48.276 154.639 48.2137 154.64 48.15V39.63C154.64 39.5345 154.678 39.4429 154.745 39.3754C154.813 39.3079 154.905 39.27 155 39.27H158.82C158.903 39.2699 158.983 39.3023 159.043 39.3602C159.103 39.418 159.137 39.4969 159.14 39.58L159.15 62.69ZM149.226 50.3167C148.469 50.281 147.713 50.4027 146.999 50.675C146.285 50.9472 145.629 51.3646 145.067 51.9033C144.505 52.442 144.049 53.0915 143.725 53.8147C143.4 54.5379 143.214 55.3206 143.176 56.1182C143.139 56.9157 143.251 57.7125 143.505 58.463C143.76 59.2135 144.153 59.9031 144.662 60.4923C145.171 61.0815 145.785 61.5588 146.47 61.897C147.155 62.2352 147.897 62.4276 148.654 62.4633C149.41 62.499 150.167 62.3772 150.881 62.105C151.595 61.8328 152.251 61.4154 152.813 60.8766C153.375 60.3379 153.831 59.6884 154.155 58.9652C154.48 58.2421 154.666 57.4593 154.704 56.6618C154.741 55.8642 154.629 55.0675 154.374 54.3169C154.12 53.5664 153.727 52.8769 153.218 52.2877C152.709 51.6985 152.095 51.2212 151.41 50.883C150.725 50.5448 149.983 50.3524 149.226 50.3167Z" fill="#0F1117"/>
+<path d="M170.64 62.7L170.67 65.21C170.671 65.3146 170.652 65.4184 170.613 65.5154C170.574 65.6124 170.516 65.7007 170.442 65.7751C170.369 65.8495 170.281 65.9086 170.185 65.9489C170.088 65.9892 169.985 66.01 169.88 66.01H166.88C166.775 66.01 166.672 65.9892 166.575 65.9489C166.479 65.9086 166.391 65.8495 166.318 65.7751C166.244 65.7007 166.186 65.6124 166.147 65.5154C166.108 65.4184 166.089 65.3146 166.09 65.21L166.12 62.69V39.59C166.12 39.5051 166.154 39.4237 166.214 39.3637C166.274 39.3037 166.355 39.27 166.44 39.27H170.31C170.395 39.27 170.476 39.3037 170.536 39.3637C170.596 39.4237 170.63 39.5051 170.63 39.59L170.64 62.7Z" fill="#0F1117"/>
+<path d="M105.56 62.64V65.2C105.56 65.4175 105.474 65.6261 105.32 65.7798C105.166 65.9336 104.957 66.02 104.74 66.02H101.76C101.654 66.02 101.549 65.999 101.452 65.9582C101.354 65.9173 101.265 65.8575 101.191 65.7822C101.116 65.7068 101.058 65.6174 101.018 65.5192C100.978 65.421 100.959 65.3159 100.96 65.21L100.97 62.68L100.98 47.56C100.98 47.3425 101.066 47.134 101.22 46.9802C101.374 46.8264 101.583 46.74 101.8 46.74H104.72C104.819 46.7401 104.916 46.7635 105.005 46.8083C105.093 46.8532 105.169 46.9181 105.228 46.998C105.286 47.0778 105.325 47.1703 105.341 47.268C105.357 47.3656 105.35 47.4657 105.32 47.56C105.167 48.0333 105.117 48.3833 105.17 48.61C105.186 48.676 105.219 48.7367 105.265 48.7857C105.312 48.8347 105.372 48.8702 105.437 48.8886C105.502 48.9069 105.571 48.9075 105.637 48.8902C105.703 48.8728 105.762 48.8382 105.81 48.79C107.497 47.1633 109.503 46.4533 111.83 46.66C111.911 46.6651 111.988 46.7011 112.043 46.7605C112.099 46.82 112.13 46.8985 112.13 46.98V50.49C112.13 50.525 112.123 50.5597 112.109 50.5919C112.096 50.6241 112.076 50.6532 112.05 50.6775C112.025 50.7018 111.995 50.7207 111.963 50.7332C111.93 50.7456 111.895 50.7514 111.86 50.75C104.13 50.27 105.42 57.56 105.56 62.64Z" fill="#0F1117"/>
+<path d="M133.77 62.95C128.357 67.6433 122.817 67.55 117.15 62.67C114.57 58.6167 114.38 54.7467 116.58 51.06C119.35 46.4 126.3 45.21 130.74 48.14C133.667 50.0733 135.043 53.1667 134.87 57.42C134.865 57.5412 134.813 57.6556 134.725 57.7395C134.638 57.8234 134.521 57.8701 134.4 57.87H120.23C120.169 57.8691 120.108 57.8825 120.053 57.9093C119.999 57.936 119.951 57.9753 119.914 58.024C119.877 58.0726 119.852 58.1293 119.841 58.1894C119.83 58.2495 119.833 58.3114 119.85 58.37C121.19 63.19 127.48 63.35 130.78 60.74C130.834 60.6966 130.897 60.665 130.964 60.647C131.031 60.629 131.101 60.625 131.171 60.6353C131.24 60.6456 131.307 60.67 131.367 60.7069C131.427 60.7438 131.479 60.7925 131.52 60.85C132.04 61.57 132.79 62.27 133.77 62.95ZM119.94 54.9L130.36 54.84C130.374 54.84 130.389 54.8372 130.402 54.8316C130.415 54.8261 130.428 54.818 130.438 54.8078C130.448 54.7976 130.456 54.7854 130.462 54.7721C130.467 54.7588 130.47 54.7444 130.47 54.73V54.67C130.463 53.4802 129.906 52.3421 128.922 51.5059C127.937 50.6696 126.606 50.2035 125.22 50.21H125.04C124.353 50.2132 123.673 50.3327 123.039 50.5616C122.405 50.7906 121.829 51.1245 121.345 51.5443C120.861 51.9641 120.479 52.4615 120.219 53.0082C119.959 53.5548 119.826 54.1399 119.83 54.73V54.79C119.83 54.8192 119.842 54.8472 119.862 54.8678C119.883 54.8884 119.911 54.9 119.94 54.9Z" fill="#0F1117"/>
+<path d="M208.04 62.61L208.05 65.16C208.05 65.3881 207.959 65.6068 207.798 65.7681C207.637 65.9294 207.418 66.02 207.19 66.02H204.31C204.081 66.02 203.861 65.9297 203.698 65.7687C203.535 65.6077 203.443 65.389 203.44 65.16L203.42 62.61L203.32 53.8C203.313 53.615 203.273 53.4351 203.2 53.27C202.113 50.8767 200.173 50.02 197.38 50.7C194.907 51.2933 193.64 53.06 193.58 56C193.513 59.2267 193.513 61.4333 193.58 62.62C193.433 63.5533 193.427 64.3967 193.56 65.15C193.577 65.2572 193.571 65.3669 193.542 65.4715C193.513 65.5762 193.461 65.6732 193.391 65.7559C193.321 65.8387 193.233 65.9051 193.135 65.9507C193.036 65.9963 192.929 66.02 192.82 66.02H189.76C189.548 66.02 189.344 65.9347 189.194 65.7828C189.044 65.6309 188.96 65.4248 188.96 65.21L188.97 62.67L188.99 47.34C188.99 47.1835 189.052 47.0335 189.163 46.9228C189.273 46.8122 189.424 46.75 189.58 46.75H192.93C193.049 46.75 193.164 46.7964 193.248 46.8789C193.333 46.9614 193.38 47.0733 193.38 47.19V48.15C193.381 48.2129 193.398 48.2747 193.43 48.3291C193.461 48.3836 193.506 48.4287 193.56 48.4601C193.614 48.4915 193.674 48.508 193.736 48.508C193.797 48.508 193.857 48.4914 193.91 48.46C197.19 46.5267 200.19 46.03 202.91 46.97C209.44 49.23 207.99 57.19 208.04 62.61Z" fill="#0F1117"/>
+<path d="M231.83 62.87C226.417 67.6567 220.86 67.59 215.16 62.67C210.37 55.22 215.01 45.32 224.6 46.68C230.033 47.4533 232.813 50.9833 232.94 57.27C232.943 57.3478 232.929 57.4253 232.901 57.498C232.873 57.5707 232.829 57.637 232.774 57.693C232.719 57.749 232.653 57.7935 232.581 57.8239C232.508 57.8543 232.429 57.87 232.35 57.87H218.29C218.222 57.869 218.156 57.8839 218.095 57.9135C218.034 57.9432 217.981 57.9867 217.939 58.0409C217.898 58.095 217.869 58.1582 217.855 58.2257C217.841 58.2932 217.843 58.3631 217.86 58.43C219.07 63.19 225.54 63.28 228.78 60.74C228.834 60.6982 228.896 60.6679 228.962 60.6507C229.028 60.6336 229.097 60.6301 229.165 60.6404C229.233 60.6506 229.299 60.6744 229.358 60.7105C229.417 60.7465 229.469 60.7939 229.51 60.85C230.03 61.61 230.803 62.2833 231.83 62.87ZM217.95 54.91L228.39 54.83C228.419 54.83 228.447 54.8184 228.468 54.7978C228.488 54.7771 228.5 54.7492 228.5 54.72L228.49 54.66C228.481 53.47 227.921 52.3328 226.935 51.4984C225.949 50.664 224.616 50.2006 223.23 50.21H223.03C221.644 50.2216 220.318 50.7053 219.345 51.5547C218.372 52.4041 217.831 53.5498 217.84 54.74V54.8C217.84 54.8292 217.852 54.8571 217.872 54.8778C217.893 54.8984 217.921 54.91 217.95 54.91Z" fill="#0F1117"/>
+<path d="M182 62.62L182.04 65.14C182.041 65.2551 182.02 65.3693 181.977 65.476C181.934 65.5827 181.87 65.6798 181.789 65.7617C181.708 65.8435 181.611 65.9085 181.505 65.9528C181.399 65.9972 181.285 66.02 181.17 66.02H178.32C178.204 66.02 178.089 65.9971 177.982 65.9526C177.875 65.9081 177.779 65.843 177.698 65.761C177.617 65.679 177.553 65.5819 177.51 65.4752C177.468 65.3686 177.447 65.2546 177.45 65.14L177.49 62.63V47.24C177.49 47.11 177.542 46.9854 177.634 46.8935C177.725 46.8016 177.85 46.75 177.98 46.75H181.52C181.65 46.75 181.775 46.8027 181.866 46.8964C181.958 46.9902 182.01 47.1174 182.01 47.25L182 62.62Z" fill="#0F1117"/>
+<path d="M100.97 62.68L100.96 65.21C100.959 65.3159 100.978 65.421 101.018 65.5192C101.058 65.6174 101.116 65.7068 101.191 65.7821C101.265 65.8575 101.354 65.9173 101.452 65.9581C101.549 65.999 101.654 66.02 101.76 66.02H104.74C104.957 66.02 105.166 65.9336 105.32 65.7798C105.474 65.626 105.56 65.4175 105.56 65.2V62.64L117.15 62.67C122.817 67.55 128.357 67.6433 133.77 62.95L140.5 62.62C144.533 66.8867 149.093 67.4533 154.18 64.32C154.239 64.2827 154.306 64.2623 154.376 64.2608C154.445 64.2592 154.514 64.2767 154.575 64.3114C154.636 64.346 154.688 64.3966 154.724 64.4579C154.76 64.5192 154.779 64.5889 154.78 64.66V65.43C154.78 65.5812 154.841 65.7261 154.95 65.833C155.059 65.9399 155.206 66 155.36 66H158.42C158.619 66 158.81 65.921 158.95 65.7803C159.091 65.6397 159.17 65.4489 159.17 65.25L159.15 62.69H166.12L166.09 65.21C166.089 65.3146 166.108 65.4184 166.147 65.5154C166.186 65.6124 166.244 65.7007 166.318 65.7751C166.391 65.8495 166.479 65.9086 166.575 65.9489C166.672 65.9892 166.775 66.01 166.88 66.01H169.88C169.985 66.01 170.088 65.9892 170.185 65.9489C170.281 65.9086 170.369 65.8495 170.442 65.7751C170.516 65.7007 170.574 65.6124 170.613 65.5154C170.652 65.4184 170.671 65.3146 170.67 65.21L170.64 62.7L177.49 62.63L177.45 65.14C177.447 65.2546 177.468 65.3685 177.51 65.4752C177.553 65.5818 177.617 65.679 177.698 65.761C177.779 65.843 177.875 65.9081 177.982 65.9526C178.089 65.9971 178.204 66.02 178.32 66.02H181.17C181.285 66.02 181.399 65.9972 181.505 65.9528C181.611 65.9085 181.708 65.8435 181.789 65.7616C181.87 65.6798 181.934 65.5827 181.977 65.476C182.02 65.3693 182.041 65.2551 182.04 65.14L182 62.62L188.97 62.67L188.96 65.21C188.96 65.4248 189.044 65.6308 189.194 65.7827C189.344 65.9346 189.548 66.02 189.76 66.02H192.82C192.929 66.0199 193.036 65.9963 193.135 65.9507C193.233 65.9051 193.321 65.8386 193.391 65.7559C193.461 65.6732 193.513 65.5761 193.542 65.4715C193.571 65.3669 193.577 65.2572 193.56 65.15C193.427 64.3967 193.433 63.5533 193.58 62.62L203.42 62.61L203.44 65.16C203.443 65.389 203.535 65.6077 203.698 65.7687C203.861 65.9297 204.081 66.02 204.31 66.02H207.19C207.418 66.02 207.637 65.9294 207.798 65.7681C207.959 65.6068 208.05 65.3881 208.05 65.16L208.04 62.61L215.16 62.67C220.86 67.59 226.417 67.6567 231.83 62.87L245.67 62.73C245.746 62.7287 245.821 62.7424 245.891 62.7705C245.962 62.7985 246.026 62.8403 246.08 62.8934C246.134 62.9464 246.176 63.0097 246.206 63.0795C246.235 63.1493 246.25 63.2243 246.25 63.3V73.68C246.25 73.8312 246.19 73.9761 246.083 74.083C245.976 74.1899 245.831 74.25 245.68 74.25H90.84C90.6835 74.25 90.5335 74.1868 90.4228 74.0742C90.3122 73.9617 90.25 73.8091 90.25 73.65V63.23C90.25 63.0868 90.3069 62.9494 90.4082 62.8481C90.5094 62.7469 90.6468 62.69 90.79 62.69L100.97 62.68Z" fill="#9B1C24"/>
+<path d="M236.61 95.29L236.62 95.96L236.63 104.67C236.63 104.755 236.596 104.836 236.536 104.896C236.476 104.956 236.395 104.99 236.31 104.99H232.45C232.365 104.99 232.284 104.955 232.224 104.893C232.164 104.831 232.13 104.748 232.13 104.66V93.99C232.129 93.363 231.999 92.743 231.747 92.169C231.494 91.5949 231.126 91.0793 230.665 90.6547C230.204 90.2301 229.659 89.9056 229.066 89.7017C228.474 89.4978 227.845 89.4189 227.22 89.47L226.69 89.51C225.448 89.6128 224.289 90.1788 223.445 91.0957C222.6 92.0126 222.131 93.2134 222.13 94.46V104.67C222.13 104.755 222.096 104.836 222.036 104.896C221.976 104.956 221.895 104.99 221.81 104.99H217.93C217.85 104.99 217.774 104.958 217.718 104.902C217.662 104.846 217.63 104.77 217.63 104.69V78.62C217.63 78.5272 217.666 78.4381 217.73 78.3725C217.793 78.3069 217.88 78.27 217.97 78.27H221.83C221.904 78.27 221.975 78.3005 222.028 78.3549C222.08 78.4093 222.11 78.4831 222.11 78.56V87.11C222.109 87.1717 222.126 87.2321 222.158 87.2848C222.19 87.3375 222.236 87.3805 222.292 87.4092C222.347 87.4379 222.41 87.4513 222.473 87.4479C222.536 87.4446 222.597 87.4245 222.65 87.39C227.11 84.47 232.32 84.89 235.59 89.14C236.47 90.2867 236.81 92.3367 236.61 95.29Z" fill="#0F1117"/>
+<path d="M206.37 81.79V85.4C206.37 85.5273 206.421 85.6494 206.511 85.7394C206.601 85.8294 206.723 85.88 206.85 85.88H211.18C211.297 85.88 211.409 85.9264 211.491 86.0089C211.574 86.0914 211.62 86.2033 211.62 86.32V89.07C211.62 89.1814 211.575 89.2882 211.494 89.367C211.413 89.4458 211.304 89.49 211.19 89.49H206.92C206.774 89.49 206.634 89.549 206.531 89.654C206.428 89.7591 206.37 89.9015 206.37 90.05C206.35 94.1033 206.363 96.78 206.41 98.08C206.54 101.58 208.59 102.34 211.41 100.91C211.447 100.891 211.487 100.88 211.529 100.879C211.571 100.878 211.612 100.886 211.65 100.903C211.687 100.921 211.721 100.947 211.747 100.979C211.773 101.011 211.791 101.049 211.8 101.09C212.007 102.01 212.343 102.843 212.81 103.59C212.839 103.637 212.859 103.69 212.868 103.744C212.877 103.799 212.875 103.855 212.861 103.908C212.848 103.961 212.825 104.011 212.792 104.054C212.759 104.098 212.717 104.134 212.67 104.16C207.89 106.78 201.89 105.06 201.91 98.66C201.91 96.25 201.88 94.47 201.83 90.07C201.827 89.9126 201.763 89.7626 201.651 89.6522C201.539 89.5418 201.387 89.48 201.23 89.48H199.27C199.132 89.48 199 89.4252 198.902 89.3277C198.805 89.2302 198.75 89.0979 198.75 88.96V86.22C198.75 86.1272 198.786 86.0382 198.85 85.9725C198.913 85.9069 199 85.87 199.09 85.87H201.37C201.503 85.87 201.63 85.8184 201.724 85.7265C201.817 85.6346 201.87 85.51 201.87 85.38V81.77C201.87 81.701 201.897 81.6349 201.946 81.5862C201.995 81.5374 202.061 81.51 202.13 81.51H206.09C206.164 81.51 206.235 81.5395 206.288 81.592C206.341 81.6445 206.37 81.7157 206.37 81.79Z" fill="#0F1117"/>
+<path d="M102.86 106.46C107.14 109.19 115.82 110.13 115.53 102.44C115.528 102.375 115.508 102.312 115.472 102.257C115.437 102.202 115.387 102.158 115.329 102.129C115.27 102.1 115.205 102.088 115.14 102.094C115.075 102.099 115.013 102.122 114.96 102.16C111.06 104.787 107.14 104.867 103.2 102.4C98.85 99.67 97.99 92.53 101.62 88.66C105.15 84.89 111.02 84.57 115.12 87.61C115.179 87.6518 115.249 87.6766 115.322 87.6818C115.394 87.687 115.466 87.6723 115.531 87.6394C115.596 87.6065 115.651 87.5566 115.689 87.4951C115.728 87.4335 115.749 87.3626 115.75 87.29V86.24C115.75 86.1101 115.801 85.9854 115.891 85.8935C115.981 85.8016 116.103 85.75 116.23 85.75H119.4C119.555 85.75 119.703 85.8108 119.814 85.9193C119.924 86.0278 119.987 86.1753 119.99 86.33C120.017 95.4234 120.003 101.063 119.95 103.25C119.69 113.62 107.95 113.64 101.2 110.22C101.018 110.129 100.875 109.974 100.799 109.786C100.724 109.598 100.72 109.389 100.79 109.2L101.65 106.87C101.692 106.755 101.76 106.651 101.847 106.565C101.935 106.48 102.041 106.415 102.157 106.375C102.273 106.336 102.396 106.323 102.518 106.338C102.64 106.353 102.757 106.394 102.86 106.46ZM115.647 94.6644C115.624 93.9386 115.449 93.2246 115.131 92.5633C114.813 91.902 114.359 91.3064 113.794 90.8104C113.229 90.3144 112.565 89.9277 111.84 89.6724C111.115 89.4172 110.342 89.2983 109.566 89.3227C108.791 89.3471 108.027 89.5142 107.319 89.8145C106.611 90.1148 105.973 90.5424 105.44 91.0729C104.908 91.6034 104.492 92.2264 104.216 92.9063C103.94 93.5862 103.81 94.3098 103.833 95.0356C103.856 95.7615 104.031 96.4754 104.349 97.1367C104.667 97.798 105.121 98.3936 105.686 98.8897C106.251 99.3857 106.914 99.7724 107.64 100.028C108.365 100.283 109.138 100.402 109.914 100.377C110.689 100.353 111.453 100.186 112.161 99.8855C112.869 99.5853 113.507 99.1577 114.04 98.6272C114.572 98.0967 114.988 97.4737 115.264 96.7937C115.54 96.1138 115.67 95.3903 115.647 94.6644Z" fill="#0F1117"/>
+<path d="M131.72 88.03C133.24 86.31 135.283 85.5133 137.85 85.64C137.926 85.6451 137.997 85.6789 138.049 85.7346C138.101 85.7903 138.13 85.8638 138.13 85.94V89.46C138.13 89.4963 138.123 89.5322 138.109 89.5657C138.094 89.5991 138.074 89.6293 138.047 89.6545C138.021 89.6797 137.99 89.6994 137.956 89.7124C137.922 89.7253 137.886 89.7313 137.85 89.73C133.797 89.63 131.697 91.4867 131.55 95.3C131.423 98.4867 131.413 101.57 131.52 104.55C131.523 104.608 131.514 104.666 131.493 104.721C131.473 104.775 131.442 104.825 131.401 104.867C131.361 104.909 131.313 104.943 131.259 104.965C131.206 104.988 131.148 105 131.09 105H127.39C127.287 105 127.187 104.959 127.114 104.886C127.041 104.813 127 104.713 127 104.61V86.29C127 86.1468 127.057 86.0094 127.158 85.9082C127.259 85.8069 127.397 85.75 127.54 85.75H130.74C130.873 85.75 131 85.8027 131.094 85.8964C131.187 85.9902 131.24 86.1174 131.24 86.25V87.85C131.238 87.9067 131.253 87.9627 131.285 88.01C131.316 88.0572 131.362 88.0934 131.415 88.1133C131.468 88.1333 131.526 88.1359 131.581 88.121C131.636 88.106 131.684 88.0742 131.72 88.03Z" fill="#0F1117"/>
+<path d="M141.21 95.392C141.212 94.088 141.481 92.7972 142.002 91.5933C142.523 90.3895 143.285 89.2961 144.245 88.3757C145.205 87.4553 146.344 86.7258 147.597 86.229C148.85 85.7321 150.192 85.4776 151.547 85.48C152.903 85.4824 154.244 85.7415 155.495 86.2427C156.746 86.744 157.883 87.4774 158.84 88.4011C159.796 89.3249 160.555 90.4209 161.071 91.6266C161.588 92.8322 161.852 94.124 161.85 95.428C161.848 96.732 161.579 98.0228 161.058 99.2267C160.537 100.431 159.775 101.524 158.815 102.444C157.855 103.365 156.716 104.094 155.463 104.591C154.21 105.088 152.868 105.342 151.513 105.34C150.157 105.338 148.816 105.078 147.565 104.577C146.313 104.076 145.177 103.343 144.22 102.419C143.264 101.495 142.505 100.399 141.989 99.1934C141.472 97.9877 141.208 96.696 141.21 95.392ZM151.53 89.31C149.997 89.31 148.527 89.9516 147.443 91.0937C146.359 92.2358 145.75 93.7848 145.75 95.4C145.75 96.1997 145.899 96.9917 146.19 97.7305C146.48 98.4694 146.906 99.1408 147.443 99.7063C147.98 100.272 148.617 100.72 149.318 101.026C150.019 101.332 150.771 101.49 151.53 101.49C152.289 101.49 153.041 101.332 153.742 101.026C154.443 100.72 155.08 100.272 155.617 99.7063C156.154 99.1408 156.58 98.4694 156.87 97.7305C157.16 96.9917 157.31 96.1997 157.31 95.4C157.31 93.7848 156.701 92.2358 155.617 91.0937C154.533 89.9516 153.063 89.31 151.53 89.31Z" fill="#0F1117"/>
+<path d="M180.26 85.75C180.727 85.75 181.183 85.7667 181.63 85.8C181.797 85.8118 181.957 85.8719 182.09 85.9732C182.223 86.0744 182.324 86.2123 182.38 86.37L187.1 99.31C187.118 99.3606 187.151 99.4044 187.195 99.4354C187.239 99.4663 187.291 99.483 187.345 99.483C187.399 99.483 187.451 99.4663 187.495 99.4354C187.539 99.4044 187.572 99.3606 187.59 99.31L192.48 86.05C192.509 85.9712 192.561 85.9031 192.631 85.8548C192.701 85.8065 192.784 85.7804 192.87 85.78H196.41C196.438 85.7799 196.465 85.7864 196.489 85.7991C196.514 85.8118 196.535 85.8303 196.55 85.8529C196.566 85.8756 196.576 85.9017 196.58 85.9291C196.583 85.9564 196.58 85.9842 196.57 86.01L189.8 104.38C189.732 104.564 189.61 104.724 189.449 104.836C189.288 104.949 189.096 105.01 188.9 105.01H185.79C185.623 105.01 185.46 104.958 185.322 104.861C185.184 104.765 185.079 104.628 185.02 104.47L180.46 92.28C180.442 92.2355 180.422 92.196 180.403 92.1661C180.384 92.1361 180.365 92.1167 180.35 92.11C180.317 92.09 180.283 92.08 180.25 92.08C180.217 92.08 180.183 92.09 180.15 92.11C180.135 92.1171 180.116 92.1367 180.097 92.1666C180.078 92.1966 180.058 92.2358 180.04 92.28L175.44 104.46C175.379 104.617 175.273 104.751 175.136 104.846C174.998 104.94 174.836 104.991 174.67 104.99L171.56 104.98C171.364 104.98 171.172 104.919 171.011 104.806C170.85 104.694 170.728 104.534 170.66 104.35L163.95 85.96C163.94 85.9342 163.937 85.9064 163.94 85.8791C163.944 85.8517 163.954 85.8256 163.969 85.8029C163.985 85.7803 164.006 85.7618 164.031 85.7491C164.055 85.7364 164.082 85.7299 164.11 85.73L167.65 85.74C167.736 85.7404 167.819 85.7665 167.889 85.8148C167.959 85.8631 168.011 85.9312 168.04 86.01L172.89 99.29C172.908 99.3406 172.941 99.3844 172.985 99.4154C173.029 99.4463 173.081 99.463 173.135 99.463C173.189 99.463 173.241 99.4463 173.285 99.4154C173.329 99.3844 173.362 99.3406 173.38 99.29L178.14 86.36C178.198 86.2042 178.299 86.0684 178.432 85.969C178.565 85.8697 178.724 85.811 178.89 85.8C179.337 85.7667 179.793 85.75 180.26 85.75Z" fill="#0F1117"/>
+</svg>
+</div><div class="nav-spacer"></div><div class="nav-links"><button class="nav-link nav-overview" onclick="showPage('landing')">Overview</button><button class="nav-link" data-page="what" onclick="showPage('what')">What We Do</button><button class="nav-link" data-page="advantage" onclick="showPage('advantage')">The Redline Growth Advantage</button><button class="nav-link" data-page="value" onclick="showPage('value')">The Value We Deliver</button><button class="nav-link" data-page="how" onclick="showPage('how')">How It Works</button><button class="nav-link" data-page="engage" onclick="showPage('engage')">How We Engage</button><button class="nav-link" data-page="notes" onclick="showPage('notes')">Notes</button></div></nav>
+<div class="landing active" id="page-landing">
+<div class="landing-eyebrow">The value we deliver for Management Consulting Firms</div>
+<h1 class="landing-title">Redline Growth</h1>
+<div class="landing-sub">MANAGED INTELLIGENCE · PROJECTS · PILOTS · MANAGED SERVICES</div>
+<p class="landing-intro">We address the chronic targeting and timing problem, helping your existing growth leaders find the right accounts to focus on, and establish and nurture the strategic relationships that grow the business.</p>
+<div class="landing-cards">
+<button class="landing-card" onclick="showPage('what')"><div class="landing-card-num">01</div><div class="landing-card-title">What We Do</div></button><button class="landing-card" onclick="showPage('advantage')"><div class="landing-card-num">02</div><div class="landing-card-title">The Redline Growth Advantage</div></button>
+<button class="landing-card" onclick="showPage('value')"><div class="landing-card-num">03</div><div class="landing-card-title">The Value We Deliver</div></button>
+<button class="landing-card" onclick="showPage('how')"><div class="landing-card-num">04</div><div class="landing-card-title">How It Works</div></button>
+<button class="landing-card" onclick="showPage('engage')"><div class="landing-card-num">05</div><div class="landing-card-title">How We Engage</div></button>
+</div>
+<div class="about-band">
+<div class="about-col"><div class="about-eyebrow">About Redline Growth</div><div class="about-h">We Deliver Actionable Intelligence<br>For Growth Teams.</div><p class="about-p">Redline Growth combines signal detection, multi-source enrichment, and AI-generated context into a single operating system, purpose-built for each client's specific accounts, buyers, and buying signals.</p><div class="about-url">redlinegrowth.com</div></div>
+<div class="caps-col"><div class="caps-eyebrow">Capabilities</div><div class="caps-grid">
+<div><div class="cap-h">Intelligence &amp; Signal Detection</div><ul class="cap-list"><li>ICP &amp; Ideal Customer Signal (ICS) Refinement</li><li>Buying Signal Taxonomy Build &amp; Continuous Monitoring</li><li>Account Prioritization &amp; Territory Scoring</li><li>Competitive Intelligence &amp; Defense Monitoring</li><li>Expansion Signal Detection for CSM Teams</li></ul></div>
+<div><div class="cap-h">GTM Infrastructure &amp; Outreach</div><ul class="cap-list"><li>CRM Automation, Enrichment &amp; Data Hygiene</li><li>Multi-Channel Outreach: Email, LinkedIn &amp; Social</li><li>Email Infrastructure Setup &amp; Deliverability Management</li><li>Website Visitor Identification &amp; Routing</li><li>List Building &amp; Multi-Source Data Enrichment</li></ul></div>
+<div><div class="cap-h">GTM Strategy &amp; Innovation</div><ul class="cap-list"><li>RevOps Architecture &amp; Stack Consolidation</li><li>AI/Clay Infrastructure Design &amp; Implementation</li><li>Cross-Functional Alignment &amp; Roadmap Integration</li><li>Advisory &amp; Fractional Leadership Support</li></ul></div>
+</div></div></div>
+</div>
+<div class="main">
+<section class="page" id="page-what" data-tab-group="what"><div class="page-eyebrow">01 · What We Do</div><h2 class="page-title">We solve the account and prospect targeting and timing issue, giving growth leaders more time and confidence for their outreach.</h2><p class="page-subtitle">Redline Growth makes your existing growth effort go further in three ways.<br>Open each for the concept and the artifact your team acts on.</p><div class="cards-row cols-3"><div class="card" data-target="w_b" onclick="toggleDetail('what','w_b',this)"><div class="card-num">01</div><div class="card-statement">Clarify and focus your growth targets and roadmap</div><div class="card-why">A wide market narrows to the few accounts worth a growth leader's time, scored on fit and timing.</div><div class="card-expand"><span>Targets</span><span class="card-expand-icon">+</span></div></div><div class="card" data-target="w_a" onclick="toggleDetail('what','w_a',this)"><div class="card-num">02</div><div class="card-statement">Optimize your growth-allocated resources</div><div class="card-why">Your senior people spend their hours on relationships and pursuits that convert, not on research software should do.</div><div class="card-expand"><span>Resources</span><span class="card-expand-icon">+</span></div></div><div class="card" data-target="w_c" onclick="toggleDetail('what','w_c',this)"><div class="card-num">03</div><div class="card-statement">Increase the impact of your engagement activities</div><div class="card-why">Every pursuit and touch lands with context, a warm path, and timing, so effort converts.</div><div class="card-expand"><span>Engagement</span><span class="card-expand-icon">+</span></div></div></div><div class="detail-tray" id="detail-w_a"><div class="detail-tray-header"><div><div class="detail-tray-eyebrow">02 · A week in the life of a growth leader</div></div><button class="detail-tray-close" onclick="closeDetail('what')">✕</button></div><div class="detail-tray-body"><div class="adv-acc"><div class="adv-head" onclick="advToggle(this)"><span class="adv-h-t">01 The week, with and without Redline Growth</span><span class="adv-head-actions"><button class="eb" onclick="event.stopPropagation();oa('assets/asset_fromto.html')">Open full view</button><svg class="adv-chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"></polyline></svg></span></div><div class="adv-body"><iframe src="assets/asset_fromto.html" height="1480" id="if_asset_fromto_html"></iframe></div></div><div class="adv-acc"><div class="adv-head" onclick="advToggle(this)"><span class="adv-h-t">02 Example Weekly Outreach Sheet</span><span class="adv-head-actions"><button class="eb" onclick="event.stopPropagation();oa('assets/asset_outreach_galweather.html')">Open full view</button><svg class="adv-chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"></polyline></svg></span></div><div class="adv-body"><iframe src="assets/asset_outreach_galweather.html" height="1500" id="if_asset_outreach_galweather_html"></iframe></div></div></div></div><div class="detail-tray" id="detail-w_b"><div class="detail-tray-header"><div><div class="detail-tray-eyebrow">01 · Clarify targets</div><div class="detail-tray-title">Fewer pursuits, with better odds</div></div><button class="detail-tray-close" onclick="closeDetail('what')">✕</button></div><div class="detail-tray-body"><p class="tray-intro">Redline Growth narrows a wide market down to the few accounts worth a growth leader's time. Fewer pursuits, better odds. The dossier below is an example of what a customized, scored account dossier looks like when it reaches the team.</p><div class="adv-acc"><div class="adv-head" onclick="advToggle(this)"><span class="adv-h-t">01 Focusing the funnel</span><span class="adv-head-actions"><button class="eb" onclick="event.stopPropagation();oa('assets/asset_funnel.html')">Open full view</button><svg class="adv-chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"></polyline></svg></span></div><div class="adv-body"><iframe src="assets/asset_funnel.html" height="700" id="if_asset_funnel_html"></iframe></div></div><div class="adv-acc"><div class="adv-head" onclick="advToggle(this)"><span class="adv-h-t">02 Example account dossier</span><span class="adv-head-actions"><button class="eb" onclick="event.stopPropagation();oa('assets/dossier_galweather_stearn_bluth.html')">Open full view</button><svg class="adv-chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"></polyline></svg></span></div><div class="adv-body"><iframe src="assets/dossier_galweather_stearn_bluth.html" height="1500" id="if_dossier_galweather_stearn_bluth_html"></iframe></div></div></div></div><div class="detail-tray" id="detail-w_c"><div class="detail-tray-header"><div><div class="detail-tray-eyebrow">03 · Increase engagement</div><div class="detail-tray-title">Redline Growth can help at every phase of the nurture and pursuit cycle.</div></div><button class="detail-tray-close" onclick="closeDetail('what')">✕</button></div><div class="detail-tray-body"><div class="af"><div class="afl"><span>Where Redline Growth fits: the pursuit cycle</span><button class="eb" onclick="oa('assets/asset_wherefits.html')">Open full view</button></div><iframe src="assets/asset_wherefits.html" height="1120" id="if_asset_wherefits_html"></iframe></div></div></div></section><section class="page" id="page-advantage" data-tab-group="advantage"><div class="page-eyebrow">02 · The Redline Growth Advantage</div><h2 class="page-title">Why firms bring us in.</h2><p class="page-subtitle">We bring the right combination of GTM Expertise with Professional Services Experience to deliver solutions that work<br>for the relationship-based practitioner-seller environment.</p><div class="adv-acc"><div class="adv-head" onclick="advToggle(this)"><span class="adv-h-t">The targeting equation</span><span class="adv-head-actions"><button class="eb" onclick="event.stopPropagation();oa('assets/asset_advantage_methodology.html')">Open full view</button><svg class="adv-chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"></polyline></svg></span></div><div class="adv-body"><iframe src="assets/asset_advantage_methodology.html" height="540" id="if_asset_advantage_methodology_html"></iframe></div></div><div class="adv-acc"><div class="adv-head" onclick="advToggle(this)"><span class="adv-h-t">Our Unique Value Proposition</span><span class="adv-head-actions"><button class="eb" onclick="event.stopPropagation();oa('assets/asset_advantage_sweetspot.html')">Open full view</button><svg class="adv-chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"></polyline></svg></span></div><div class="adv-body"><iframe src="assets/asset_advantage_sweetspot.html" height="680" id="if_asset_advantage_sweetspot_html"></iframe></div></div><div class="adv-acc"><div class="adv-head" onclick="advToggle(this)"><span class="adv-h-t">Our position in the intelligence landscape</span><span class="adv-head-actions"><button class="eb" onclick="event.stopPropagation();oa('assets/asset_advantage_landscape.html')">Open full view</button><svg class="adv-chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"></polyline></svg></span></div><div class="adv-body"><iframe src="assets/asset_advantage_landscape.html" height="760" id="if_asset_advantage_landscape_html"></iframe></div></div></section>
+<section class="page" id="page-value" data-tab-group="value"><div class="page-eyebrow">03 · The Value We Deliver</div><h2 class="page-title">We raise the odds you hit your number by putting senior time on the right accounts at the right moment.</h2><p class="page-subtitle">The work is the same work your growth leaders already do. We carry the part that does not need them, so their hours, and their judgment, land where the revenue is. Three kinds of value come out of that, from the concrete to the cultural.</p><div class="val-cards"><div class="val-card"><div class="val-num">01</div><div class="val-t">Growth Leader time back, and focused on the right activities</div><div class="val-b">Research and signal-reading is the lowest-value, least billable thing a growth leader does, and the first thing dropped when delivery gets heavy. We carry the detect and translate work, so the hours come back and land on client-facing work and real pursuits instead of sourcing.</div></div><div class="val-card"><div class="val-num">02</div><div class="val-t">A pipeline that holds up through productivity peaks and valleys</div><div class="val-b">The doer-seller trap is mechanical. When delivery peaks, prospecting stops, and when projects end the pipeline is empty. A managed engine runs the top of funnel continuously, so presence stays up while your people are heads-down and the forecast holds through the busy season.</div></div><div class="val-card"><div class="val-num">03</div><div class="val-t">An engine your best people want to partner with</div><div class="val-b">Cold prospecting is a quiet driver of burnout and the reason BD is the job nobody wants. Take it off their plate and people stay, recruiting gets easier, and juniors ramp faster because the dossier does the homework. The targeting logic lives in the engine, not in one person, so a departure does not take the pipeline with it.</div></div></div><div class="adv-acc"><div class="adv-head" onclick="advToggle(this)"><span class="adv-h-t">What the focus is worth, on your numbers</span><span class="adv-head-actions"><button class="eb" onclick="event.stopPropagation();oa('assets/asset_value_calculator.html')">Open full view</button><svg class="adv-chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"></polyline></svg></span></div><div class="adv-body"><iframe src="assets/asset_value_calculator.html" height="800" id="if_asset_value_calculator_html"></iframe></div></div><div class="adv-acc"><div class="adv-head" onclick="advToggle(this)"><span class="adv-h-t">Funnel comparison, on your numbers</span><span class="adv-head-actions"><button class="eb" onclick="event.stopPropagation();oa('assets/asset_funnel_compare.html')">Open full view</button><svg class="adv-chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"></polyline></svg></span></div><div class="adv-body"><iframe src="assets/asset_funnel_compare.html" height="720" id="if_asset_funnel_compare_html"></iframe></div></div></section>
+<section class="page" id="page-how" data-tab-group="how"><div class="page-eyebrow">04 · How It Works</div><h2 class="page-title">The intelligence layer between your data and your team.</h2><p class="page-subtitle">Redline Growth captures the signals, builds the dossiers, and delivers them into the tools your team already uses. Here is the engine and what feeds it.</p><div class="cards-row cols-2"><div class="card" data-target="h_a" onclick="toggleDetail('how','h_a',this)"><div class="card-num">01</div><div class="card-statement">The three-layer engine</div><div class="card-why">Intelligence is captured, enriched, and scored, then feeds the execution tools you already run.</div><div class="card-expand"><span>The engine</span><span class="card-expand-icon">+</span></div></div><div class="card" data-target="h_b" onclick="toggleDetail('how','h_b',this)"><div class="card-num">02</div><div class="card-statement">What's a signal?</div><div class="card-why">Four ways to find the accounts that are moving, before the rest of the market sees them.</div><div class="card-expand"><span>Signals</span><span class="card-expand-icon">+</span></div></div></div><div class="detail-tray" id="detail-h_a"><div class="detail-tray-header"><div><div class="detail-tray-eyebrow">01 · The engine</div><div class="detail-tray-title">The intelligence layer that feeds your execution</div></div><button class="detail-tray-close" onclick="closeDetail('how')">✕</button></div><div class="detail-tray-body"><p class="tray-intro">The work flows to the growth leaders you already have. Redline Growth is the intelligence layer supporting them, not an outsourced proxy.</p><div class="af"><div class="afl"><span>The Redline Growth intelligence engine</span><button class="eb" onclick="oa('assets/three_layer_diagram_profservices_v1.html')">Open full view</button></div><iframe src="assets/three_layer_diagram_profservices_v1.html" height="720" id="if_three_layer_diagram_profservices_v1_html"></iframe></div></div></div><div class="detail-tray" id="detail-h_b"><div class="detail-tray-header"><div><div class="detail-tray-eyebrow">02 · Signals</div><div class="detail-tray-title">Four ways to find them, built per practice</div></div><button class="detail-tray-close" onclick="closeDetail('how')">✕</button></div><div class="detail-tray-body"><p class="tray-intro">There is not one kind of signal. There are four ways to find them, and the library is built per practice, not bought generic.</p><div class="af"><div class="afl"><span>What's a signal?</span><button class="eb" onclick="oa('assets/asset_signal.html')">Open full view</button></div><iframe src="assets/asset_signal.html" height="1320" id="if_asset_signal_html"></iframe></div></div></div></section>
+<section class="page" id="page-engage" data-tab-group="engage"><div class="page-eyebrow">05 · How We Engage</div><h2 class="page-title">Pilots, Subscription, Projects.</h2><p class="page-subtitle">The managed intelligence subscription is the core engagement: a short pilot to set up and tune the customized engine, then delivery of the intelligence outputs on a regular cadence. Fixed-scope projects support emergent opportunities and address any large-scale integration or CRM or other data clean up efforts. We also support future decisions to transition the engine platform in-house.</p><div class="eng-mode sub"><div class="eng-mh">Managed subscription · the intelligence engine</div><div class="eng-msub">Ongoing intelligence engine, sustained enablement.</div><p class="eng-mp">The subscription keeps the Detect, Translate, and Activate engine active and refreshed on a recurring cadence to monitor your market and generate prioritized leads to keep the pipeline sustained. Signal architecture is maintained and tuned across the engagement. The intelligence compounds rather than eroding.</p><div class="eng-glab">Service modes</div><div class="eng-srv"><b>Detect.</b> Ongoing signal monitoring calibrated to your firm's fit and addressable market.</div><div class="eng-srv"><b>Translate.</b> Recurring dossier and target-list production, routed to your growth leaders.</div><div class="eng-srv"><b>Activate.</b> Your team engages with pre-built intelligence. Pursuit outcomes feed back into signal calibration, improving accuracy over time.</div><div class="eng-glab">Engagement phases</div><div class="eng-srv"><b>Pilot.</b> Four to six weeks to stand up the engine, then four to six months for measurable pipeline.</div><div class="eng-srv"><b>Ongoing.</b> A dedicated GTM engineer, recurring strategy reviews, and continuous signal optimization and engine refinement. Multi-month minimum.</div></div><div class="eng-divider" style="margin-top:30px">What each tier covers, and what is included at your size</div><div class="eng-tiers"><div class="adv-acc"><div class="adv-head" onclick="advToggle(this)"><span class="adv-h-t">Tier 1 &middot; Lead and Pipeline Support</span><span class="adv-head-actions"><svg class="adv-chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"></polyline></svg></span></div><div class="adv-body"><div style="padding:4px 22px 20px"><div class="eng-tier t1"><div class="eng-tn">Tier 1 · the base</div><div class="eng-th">Lead &amp; Pipeline Support</div><div class="eng-tsub">Building a sustained growth pipeline</div><ul class="eng-list"><li>Onboarding and engine build: ICP, signal library, Clay infrastructure</li><li>Account and network mapping across your base, net-new, and top relationships</li><li>Weekly intelligence delivery: briefs, dossiers, and a prioritized action queue</li><li>Existing-base expansion and retention monitoring</li><li>Quarterly review and optimization</li></ul><div class="eng-scale"><div class="eng-srow"><div class="eng-slab">1a · Founder-driven base</div><div class="eng-stx"><b>Included at every size.</b> The principal's own motion: events, advanced LinkedIn mining and navigation, and the relationships they carry personally.</div></div><div class="eng-srow"><div class="eng-slab">1b · Growth-leader bench</div><div class="eng-stx"><b>Available for firms/offices/practices with 40+ people.</b> The same support scaled across the direct growth leaders in a larger team, with the full leadership graph, nurture sequence activation, and competitive monitoring.</div></div></div></div></div></div></div><div class="adv-acc"><div class="adv-head" onclick="advToggle(this)"><span class="adv-h-t">Tier 2 &middot; Sales Opportunity Pursuit Support</span><span class="adv-head-actions"><svg class="adv-chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"></polyline></svg></span></div><div class="adv-body"><div style="padding:4px 22px 20px"><div class="eng-tier t2"><div class="eng-tn">Tier 2 · pursuit support</div><div class="eng-th">Sales Opportunity Pursuit Support</div><div class="eng-tsub">Qualified opportunity support</div><ul class="eng-list"><li>Pursuit intake and qualification</li><li>Per-pursuit deep-dive research and the buying-committee mapping</li><li>Opening material the team can carry into the room</li><li>Win-loss review and playbook refinement</li></ul><div class="eng-scale"><div class="eng-srow"><div class="eng-slab">When it fits</div><div class="eng-stx"><b>Available at every size.</b> Added when a firm runs enough live pursuits at once that per-deal intelligence pays for itself. Sized to your pursuit volume, not a flat add-on.</div></div></div></div></div></div></div></div><div class="adv-acc"><div class="adv-head" onclick="advToggle(this)"><span class="adv-h-t">Subscription pricing by firm size</span><span class="adv-head-actions"><svg class="adv-chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"></polyline></svg></span></div><div class="adv-body"><div style="padding:4px 22px 20px"><div class="eng-bands"><table><thead><tr><th>Bookings target</th><th>Firm/Office/Practice</th><th>Subscription</th><th>Tiers available</th></tr></thead><tbody><tr><td>$2M to $4M</td><td>10 to 20 people</td><td class="fee">$2,500 to $4,000 / mo</td><td>Tier 1a + Tier 2</td></tr><tr><td>$4M to $8M</td><td>21 to 40 people</td><td class="fee">$4,500 to $8,000 / mo</td><td>Tier 1a + Tier 2</td></tr><tr><td>$8M to $12M</td><td>41 to 60 people</td><td class="fee">$9,000 to $16,000 / mo</td><td>All tiers</td></tr><tr><td>$12M to $20M</td><td>61 to 100 people</td><td class="fee">$13,500 to $24,000 / mo</td><td>All tiers</td></tr><tr><td>$20M to $40M</td><td>101 to 200 people</td><td class="fee">$22,500 to $40,000 / mo</td><td>All tiers</td></tr><tr><td>$40M and up</td><td>200+ people</td><td class="fee">1.5 to 2% of annual booking target</td><td>All tiers</td></tr></tbody></table></div><p class="eng-note">Pricing is set by your top-line booked revenue target for the office, practice, or territory you organize your P&amp;L against, roughly 1 to 2.5% of that target depending on size. All subscriptions billed quarterly in advance.</p></div></div></div><div class="eng-divider" style="margin-top:30px">Also available · project engagements and scale planning</div><div class="adv-acc"><div class="adv-head" onclick="advToggle(this)"><span class="adv-h-t">Project-based engagements</span><span class="adv-head-actions"><svg class="adv-chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"></polyline></svg></span></div><div class="adv-body"><div style="padding:4px 24px 22px"><div class="eng-mode proj"><div class="eng-mh">Project-based engagements</div><div class="eng-msub">Defined intelligence asset, fixed scope, time-bounded.</div><p class="eng-mp">Projects produce a specific intelligence deliverable using the Detect, Translate, and Advisory modes. The output is yours to use as a point-in-time asset inside your CRM, outbound platform, or pursuit workflow. Scoped and priced per engagement.</p><div class="eng-glab">Example services</div><div class="eng-grp"><b>Detect</b><div class="ln">Account list generation and enrichment. Persona and contact mapping. Market universe and persona mapping.</div></div><div class="eng-grp"><b>Detect + Translate</b><div class="ln">Cross-sell opportunity analysis. Cross-sell intelligence foundation. Channel and partner intelligence.</div></div><div class="eng-grp"><b>Advisory</b><div class="ln">Assessment sprint. Also scoped as projects: systems integrations, CRM cleanups and data hygiene, planning sprints.</div></div><div class="eng-modefoot">Project deliverables are high value but point-in-time. Signal accuracy erodes without regular upkeep. Firms that want to maintain accuracy and recency move to a subscription or an internal Clay instance.</div></div></div></div></div><div class="adv-acc"><div class="adv-head" onclick="advToggle(this)"><span class="adv-h-t">Scale Roadmap</span><span class="adv-head-actions"><button class="eb" onclick="event.stopPropagation();oa('assets/asset_scale_roadmap.html')">Open full view</button><svg class="adv-chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"></polyline></svg></span></div><div class="adv-body"><iframe src="assets/asset_scale_roadmap.html" height="560" id="if_asset_scale_roadmap_html"></iframe></div></div></section>
+<section class="page" id="page-notes"><div class="page-eyebrow">Notes</div><h2 class="page-title">Notes &amp; Methodology</h2><p class="page-subtitle">The assumptions and sources behind the models, in one place.</p><div class="notes-body"><h3>In-market timing</h3><p>The targeting logic draws on the Ehrenberg-Bass and LinkedIn B2B Institute finding that roughly five percent of business buyers are in-market in a given quarter and about twenty percent in a given year, and that firms change providers roughly every five years. Redline Growth focuses finite effort on the accounts showing movement now.</p><h3>The funnel</h3><p>The narrowing example uses an illustrative full set that resolves to a scored short list, then to the stakeholders behind it. Live numbers are scoped to your own accounts and book.</p><h3>The value model</h3><p>The benchmark lift is measured from an operationalized starting point, Stage 2 on the maturity ladder, to signal-qualified. Figures shown in any example are for structure; the working model is driven by your numbers and refined at the fees step.</p><h3>Examples</h3><p>Firm and account names in any dossier or walkthrough are illustrative and shown for structure only.</p></div></section>
+</div>
+<script>
+function showPage(pageId) {
+  // Hide landing
+  document.getElementById('page-landing').classList.remove('active');
+  // Hide all pages
+  document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+  // Reset all nav links
+  document.querySelectorAll('.nav-link').forEach(l => l.classList.remove('active'));
+  // Close any open detail trays
+  document.querySelectorAll('.detail-tray').forEach(t => t.classList.remove('open'));
+  document.querySelectorAll('.card').forEach(c => c.classList.remove('active'));
+
+  if (pageId === 'landing') {
+    document.getElementById('page-landing').classList.add('active');
+  } else {
+    const target = document.getElementById('page-' + pageId);
+    if (target) target.classList.add('active');
+    const link = document.querySelector('.nav-link[data-page="' + pageId + '"]');
+    if (link) link.classList.add('active');
+  }
+  window.scrollTo(0, 0);
+}
+
+function toggleDetail(group, targetId, cardEl) {
+  const tray = document.getElementById('detail-' + targetId);
+  const isAlreadyOpen = cardEl.classList.contains('active');
+
+  // Close all cards and trays in this group
+  const section = document.querySelector('[data-tab-group="' + group + '"]');
+  if (section) {
+    section.querySelectorAll('.card').forEach(c => c.classList.remove('active'));
+    section.querySelectorAll('.detail-tray').forEach(t => t.classList.remove('open'));
+  }
+
+  // If it was already open, leave closed. Otherwise open the clicked one.
+  if (!isAlreadyOpen) {
+    cardEl.classList.add('active');
+    if (tray) tray.classList.add('open');
+  }
+}
+
+function closeDetail(group) {
+  const section = document.querySelector('[data-tab-group="' + group + '"]');
+  if (section) {
+    section.querySelectorAll('.card').forEach(c => c.classList.remove('active'));
+    section.querySelectorAll('.detail-tray').forEach(t => t.classList.remove('open'));
+  }
+}
+
+// Keyboard nav: ESC closes any open detail tray
+document.addEventListener('keydown', function(e) {
+  if (e.key === 'Escape') {
+    document.querySelectorAll('.detail-tray.open').forEach(t => t.classList.remove('open'));
+    document.querySelectorAll('.card.active').forEach(c => c.classList.remove('active'));
+  }
+});
+
+function oa(u){window.open(u,'_blank');}
+window.addEventListener('message',function(e){if(e.data&&e.data.type==='resize'){document.querySelectorAll('iframe').forEach(function(f){if(f.contentWindow===e.source){f.style.height=(e.data.height+8)+'px';}});}});
+
+</script>
+
+<script>
+function advToggle(h){var a=h.closest('.adv-acc');var op=a.classList.toggle('open');if(op){var ifr=a.querySelector('iframe');if(ifr){setTimeout(function(){try{ifr.contentWindow.dispatchEvent(new Event('resize'));}catch(e){}},120);}}}
+</script>
+</body></html>

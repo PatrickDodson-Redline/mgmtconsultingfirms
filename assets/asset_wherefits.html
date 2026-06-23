@@ -1,0 +1,238 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=DM+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{
+  --ink:#0F1117; --t1:#1A1D24; --t2:#464B55; --tm:#6E7388;
+  --amber:#C87041; --blue:#5D7E8A; --green:#8A9B72; --gold:#C9A44D; --crimson:#9B1C24;
+  --vellum:#E8E4D8; --surface:#FAF8F4; --nav:#F0EDE4; --card:#FFFFFF;
+  --rule:#C9C2B5; --hair:rgba(0,0,0,0.08);
+  --fd:'Space Grotesk',system-ui,sans-serif; --fb:'DM Sans',system-ui,sans-serif; --fm:'JetBrains Mono',monospace;
+}
+html{scroll-behavior:smooth}
+body{font-family:var(--fb);background:var(--surface);color:var(--t1);line-height:1.6;-webkit-font-smoothing:antialiased}
+.wrap{max-width:1040px;margin:0 auto;padding:0 6vw 80px}
+
+/* hero snapshot */
+.hero{padding:72px 6vw 40px;max-width:1040px;margin:0 auto}
+.brand{font-family:var(--fd);font-weight:700;font-size:19px;letter-spacing:-.3px;color:var(--t1)}
+.brand .g{color:var(--amber);font-weight:400}
+.eyebrow{font-family:var(--fm);font-size:11px;font-weight:500;letter-spacing:.16em;text-transform:uppercase;color:var(--amber);margin:34px 0 16px}
+.redline{height:2px;width:54px;background:var(--amber);border:0;margin:0 0 26px}
+.snap{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-bottom:30px}
+.snap .tile{background:var(--card);border:1px solid var(--hair);border-radius:12px;padding:22px}
+.snap .lab{font-family:var(--fm);font-size:9.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--amber);opacity:.75;margin-bottom:10px}
+.snap .tx{font-size:14.5px;color:var(--t1);line-height:1.55}
+.engage{display:flex;align-items:center;gap:22px;font-family:var(--fm);font-size:12px;letter-spacing:.05em;text-transform:uppercase;color:var(--t2)}
+.engage span{position:relative}
+.engage span:not(:last-child):after{content:"";position:absolute;right:-12px;top:50%;width:1px;height:13px;background:var(--rule);transform:translateY(-50%)}
+
+/* group headers */
+.grp{margin:40px 0 12px;display:flex;align-items:baseline;gap:14px}
+.grp .gn{font-family:var(--fm);font-size:10px;letter-spacing:.16em;text-transform:uppercase;color:var(--amber);opacity:.7}
+.grp .gt{font-family:var(--fd);font-size:23px;font-weight:600;letter-spacing:-.5px;color:var(--t1)}
+.grp .gd{font-size:14px;color:var(--t2);margin:2px 0 0;max-width:74ch}
+
+/* accordion */
+.acc{margin-bottom:8px;border:1px solid var(--rule);border-radius:8px;overflow:hidden;background:var(--card)}
+.acc-head{display:flex;align-items:center;gap:14px;padding:17px 22px;cursor:pointer;transition:background .15s;user-select:none}
+.acc-head:hover{background:rgba(200,112,65,.03)}
+.acc.open .acc-head{border-bottom:1px solid var(--hair)}
+.acc-num{font-family:var(--fm);font-size:9px;letter-spacing:.12em;text-transform:uppercase;color:var(--amber);opacity:.7;min-width:26px}
+.acc-title{font-family:var(--fd);font-size:17px;font-weight:600;color:var(--t1);letter-spacing:-.3px;flex:1}
+.acc-chev{width:17px;height:17px;color:var(--tm);transition:transform .25s;flex-shrink:0}
+.acc.open .acc-chev{transform:rotate(180deg)}
+.acc-body{display:none;padding:22px 22px 30px}
+.acc.open .acc-body{display:block}
+.acc-desc{font-size:14.5px;color:var(--t2);margin-bottom:22px;max-width:76ch;line-height:1.62}
+.acc-desc.intro{color:var(--t1);border-left:3px solid var(--amber);padding-left:16px}
+
+/* asset frame */
+.af{width:100%;border:1px solid var(--rule);border-radius:8px;overflow:hidden;background:var(--card);margin:6px 0 4px}
+.af iframe{width:100%;border:none;display:block}
+.afl{display:flex;align-items:center;justify-content:space-between;padding:8px 14px;background:var(--nav);border-bottom:1px solid var(--hair);font-family:var(--fm);font-size:9px;letter-spacing:.1em;text-transform:uppercase;color:var(--tm)}
+.eb{font-family:var(--fm);font-size:9px;letter-spacing:.08em;text-transform:uppercase;color:var(--amber);background:none;border:1px solid rgba(200,112,65,.35);padding:4px 11px;border-radius:4px;cursor:pointer;transition:background .15s}
+.eb:hover{background:rgba(200,112,65,.08)}
+.note{font-size:12.5px;color:var(--tm);margin-top:10px;font-style:italic}
+
+/* generic blocks */
+h3.blk{font-family:var(--fd);font-size:16px;font-weight:600;color:var(--t1);margin:26px 0 10px;letter-spacing:-.2px}
+p.body{font-size:14.5px;color:var(--t2);line-height:1.65;margin-bottom:12px;max-width:78ch}
+p.body b{color:var(--t1);font-weight:600}
+.quote{font-size:15px;color:var(--t1);font-style:italic;border-left:3px solid var(--rule);padding:2px 0 2px 16px;margin:4px 0 14px;max-width:72ch}
+.quote .who{display:block;font-style:normal;font-family:var(--fm);font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--tm);margin-top:7px}
+
+/* pursuit cycle */
+.bjband{display:grid;grid-template-columns:1fr 1.4fr 1fr;gap:10px;margin-bottom:10px}
+.bjband div{font-family:var(--fm);font-size:9.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--tm);text-align:center;padding:7px 8px;background:var(--nav);border:1px solid var(--hair);border-radius:6px}
+.toprow{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;position:relative;margin-bottom:14px}
+.pcard{background:var(--card);border:1px solid var(--hair);border-radius:10px;padding:16px 16px 18px;border-top:3px solid var(--blue)}
+.pcard .pn{font-family:var(--fm);font-size:9px;letter-spacing:.1em;text-transform:uppercase;color:var(--blue);margin-bottom:5px}
+.pcard .ph{font-family:var(--fd);font-size:14.5px;font-weight:600;color:var(--t1);margin-bottom:9px;line-height:1.25}
+.pcard .pq{font-size:12.5px;font-style:italic;color:var(--t2);border-left:2px solid var(--rule);padding-left:10px;margin-bottom:10px;line-height:1.5}
+.pcard .pd{font-size:12.8px;color:var(--t2);line-height:1.55}
+.pcard .po{font-size:12.5px;color:var(--green);margin-top:9px;line-height:1.5}
+.pcard .po b{color:#5d6b48}
+.foundrow{display:grid;grid-template-columns:1fr 1fr;gap:14px;position:relative}
+.fcard{background:#FBFAF6;border:1px solid var(--hair);border-radius:10px;padding:16px 18px;border-bottom:3px solid var(--amber)}
+.fcard .pn{font-family:var(--fm);font-size:9px;letter-spacing:.1em;text-transform:uppercase;color:var(--amber);margin-bottom:5px}
+.fcard .ph{font-family:var(--fd);font-size:14.5px;font-weight:600;color:var(--t1);margin-bottom:9px}
+.fcard .pq{font-size:12.5px;font-style:italic;color:var(--t2);border-left:2px solid var(--rule);padding-left:10px;margin-bottom:10px;line-height:1.5}
+.fcard .pd{font-size:12.8px;color:var(--t2);line-height:1.55;margin-bottom:8px}
+.fcard .po{font-size:12.5px;color:var(--green);line-height:1.5}
+.loopnote{font-size:12.5px;color:var(--tm);margin-top:12px;text-align:center;font-style:italic}
+
+/* signal modes */
+.def{font-size:16px;color:var(--t1);font-weight:500;border-left:3px solid var(--amber);padding-left:18px;margin:4px 0 24px;max-width:70ch}
+.modes{display:grid;grid-template-columns:repeat(2,1fr);gap:14px;margin:8px 0 6px}
+.mode{background:var(--card);border:1px solid var(--hair);border-radius:10px;padding:18px}
+.mode .mn{font-family:var(--fm);font-size:9px;letter-spacing:.12em;text-transform:uppercase;color:var(--amber);opacity:.8;margin-bottom:8px}
+.mode .mh{font-family:var(--fd);font-size:15px;font-weight:600;color:var(--t1);margin-bottom:7px}
+.mode .md{font-size:13px;color:var(--t2);line-height:1.55}
+.modeframe{font-size:14.5px;color:var(--t1);background:#FBFAF6;border:1px solid var(--hair);border-left:3px solid var(--amber);border-radius:8px;padding:15px 18px;margin:16px 0 6px;line-height:1.6}
+.cats{display:flex;flex-wrap:wrap;gap:8px;margin:6px 0 4px}
+.cats .chip{font-family:var(--fm);font-size:11px;letter-spacing:.04em;color:var(--t2);background:var(--card);border:1px solid var(--rule);border-radius:30px;padding:6px 13px}
+.twoside{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin:8px 0}
+.twoside .s{background:var(--card);border:1px solid var(--hair);border-radius:10px;padding:16px 18px}
+.twoside .s .lab{font-family:var(--fm);font-size:9px;letter-spacing:.1em;text-transform:uppercase;margin-bottom:8px}
+.twoside .s.fp .lab{color:var(--green)}
+.twoside .s.tp .lab{color:var(--blue)}
+.twoside .s .tx{font-size:13px;color:var(--t2);line-height:1.55}
+.vert{background:#FBFAF6;border:1px solid var(--hair);border-radius:10px;padding:16px 18px;margin:8px 0}
+.vert .vh{font-family:var(--fd);font-size:13.5px;font-weight:600;color:var(--t1);margin-bottom:6px}
+.vert .vl{font-size:12.8px;color:var(--t2);line-height:1.6}
+.vert .vl b{color:var(--t1);font-weight:600}
+.ladder{background:var(--card);border:1px solid var(--hair);border-radius:10px;padding:18px 20px;margin:10px 0}
+.ladder .lh{font-family:var(--fd);font-size:14px;font-weight:600;color:var(--t1);margin-bottom:8px}
+.rungs{display:flex;gap:6px;margin:14px 0 6px;flex-wrap:wrap}
+.rung{flex:1;min-width:120px;border:1px solid var(--hair);border-radius:7px;padding:10px 12px;background:#FBFAF6}
+.rung.on{border-color:var(--amber);background:rgba(200,112,65,.06)}
+.rung .rn{font-family:var(--fm);font-size:9px;letter-spacing:.08em;text-transform:uppercase;color:var(--tm);margin-bottom:4px}
+.rung.on .rn{color:var(--amber)}
+.rung .rt{font-size:12.5px;color:var(--t1);font-weight:500;line-height:1.4}
+
+/* funnel scatter-collect */
+.funnel{background:var(--card);border:1px solid var(--hair);border-radius:10px;padding:20px;margin:6px 0}
+.fstage{display:flex;align-items:baseline;justify-content:space-between;gap:16px;margin-bottom:14px;flex-wrap:wrap}
+.fstage .ftitle{font-family:var(--fd);font-size:15px;font-weight:600;color:var(--t1)}
+.fstage .fsub{font-size:13px;color:var(--t2);max-width:62ch}
+.fcount{font-family:var(--fd);font-size:30px;font-weight:700;color:var(--amber);letter-spacing:-1px;min-width:90px;text-align:right}
+.dotfield{position:relative;height:240px;border:1px solid var(--hair);border-radius:8px;background:#FBFAF6;overflow:hidden}
+.dot{position:absolute;width:7px;height:7px;border-radius:50%;background:var(--rule);transition:all .9s cubic-bezier(.4,0,.2,1);opacity:.5}
+.dot.sig{background:var(--blue);opacity:.95}
+.dot.fit{background:var(--amber);opacity:1;width:9px;height:9px}
+.dot.work{background:var(--amber);opacity:1;width:11px;height:11px;box-shadow:0 0 0 3px rgba(200,112,65,.18)}
+.dot.dim{opacity:.12}
+.fctrl{display:flex;align-items:center;gap:14px;margin-top:14px}
+.fbtn{font-family:var(--fm);font-size:10px;letter-spacing:.08em;text-transform:uppercase;color:#fff;background:var(--amber);border:none;padding:9px 16px;border-radius:6px;cursor:pointer}
+.fbtn.alt{background:none;color:var(--amber);border:1px solid rgba(200,112,65,.4)}
+.fbeats{display:flex;gap:6px;flex:1}
+.fbeat{flex:1;height:4px;border-radius:3px;background:var(--rule);opacity:.4}
+.fbeat.on{background:var(--amber);opacity:1}
+.fpay{font-size:14px;color:var(--t1);margin-top:16px;border-left:3px solid var(--amber);padding-left:16px;max-width:70ch}
+
+/* from-to */
+.ft{display:grid;grid-template-columns:1fr 1fr;gap:0;border:1px solid var(--hair);border-radius:10px;overflow:hidden;margin:8px 0}
+.ft .beatlab{grid-column:1/3;background:var(--nav);font-family:var(--fm);font-size:9.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--t2);padding:9px 16px;border-bottom:1px solid var(--hair)}
+.ft .before,.ft .after{padding:15px 18px;font-size:13px;line-height:1.6}
+.ft .before{background:#FBFAF6;color:var(--t2);border-right:1px solid var(--hair);border-bottom:1px solid var(--hair)}
+.ft .after{background:var(--card);color:var(--t1);border-bottom:1px solid var(--hair)}
+.ft .tag{display:block;font-family:var(--fm);font-size:8.5px;letter-spacing:.1em;text-transform:uppercase;margin-bottom:6px}
+.ft .before .tag{color:var(--crimson);opacity:.7}
+.ft .after .tag{color:var(--green)}
+.payoff{font-size:15px;color:var(--t1);font-weight:500;margin:16px 0 6px;max-width:72ch}
+.weare{font-size:14px;color:var(--t2);background:#FBFAF6;border:1px solid var(--hair);border-radius:8px;padding:15px 18px;margin-top:8px;max-width:78ch}
+
+/* services placeholder */
+.tiers{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin:8px 0}
+.tier{background:var(--card);border:1px solid var(--hair);border-radius:10px;padding:18px}
+.tier .tn{font-family:var(--fm);font-size:9.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--amber);margin-bottom:8px}
+.tier .th{font-family:var(--fd);font-size:15px;font-weight:600;color:var(--t1);margin-bottom:8px}
+.tier .td{font-size:12.8px;color:var(--t2);line-height:1.55}
+.ph-note{font-size:13px;color:var(--tm);font-style:italic;margin-top:14px}
+
+/* closing */
+.closing{margin-top:48px;padding:30px;background:var(--nav);border:1px solid var(--hair);border-radius:12px}
+.closing .ce{font-family:var(--fm);font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--amber);opacity:.8;margin-bottom:10px}
+.closing .ct{font-size:16px;color:var(--t1);line-height:1.6;max-width:80ch}
+.foot{margin-top:30px;font-family:var(--fm);font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--tm)}
+
+@media(max-width:820px){
+  .snap,.modes,.twoside,.tiers{grid-template-columns:1fr}
+  .toprow,.foundrow,.bjband{grid-template-columns:1fr}
+  .ft{grid-template-columns:1fr}
+  .ft .before{border-right:none}
+}
+
+body{padding:0} .wrap{padding:8px 4px 18px}.persist{border-top:3px solid var(--amber)}.cyclelab{font-family:var(--fm);font-size:9.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--tm);text-align:center;padding:8px;background:var(--nav);border:1px solid var(--hair);border-radius:6px;margin:14px 0}
+.ph,.pn,.cyclelab,.po b,.pq b,.pd b{text-wrap:balance}
+h1,h2,h3,h4{text-wrap:balance}
+
+/* v7 widow control */
+h1,h2,h3,h4,.page-title,.card-statement,.eng-mh,.eng-th,.eng-tn,.ph,.pn,.acc-title,.blk,.vh,.mh,.cyclelab,.sig-head,.lab,.ft-cap,.def{text-wrap:balance}
+
+/* standalone (open full view) gets side margins; embed stays full-width */
+body.standalone{max-width:1200px;margin-left:auto;margin-right:auto}
+
+.pcard .pdl,.fcard .pdl{margin:6px 0 0;padding-left:14px;list-style:none}
+.pcard .pdl li,.fcard .pdl li{position:relative;margin-bottom:4px;font-size:12.6px;color:var(--t2);line-height:1.45}
+.pcard .pdl li::before,.fcard .pdl li::before{content:'';position:absolute;left:-12px;top:7px;width:4px;height:4px;border-radius:50%;background:var(--blue)}
+.fcard.fwide{display:grid;grid-template-columns:1fr 1fr;column-gap:28px;row-gap:6px;align-items:start}
+.fcard.fwide>.pn,.fcard.fwide>.ph,.fcard.fwide>.po{grid-column:1 / -1}
+.fcard.fwide>.po{margin-top:4px}
+@media(max-width:680px){.fcard.fwide{grid-template-columns:1fr}}
+</style></head>
+<body><div class="wrap"><div class="acc-body" style="display:block;padding:0"><p class="acc-desc intro">Professional services firms grow by winning work and expanding from it, so the cycle is a loop. Redline Growth applies across the whole cycle, with a continuous relationship layer wrapping the active pursuit: present before issues are defined, and through execution and expansion.</p><div class="fcard persist fwide"><div class="pn">Monitor · Before issues are defined</div><div class="ph">Be present, and get known where it counts</div><div class="pq"><b>Problem.</b> We're known where we've worked and invisible where we haven't. And the accounts we'd most want are the ones we have no line into. By the time an RFP posts, the firms in the relationship are already on the list and we're not.</div><div class="pd"><b>Solution.</b><ul class="pdl"><li>Keep a steady presence with target accounts, in your growth leaders' voices.</li><li>Most future clients are not buying now: about 5 percent are in-market in a quarter, twenty percent in a year.</li><li>Concentrate relationship-building on the names your signals put nearest the buying window.</li><li>Map your growth leaders' first and second-degree networks to find who sits one introduction from each target.</li></ul></div><div class="po"><b>Outcome.</b> Engagement is established proactively, when you have the greatest opportunity to help surface needs and shape the approach. You can shape the RFP, or avoid it altogether by being in front of it.</div></div>
+<div class="cyclelab">The buying cycle · the active pursuit</div>
+<div class="toprow"><div class="pcard"><div class="pn">Detect</div><div class="ph">See which accounts are moving</div><div class="pq"><b>Problem.</b> By the time we hear a client or a target is in motion, someone is already in the room.</div><div class="pd"><b>Solution.</b><ul class="pdl"><li>Watch your client base and target list for events that signal a buying cycle.</li><li>Triggers: a new mandate, a leadership change, a recapitalization, or a competitive loss.</li><li>Tune to your own experience and first-party data on what spurs clients to act.</li></ul></div><div class="po"><b>Outcome.</b> You learn an account is moving while there is still time to influence it or gain the inside position on a competitive bid.</div></div><div class="pcard"><div class="pn">Translate</div><div class="ph">Spend growth leader time where it converts</div><div class="pq"><b>Problem.</b> We chase what walks in the door. Half our pursuit hours go to deals we were never going to win.</div><div class="pd"><b>Solution.</b><ul class="pdl"><li>Use data and history to find the signals that actually mean something.</li><li>Point growth leaders' limited time at the most qualified leads.</li><li>Concentrate effort where it moves the top line.</li></ul></div><div class="po"><b>Outcome.</b> The firm's most expensive hours land on the pursuits most likely to close, and win rates rise without burning out your leaders and teams.</div></div><div class="pcard"><div class="pn">Activate</div><div class="ph">Walk into the pitch already knowing the&nbsp;buyer</div><div class="pq"><b>Problem.</b> Every proposal team starts the research from zero, and we still reach orals knowing less than we should about the buyer's situation.</div><div class="pd"><b>Solution.</b><ul class="pdl"><li>Deliver a dossier for each live pursuit: the trigger, the buying committee, the context, and opening material.</li><li>The relationship-layer network map shows which growth leader has the warmest route in.</li></ul></div><div class="po"><b>Outcome.</b> Pursuit teams prep in minutes instead of days and arrive with a point of view, not a template.</div></div></div>
+<div class="fcard persist fwide"><div class="pn">Execution and expansion</div><div class="ph">Anchor and expand your existing accounts</div><div class="pq"><b>Problem.</b> Our best growth is inside accounts we already hold, and we leave it to chance. Cross-practice selling is clumsy, or we miss legitimate growth because no one was aware of the opening.</div><div class="pd"><b>Solution.</b><ul class="pdl"><li>Monitor the book for expansion and risk signals.</li><li>Surface cross-practice openings before they move past you.</li><li>Research what worked historically and the natural next services over an account's life.</li><li>Map the org and relationships to build presence across the client.</li></ul></div><div class="po"><b>Outcome.</b> Expansion becomes a deliberate motion instead of an accident, and at-risk accounts surface early enough to save.</div></div>
+<div class="loopnote">The cycle is a loop, not a line. The bottom band feeds the top: execution and expansion done well compound into presence and reputation. The network graph built in the relationship layer is reused at Activate, so relationship capital is built once and used again.</div></div></div>
+<script>
+function ta(head){var a=head.closest('.acc');a.classList.toggle('open');if(a.classList.contains('open')){var fr=a.querySelector('#funnel');if(fr&&!fr.dataset.played){setTimeout(funnelPlay,250)}reportH()}else{reportH()}}
+function oa(u){window.open(u,'_blank')}
+function reportH(){try{var h=document.body.scrollHeight;parent.postMessage({type:'resize',height:h},'*')}catch(e){}}
+window.addEventListener('load',function(){buildField();reportH()});
+window.addEventListener('resize',reportH);
+
+/* ===== funnel scatter-collect ===== */
+var FN={dots:[],beat:0};
+function buildField(){if(!document.getElementById("dotfield"))return;
+  var f=document.getElementById('dotfield');if(!f)return;f.innerHTML='';FN.dots=[];
+  var W=f.clientWidth||620,H=240,N=250;
+  for(var i=0;i<N;i++){
+    var d=document.createElement('div');d.className='dot';
+    var x=8+Math.random()*(W-16),y=8+Math.random()*(H-16);
+    d.style.left=x+'px';d.style.top=y+'px';d._x=x;d._y=y;
+    f.appendChild(d);FN.dots.push(d);
+  }
+  // deterministic-ish selection: signal slice ~25, fit ~12
+  FN.sig=[];FN.fit=[];
+  for(var j=0;j<FN.dots.length;j++){if(j%10===0)FN.sig.push(j)}      // 25
+  for(var k=0;k<FN.sig.length;k++){if(k%2===0)FN.fit.push(FN.sig[k])} // ~13
+}
+function setBeats(n){var b=document.querySelectorAll('#f-beats .fbeat');b.forEach(function(el,i){el.classList.toggle('on',i<=n)})}
+function clearClasses(){FN.dots.forEach(function(d){d.className='dot'})}
+function funnelStage(n){
+  var t=document.getElementById('f-title'),s=document.getElementById('f-sub'),c=document.getElementById('f-count'),p=document.getElementById('f-pay');
+  setBeats(n);p.style.opacity=0;
+  if(n===0){clearClasses();t.textContent='Your full addressable set';s.textContent='Every account the firm could pursue.';c.textContent='250'}
+  else if(n===1){clearClasses();FN.dots.forEach(function(d){d.classList.add('dim')});FN.sig.forEach(function(i){FN.dots[i].className='dot sig'});t.textContent='The slice showing a signal';s.textContent='The accounts in-market at a point in time, refreshed quarterly or monthly to keep feeding priority leads.';c.textContent='~25'}
+  else if(n===2){clearClasses();FN.dots.forEach(function(d){d.classList.add('dim')});FN.fit.forEach(function(i){FN.dots[i].className='dot fit'});t.textContent='Scored for fit';s.textContent="The roughly top ten to fifteen percent worth a growth leader spending time and energy on.";c.textContent='~13'}
+  else if(n===3){
+    clearClasses();FN.dots.forEach(function(d){d.classList.add('dim')});
+    // collect the fit dots into a tidy row near the top
+    FN.fit.forEach(function(i,idx){var d=FN.dots[i];d.className='dot work';var cols=FN.fit.length;var W=(document.getElementById('dotfield').clientWidth||620);d.style.left=(W/2-(cols*16)/2+idx*16)+'px';d.style.top='26px'});
+    t.textContent='The short list your team works';s.textContent='Each with a reason and a warm path in.';c.textContent='~13';
+    setTimeout(function(){p.style.opacity=1},700);
+  }
+}
+function funnelPlay(){
+  var fr=document.getElementById('funnel');if(fr)fr.dataset.played='1';
+  if(!FN.dots.length)buildField();
+  FN.beat=0;funnelStage(0);
+  var seq=[1,2,3];var t=700;
+  seq.forEach(function(n){setTimeout(function(){funnelStage(n)},t);t+=1300})
+}
+function funnelReset(){buildField();FN.beat=0;funnelStage(0)}
+</script><script>if(window.self===window.top){document.documentElement&&document.addEventListener('DOMContentLoaded',function(){document.body.classList.add('standalone');});if(document.body){document.body.classList.add('standalone');}}</script>
+</body></html>

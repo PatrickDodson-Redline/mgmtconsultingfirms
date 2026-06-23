@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Targeting Equation | Redline Growth</title>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=DM+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --ink:#0F1117; --t1:#1A1D24; --t2:#464B55; --tm:#6E7388;
+  --amber:#C87041; --blue:#5D7E8A; --green:#8A9B72; --gold:#C9A44D;
+  --vellum:#E8E4D8; --surface:#FAF8F4; --nav:#F0EDE4; --card:#FFFFFF;
+  --rule:#C9C2B5; --hair:rgba(0,0,0,0.08);
+  --fd:'Space Grotesk',system-ui,sans-serif; --fb:'DM Sans',system-ui,sans-serif; --fm:'JetBrains Mono',monospace;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:var(--fb);background:var(--vellum);color:var(--t1);padding:30px 26px;line-height:1.5}
+.eyebrow{font-family:var(--fm);font-size:10px;font-weight:600;letter-spacing:.16em;text-transform:uppercase;color:var(--tm);margin-bottom:10px}
+.title{font-family:var(--fd);font-size:25px;font-weight:600;letter-spacing:-.4px;color:var(--t1);line-height:1.18;text-wrap:balance}
+.sub{font-family:var(--fd);font-size:16px;font-weight:400;color:var(--t2);margin-top:7px;text-wrap:balance}
+.cols{display:grid;grid-template-columns:1fr 1fr 1fr;gap:18px;margin-top:24px}
+.col{background:var(--card);border:1px solid var(--rule);border-top:3px solid var(--amber);border-radius:10px;padding:22px 22px 24px}
+.col.c2{border-top-color:var(--blue)}
+.col.c3{border-top-color:var(--gold)}
+.cn{font-family:var(--fd);font-size:21px;font-weight:700;letter-spacing:-.3px;color:var(--amber)}
+.col.c2 .cn{color:var(--blue)} .col.c3 .cn{color:var(--gold)}
+.ct{font-family:var(--fd);font-size:15.5px;font-weight:600;color:var(--t1);margin:9px 0 14px;text-wrap:balance}
+ul{list-style:none}
+li{position:relative;padding-left:16px;font-size:13.5px;line-height:1.5;color:var(--t2);margin-bottom:9px}
+li::before{content:'';position:absolute;left:2px;top:8px;width:5px;height:5px;border-radius:50%;background:var(--amber)}
+.col.c2 li::before{background:var(--blue)} .col.c3 li::before{background:var(--gold)}
+@media(max-width:720px){.cols{grid-template-columns:1fr}.title{font-size:21px}}
+
+/* standalone (open full view) gets side margins; embed stays full-width */
+body.standalone{max-width:1200px;margin-left:auto;margin-right:auto}
+</style>
+</head>
+<body>
+<div class="eyebrow">Methodology</div>
+<div class="title">Collaborative discovery. Iterative engine design. Continuous intelligence.</div>
+<div class="sub">Three layers of intelligence that compound into a single, scored view.</div>
+<div class="cols">
+  <div class="col c1">
+    <div class="cn">01 Right Firm</div>
+    <div class="ct">The accounts worth pursuing</div>
+    <ul>
+      <li>Win and loss patterns across past pursuits</li>
+      <li>Sector, footprint, and firmographic fit</li>
+      <li>Buying dynamics and procurement posture</li>
+      <li>Incumbent relationships and open white space</li>
+    </ul>
+  </div>
+  <div class="col c2">
+    <div class="cn">02 Right Buyer</div>
+    <div class="ct">The people who decide</div>
+    <ul>
+      <li>Decision-maker and influencer mapping</li>
+      <li>Buying-committee identification</li>
+      <li>Role, seniority, and entry points</li>
+      <li>Relationship paths drawn from your own network</li>
+    </ul>
+  </div>
+  <div class="col c3">
+    <div class="cn">03 Right Moment</div>
+    <div class="ct">The trigger to indicate readiness</div>
+    <ul>
+      <li>Leadership transitions and new mandates</li>
+      <li>M&amp;A, recapitalization, and restructuring</li>
+      <li>Regulatory and market shifts in the sector</li>
+      <li>Renewal, expansion, and re-bid windows</li>
+    </ul>
+  </div>
+</div>
+<script>
+function reportH(){try{parent.postMessage({type:'resize',height:document.body.scrollHeight},'*');}catch(e){}}
+window.addEventListener('load',reportH);window.addEventListener('resize',reportH);setTimeout(reportH,300);
+</script>
+<script>if(window.self===window.top){document.documentElement&&document.addEventListener('DOMContentLoaded',function(){document.body.classList.add('standalone');});if(document.body){document.body.classList.add('standalone');}}</script>
+</body>
+</html>

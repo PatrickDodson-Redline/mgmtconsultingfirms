@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Bluth Company · Account Intelligence Dossier · Galweather Stearn</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --accent:#1B2A4A; --accent2:#B08D57; --bg:#FFFFFF; --panel:#F4F2EE;
+  --ink:#1A1D24; --muted:#6B7280; --border:rgba(0,0,0,0.08);
+  --hfont:'Playfair Display',Georgia,serif; --bfont:'Inter',system-ui,-apple-system,sans-serif;
+}
+html,body{background:var(--bg)}
+body{font-family:var(--bfont);color:var(--ink);line-height:1.6;-webkit-font-smoothing:antialiased}
+.wrap{max-width:780px;margin:0 auto;padding:40px 28px 56px}
+.sheet{background:var(--bg);}
+/* brand lockup */
+.brand{display:flex;align-items:center;gap:12px;padding-bottom:18px;margin-bottom:26px;border-bottom:2px solid var(--accent)}
+.brand-mark{width:38px;height:38px;border-radius:8px;background:var(--accent);color:#fff;display:flex;align-items:center;justify-content:center;font-family:var(--hfont);font-weight:700;font-size:14px;letter-spacing:0.02em;flex:none}
+.brand-text{display:flex;flex-direction:column}
+.brand-name{font-family:var(--hfont);font-weight:700;font-size:17px;color:var(--ink);line-height:1.1}
+.brand-tag{font-size:10.5px;letter-spacing:0.14em;text-transform:uppercase;color:var(--muted);margin-top:3px}
+.brand-by{margin-left:auto;text-align:right;font-size:9.5px;letter-spacing:0.12em;text-transform:uppercase;color:var(--muted);line-height:1.5}
+.brand-by b{color:var(--accent);font-weight:600}
+/* hero */
+.eyebrow{font-size:10.5px;font-weight:600;letter-spacing:0.14em;text-transform:uppercase;color:var(--accent);margin-bottom:8px}
+.title{font-family:var(--hfont);font-weight:700;font-size:30px;line-height:1.12;letter-spacing:-0.4px;color:var(--ink);margin-bottom:6px}
+.subtitle{font-size:13.5px;color:var(--muted);max-width:62ch}
+/* sections */
+section{margin-top:28px}
+.sec-label{font-size:10.5px;font-weight:600;letter-spacing:0.12em;text-transform:uppercase;color:var(--accent);padding-bottom:7px;margin-bottom:13px;border-bottom:1px solid var(--border)}
+ul{list-style:none}
+li{position:relative;padding-left:20px;margin-bottom:9px;font-size:13.5px;line-height:1.55}
+li::before{content:"";position:absolute;left:2px;top:9px;width:7px;height:7px;border-radius:2px;background:var(--accent2)}
+/* signals */
+.signals{padding-left:6px}
+.signals li{padding-left:0;margin-bottom:14px}
+.signals li::before{display:none}
+.sig{background:var(--panel);border-left:3px solid var(--accent);border-radius:0 8px 8px 0;padding:11px 16px 11px 20px}
+.sig-head{font-weight:600;font-size:13.5px;color:var(--ink)}
+.sig-sub{font-size:12px;color:var(--muted);margin-top:3px}
+.chip{display:inline-block;font-size:9.5px;font-weight:600;letter-spacing:0.05em;text-transform:uppercase;color:var(--accent);background:var(--bg);border:1px solid var(--accent);border-radius:20px;padding:1px 8px;margin-left:6px;vertical-align:middle}
+/* committee */
+table{width:100%;border-collapse:collapse}
+th{font-size:9.5px;font-weight:600;letter-spacing:0.08em;text-transform:uppercase;color:var(--muted);text-align:left;padding:6px 10px;border-bottom:2px solid var(--accent)}
+td{font-size:13px;padding:10px;border-bottom:1px solid var(--border);vertical-align:top;line-height:1.5}
+td.who{font-weight:600;color:var(--ink);width:42%}
+td.role{color:var(--muted)}
+.c-name{font-weight:600;color:var(--ink);font-size:13px;line-height:1.3}
+.c-title{font-size:11.5px;color:var(--muted);margin-top:1px}
+.c-contact{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:10.5px;color:var(--accent);margin-top:4px;word-break:break-word}
+/* message */
+.msg{background:var(--panel);border-top:3px solid var(--accent);border-radius:0 0 8px 8px;padding:18px 20px;margin-top:6px}
+.msg-to{font-size:9.5px;font-weight:600;letter-spacing:0.1em;text-transform:uppercase;color:var(--accent);margin-bottom:10px}
+.msg-body{font-size:13.5px;color:var(--ink);line-height:1.65;font-style:italic;position:relative;padding-left:16px}
+.msg-body::before{content:"";position:absolute;left:0;top:2px;bottom:2px;width:2px;background:var(--accent2);border-radius:2px}
+/* footer */
+.foot{margin-top:32px;padding-top:16px;border-top:1px solid var(--border);display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;font-size:10px;color:var(--muted);line-height:1.5}
+.foot b{color:var(--accent)}
+@media(max-width:560px){
+  .wrap{padding:28px 18px 40px} .title{font-size:25px}
+  td.who{width:50%}
+}
+
+/* v7 widow control */
+h1,h2,h3,h4,.page-title,.card-statement,.eng-mh,.eng-th,.eng-tn,.ph,.pn,.acc-title,.blk,.vh,.mh,.cyclelab,.sig-head,.lab,.ft-cap,.def{text-wrap:balance}
+
+.signals li.sig{padding:12px 18px 12px 24px !important}
+
+/* standalone (open full view) gets side margins; embed stays full-width */
+body.standalone{max-width:1200px;margin-left:auto;margin-right:auto}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="sheet">
+    <div class="brand">
+      <div class="brand-mark">GS</div>
+      <div class="brand-text">
+        <div class="brand-name">Galweather Stearn</div>
+        <div class="brand-tag">Management Consulting</div>
+      </div>
+      <div class="brand-by">Account Intelligence<br><b>Prepared by Redline Growth</b></div>
+    </div>
+
+    <div class="eyebrow">Mid-Market · Turnaround &amp; Integration</div>
+    <h1 class="title">The Bluth Company</h1>
+    <p class="subtitle">Post-acquisition integration and operating-model turnaround.</p>
+
+    <section>
+      <div class="sec-label">Trigger, why now</div>
+      <ul>
+      <li>First acquisition in years closed eight weeks ago, a regional developer, with no integration office stood up to absorb it.</li>
+      <li>Founder stepped back under legal pressure and his son was installed as operator with no outside operating plan. The window to shape the model is open now and closes as the deal leaks value.</li>
+      </ul>
+    </section>
+
+    <section>
+      <div class="sec-label">Signals</div>
+      <ul class="signals">
+      <li class="sig">
+        <div class="sig-head">Founder out, son installed as operator <span class="chip">last 30 days</span></div>
+        <div class="sig-sub">First real management transition in the company&#x27;s history.</div>
+      </li>
+      <li class="sig">
+        <div class="sig-head">Regional competitor acquired <span class="chip">prior quarter</span></div>
+        <div class="sig-sub">No integration team or plan in place.</div>
+      </li>
+      <li class="sig">
+        <div class="sig-head">Three senior finance and operations departures <span class="chip">90 days</span></div>
+        <div class="sig-sub">Points to the control gaps the new operator inherits.</div>
+      </li>
+      </ul>
+    </section>
+
+    <section>
+      <div class="sec-label">Account context</div>
+      <ul>
+      <li>Family-controlled regional real-estate developer, mid-market revenue, reputation bruised by the founder&#x27;s legal troubles.</li>
+      <li>Needs a fast, credible operating model and an integration plan defensible to a skeptical family board.</li>
+      <li>Hands-on turnaround work, not a brand-name audit. The mid-tier operator-led lane Galweather Stearn sits in.</li>
+      </ul>
+    </section>
+
+    <section>
+      <div class="sec-label">Buying committee</div>
+      <table>
+        <tr><th>Contact</th><th>Why they matter</th></tr>
+        <tr>
+          <td class="who">
+            <div class="c-name">Michael Bluth</div>
+            <div class="c-title">Acting Head / President</div>
+            <div class="c-contact">michael.bluth@bluthcompany.com &nbsp;·&nbsp; (213) 555-0142</div>
+          </td>
+          <td class="role">Economic buyer. Needs a plan that works and that he can defend.</td>
+        </tr>
+        <tr>
+          <td class="who">
+            <div class="c-name">Ira Gilligan</div>
+            <div class="c-title">Interim CFO</div>
+            <div class="c-contact">ira.gilligan@bluthcompany.com &nbsp;·&nbsp; (213) 555-0188</div>
+          </td>
+          <td class="role">Accountable for cost and the control gaps the departures opened.</td>
+        </tr>
+        <tr>
+          <td class="who">
+            <div class="c-name">Lucille Bluth</div>
+            <div class="c-title">Board &amp; Ownership</div>
+            <div class="c-contact">lucille.bluth@bluthcompany.com &nbsp;·&nbsp; (213) 555-0101</div>
+          </td>
+          <td class="role">Legacy and trust, the relationship that opens the rest.</td>
+        </tr>
+        <tr>
+          <td class="who">
+            <div class="c-name">Stan Sitwell</div>
+            <div class="c-title">Head, Acquired Unit</div>
+            <div class="c-contact">stan.sitwell@bluthcompany.com &nbsp;·&nbsp; (704) 555-0177</div>
+          </td>
+          <td class="role">Integration counterpart, make-or-break on execution.</td>
+        </tr>
+      </table>
+    </section>
+
+    <section>
+      <div class="sec-label">Why it matters</div>
+      <ul>
+      <li>Integration value erodes inside two quarters without an operating model, and the family&#x27;s confidence in the new operator goes with it.</li>
+      <li>A firm that arrives already understanding the transition, the control gaps, and the clock lands as a growth leader, not a pitch.</li>
+      </ul>
+    </section>
+
+    <section>
+      <div class="sec-label">Opening message, to Michael Bluth, acting head</div>
+      <div class="msg">
+        <div class="msg-to">Signal, pain acknowledgment, curiosity. No meeting ask.</div>
+        <div class="msg-body">Michael, congratulations on closing the regional deal. The first sixty days usually decide whether the value shows up, and building an integration plan while settling into the seat is a lot to carry at once. We have run this exact window for family-held developers before. Curious whether your read on the priorities matches what we see from the outside. Worth a quick reaction?</div>
+      </div>
+    </section>
+
+    <div class="foot">
+      <div>Intelligence prepared by <b>Redline Growth</b>. Signal-enriched account dossier.</div>
+      <div>Illustrative. Names and signals are fictional. Confidential.</div>
+    </div>
+  </div>
+</div>
+<script>
+(function(){
+  function report(){
+    var h=document.body.scrollHeight;
+    if(window.parent){window.parent.postMessage({type:'resize',height:h},'*');}
+  }
+  window.addEventListener('load',report);
+  window.addEventListener('resize',report);
+})();
+</script>
+<script>if(window.self===window.top){document.documentElement&&document.addEventListener('DOMContentLoaded',function(){document.body.classList.add('standalone');});if(document.body){document.body.classList.add('standalone');}}</script>
+</body>
+</html>

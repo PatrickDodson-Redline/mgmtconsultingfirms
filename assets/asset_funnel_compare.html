@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,700&family=JetBrains+Mono:wght@500&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'DM Sans',sans-serif;color:#1A1D24;background:#FAF8F4;padding:10px 6px 22px;line-height:1.5}
+.fc-head{padding:2px 4px 14px;border-bottom:1px solid #E2DDCF;margin-bottom:16px}
+.fc-eye{font:500 10.5px/1.3 'JetBrains Mono',monospace;letter-spacing:0.12em;text-transform:uppercase;color:#C87041;margin-bottom:7px}
+.fc-h{font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:20px;letter-spacing:-0.3px}
+.fc-sub{font-size:12.5px;color:#464B55;margin-top:6px;max-width:84ch}
+
+.fc-inputs{background:#fff;border:1px solid #E2DDCF;border-radius:12px;padding:14px 16px;margin-bottom:14px;display:grid;grid-template-columns:repeat(4,1fr);gap:14px}
+@media(max-width:680px){.fc-inputs{grid-template-columns:1fr 1fr}}
+.fc-inputs .fld label{display:block;font-size:11px;color:#464B55;margin-bottom:5px;font-weight:500;line-height:1.25}
+.fc-inputs input{width:100%;font-family:'JetBrains Mono',monospace;font-size:13px;background:#FAF8F4;border:1px solid #D9D2C4;border-radius:7px;padding:7px 9px}
+.fc-inputs input:focus{outline:none;border-color:#C87041;background:#fff}
+.pre{position:relative}.pre input{padding-left:20px}.pre::before{content:'$';position:absolute;left:9px;top:7px;font:13px 'JetBrains Mono',monospace;color:#6E7388}
+
+.imp{background:#fff;border:1px solid #E2DDCF;border-radius:12px;padding:13px 18px;margin-bottom:16px}
+.imp-row{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:6px}
+.imp-row label{font-size:12px;color:#464B55;font-weight:500}
+.imp-val{font-family:'JetBrains Mono',monospace;font-size:14px;color:#C87041;font-weight:500}
+.imp input[type=range]{width:100%;accent-color:#C87041}
+.imp .note{font-size:11px;color:#6E7388;margin-top:6px}
+
+.charts{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+@media(max-width:760px){.charts{grid-template-columns:1fr}}
+.chart{border:1px solid #E2DDCF;border-radius:12px;padding:15px 16px 16px;background:#fff}
+.chart.c1{border-top:3px solid #6E7388}
+.chart.c2{border-top:3px solid #8A9B72}
+.chart.c3{border-top:3px solid #C87041}
+.chart-t{font-family:'Space Grotesk',sans-serif;font-weight:600;font-size:13.5px;line-height:1.25;margin-bottom:3px;min-height:34px}
+.chart-sub{font-size:10.5px;color:#6E7388;margin-bottom:12px;min-height:28px;line-height:1.3}
+.bars{display:flex;gap:10px;align-items:flex-end;height:172px;border-bottom:1px solid #E2DDCF}
+.barwrap{flex:1;display:flex;flex-direction:column;justify-content:flex-end;align-items:center}
+.bval{font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:13px;margin-bottom:4px;color:#1A1D24}
+.bar{width:64%;max-width:40px;border-radius:5px 5px 0 0;min-height:2px}
+.c1 .bar{background:#6E7388}.c2 .bar{background:#8A9B72}.c3 .bar{background:#C87041}
+.blbls{display:flex;gap:10px;margin-top:6px}
+.blbls span{flex:1;text-align:center;font:500 10px/1.2 'DM Sans',sans-serif;color:#6E7388}
+.chart-rev{margin-top:11px;display:flex;justify-content:space-between;align-items:baseline}
+.chart-rev .l{font:500 9.5px/1 'JetBrains Mono',monospace;letter-spacing:0.06em;text-transform:uppercase;color:#6E7388}
+.chart-rev .v{font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:16px}
+.chart-note{margin-top:9px;font-size:11.5px;line-height:1.45;color:#464B55}
+.chart-note b{color:#1A1D24}
+.fc-foot{margin-top:14px;font:500 10px/1.4 'JetBrains Mono',monospace;letter-spacing:0.04em;color:#6E7388}
+body.standalone{max-width:1200px;margin-left:auto;margin-right:auto}
+</style></head>
+<body>
+
+<div class="fc-head">
+  <div class="fc-eye">Funnel comparison · unit numbers</div>
+  <h1 class="fc-h">Same number, less effort. Or same effort, a bigger number.</h1>
+  <p class="fc-sub">How many deals you surface, qualify, and close. The left runs on your funnel, set to model defaults and adjustable to actuals. The other two apply the funnel improvement that better-fit pursuits produce: one holds your target and needs fewer leads, one holds your effort and grows the number.</p>
+</div>
+
+<div class="fc-inputs">
+  <div class="fld"><label>Annual new revenue to source</label><div class="pre"><input type="text" inputmode="numeric" id="in_target" value="2,400,000"></div></div>
+  <div class="fld"><label>Average deal size</label><div class="pre"><input type="text" inputmode="numeric" id="in_deal" value="300,000"></div></div>
+  <div class="fld"><label>Qualify-in rate (screened to pursuit), %</label><input type="number" id="in_qin" value="40" min="1" max="100" step="1"></div>
+  <div class="fld"><label>Win rate on qualified pursuits, %</label><input type="number" id="in_win" value="40" min="1" max="100" step="1"></div>
+</div>
+
+<div class="imp">
+  <div class="imp-row"><label>Funnel improvement with Redline Growth</label><span class="imp-val" id="o_imp">1.30x</span></div>
+  <input type="range" id="in_imp" value="1.30" min="1.25" max="1.40" step="0.05">
+  <div class="note">Study-backed range, 1.25 to 1.40. Drives both the fewer-leads view and the growth view.</div>
+</div>
+
+<div class="charts">
+  <div class="chart c1">
+    <div class="chart-t">Status quo</div>
+    <div class="chart-sub">Your funnel today.</div>
+    <div class="bars">
+      <div class="barwrap"><div class="bval" id="c1_lv">50</div><div class="bar" id="c1_lb"></div></div>
+      <div class="barwrap"><div class="bval" id="c1_pv">20</div><div class="bar" id="c1_pb"></div></div>
+      <div class="barwrap"><div class="bval" id="c1_wv">8</div><div class="bar" id="c1_wb"></div></div>
+    </div>
+    <div class="blbls"><span>Leads</span><span>Pursuits</span><span>Wins</span></div>
+    <div class="chart-rev"><span class="l">New revenue</span><span class="v" id="c1_rev">$2,400,000</span></div>
+    <div class="chart-note">The number you need, at today's conversion.</div>
+  </div>
+
+  <div class="chart c2">
+    <div class="chart-t">Same target, fewer leads</div>
+    <div class="chart-sub">Higher-quality, better-qualified pursuits hit the same number with less at the top.</div>
+    <div class="bars">
+      <div class="barwrap"><div class="bval" id="c2_lv">39</div><div class="bar" id="c2_lb"></div></div>
+      <div class="barwrap"><div class="bval" id="c2_pv">18</div><div class="bar" id="c2_pb"></div></div>
+      <div class="barwrap"><div class="bval" id="c2_wv">8</div><div class="bar" id="c2_wb"></div></div>
+    </div>
+    <div class="blbls"><span>Leads</span><span>Pursuits</span><span>Wins</span></div>
+    <div class="chart-rev"><span class="l">New revenue</span><span class="v" id="c2_rev">$2,400,000</span></div>
+    <div class="chart-note" id="c2_note"><b>About 12 fewer leads</b> to hit the same target.</div>
+  </div>
+
+  <div class="chart c3">
+    <div class="chart-t">Same capacity, bigger number</div>
+    <div class="chart-sub">Reclaimed capacity goes back into outreach, so the whole funnel scales.</div>
+    <div class="bars">
+      <div class="barwrap"><div class="bval" id="c3_lv">65</div><div class="bar" id="c3_lb"></div></div>
+      <div class="barwrap"><div class="bval" id="c3_pv">26</div><div class="bar" id="c3_pb"></div></div>
+      <div class="barwrap"><div class="bval" id="c3_wv">10</div><div class="bar" id="c3_wb"></div></div>
+    </div>
+    <div class="blbls"><span>Leads</span><span>Pursuits</span><span>Wins</span></div>
+    <div class="chart-rev"><span class="l">New revenue</span><span class="v" id="c3_rev">$3,120,000</span></div>
+    <div class="chart-note" id="c3_note"><b>+$720,000</b> in new revenue from the same team.</div>
+  </div>
+</div>
+
+<div class="fc-foot">Illustrative, on your inputs. Model defaults: deal size $300k, qualify-in 40%, win rate 40%. Not a guarantee of results.</div>
+
+<script>
+var $=function(id){return document.getElementById(id);};
+function num(id){return parseFloat(($(id).value||'').toString().replace(/[^0-9.]/g,''))||0;}
+function money(id){var n=num(id);$(id).value=n?n.toLocaleString('en-US'):'';}
+function nf(n){return Math.round(n).toLocaleString('en-US');}
+function w1(n){return (Math.round(n*10)/10).toLocaleString('en-US',{maximumFractionDigits:1});}
+var MAXH=140;
+function setbar(id,val,gmax){$(id).style.height=(gmax>0?Math.max(val/gmax*MAXH,2):2)+'px';}
+function calc(){
+  var T=num('in_target'),D=num('in_deal'),qi=(+$('in_qin').value||0)/100,wr=(+$('in_win').value||0)/100,k=+$('in_imp').value||1;
+  var W=D>0?T/D:0, P=wr>0?W/wr:0, L=qi>0?P/qi:0, R=W*D;
+  var f=Math.sqrt(k), qiR=Math.min(qi*f,0.95), wrR=Math.min(wr*f,0.95);
+  var W2=W, P2=wrR>0?W2/wrR:0, L2=qiR>0?P2/qiR:0, R2=R;
+  var L3=L*k, P3=P*k, W3=W*k, R3=R*k;
+  var gmax=Math.max(L,L2,L3,1);
+  $('c1_lv').textContent=nf(L);$('c1_pv').textContent=nf(P);$('c1_wv').textContent=w1(W);$('c1_rev').textContent='$'+nf(R);
+  setbar('c1_lb',L,gmax);setbar('c1_pb',P,gmax);setbar('c1_wb',W,gmax);
+  $('c2_lv').textContent=nf(L2);$('c2_pv').textContent=nf(P2);$('c2_wv').textContent=w1(W2);$('c2_rev').textContent='$'+nf(R2);
+  setbar('c2_lb',L2,gmax);setbar('c2_pb',P2,gmax);setbar('c2_wb',W2,gmax);
+  $('c2_note').innerHTML='<b>About '+nf(L-L2)+' fewer leads</b> to hit the same target.';
+  $('c3_lv').textContent=nf(L3);$('c3_pv').textContent=nf(P3);$('c3_wv').textContent=w1(W3);$('c3_rev').textContent='$'+nf(R3);
+  setbar('c3_lb',L3,gmax);setbar('c3_pb',P3,gmax);setbar('c3_wb',W3,gmax);
+  $('c3_note').innerHTML='<b>+$'+nf(R3-R)+'</b> in new revenue from the same team.';
+  $('o_imp').textContent=k.toFixed(2)+'x';
+  reportH();
+}
+['in_target','in_deal','in_qin','in_win','in_imp'].forEach(function(id){
+  $(id).addEventListener('input',function(){ if(id==='in_target'||id==='in_deal') money(id); calc(); });
+});
+function reportH(){try{parent.postMessage({type:'resize',height:document.body.scrollHeight},'*');}catch(e){}}
+window.addEventListener('load',function(){calc();reportH();});
+window.addEventListener('resize',reportH);setTimeout(reportH,300);
+</script>
+<script>if(window.self===window.top){document.addEventListener('DOMContentLoaded',function(){document.body.classList.add('standalone');});if(document.body){document.body.classList.add('standalone');}}</script>
+</body></html>

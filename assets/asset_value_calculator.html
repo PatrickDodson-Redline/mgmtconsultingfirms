@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,700&family=JetBrains+Mono:wght@500&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'DM Sans',sans-serif;color:#1A1D24;background:#FAF8F4;padding:8px 4px 22px;line-height:1.5}
+.vc-head{padding:2px 4px 14px;border-bottom:1px solid #E2DDCF;margin-bottom:18px}
+.vc-eye{font:500 10.5px/1.3 'JetBrains Mono',monospace;letter-spacing:0.12em;text-transform:uppercase;color:#C87041;margin-bottom:7px}
+.vc-h{font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:21px;letter-spacing:-0.3px}
+.vc-sub{font-size:13px;color:#464B55;margin-top:6px;max-width:72ch}
+
+.vc-grid{display:grid;grid-template-columns:300px 1fr;gap:18px;align-items:start}
+@media(max-width:720px){.vc-grid{grid-template-columns:1fr}}
+
+.vc-inputs{background:#fff;border:1px solid #E2DDCF;border-radius:12px;padding:16px 16px 18px}
+.vc-inputs h3{font:500 10px/1 'JetBrains Mono',monospace;letter-spacing:0.12em;text-transform:uppercase;color:#6E7388;margin-bottom:14px}
+.fld{margin-bottom:13px}
+.fld label{display:block;font-size:12px;color:#464B55;margin-bottom:5px;font-weight:500}
+.fld input[type=number]{width:100%;font-family:'JetBrains Mono',monospace;font-size:13.5px;color:#1A1D24;background:#FAF8F4;border:1px solid #D9D2C4;border-radius:7px;padding:8px 10px}
+.fld input[type=number]:focus{outline:none;border-color:#C87041;background:#fff}
+.fld .pre{position:relative}
+.fld .pre input{padding-left:22px}
+.fld .pre::before{content:'$';position:absolute;left:10px;top:8px;font-family:'JetBrains Mono',monospace;font-size:13px;color:#6E7388}
+.fld input[type=range]{width:100%;accent-color:#C87041;margin-top:4px}
+.fld .hint{font-size:10.5px;color:#6E7388;line-height:1.4;margin-top:4px}
+.convrow{display:flex;justify-content:space-between;align-items:baseline}
+.convval{font-family:'JetBrains Mono',monospace;font-size:13px;color:#C87041;font-weight:500}
+
+.vc-results{display:flex;flex-direction:column;gap:12px}
+.tier{border-radius:12px;padding:16px 18px;border:1px solid #E2DDCF;background:#fff}
+.tier-lbl{font:500 9.5px/1 'JetBrains Mono',monospace;letter-spacing:0.13em;text-transform:uppercase;margin-bottom:9px}
+.t-concrete{border-left:3px solid #5D7E8A}
+.t-concrete .tier-lbl{color:#4d6975}
+.t-asp{border-left:3px solid #C87041;background:rgba(200,112,65,0.04)}
+.t-asp .tier-lbl{color:#9a5326}
+.bignum{font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:30px;letter-spacing:-0.5px;line-height:1.05;color:#1A1D24}
+.bignum .u{font-size:15px;font-weight:600;color:#6E7388;margin-left:5px}
+.subnum{font-size:12.5px;color:#464B55;margin-top:6px}
+.subnum b{color:#1A1D24;font-weight:600}
+.tier-desc{font-size:12.5px;color:#464B55;line-height:1.45;margin:-2px 0 9px}
+.illus{font:500 9.5px/1.3 'JetBrains Mono',monospace;letter-spacing:0.05em;color:#8a8472;margin-top:9px}
+
+.nbox{border-radius:12px;padding:15px 18px;border:1px solid #E2DDCF}
+.n-focus{background:rgba(93,126,138,0.06);border-left:3px solid #5D7E8A}
+.n-life{background:rgba(138,155,114,0.07);border-left:3px solid #8A9B72}
+.nbox-h{font-family:'Space Grotesk',sans-serif;font-weight:600;font-size:14.5px;margin-bottom:9px}
+.nlist{list-style:none}
+.nlist li{position:relative;padding-left:16px;font-size:12.8px;color:#464B55;line-height:1.5;margin-bottom:6px}
+.nlist li:last-child{margin-bottom:0}
+.nlist li::before{content:'';position:absolute;left:0;top:8px;width:5px;height:5px;border-radius:50%}
+.n-focus .nlist li::before{background:#5D7E8A}
+.n-life .nlist li::before{background:#8A9B72}
+
+.vc-foot{margin-top:16px;padding-top:11px;border-top:1px solid #E2DDCF;font:500 10px/1.4 'JetBrains Mono',monospace;letter-spacing:0.05em;color:#6E7388}
+.bandbar{display:flex;flex-wrap:wrap;align-items:center;gap:8px;margin-bottom:18px}
+.bandbar-lbl{font:500 10px/1 'JetBrains Mono',monospace;letter-spacing:0.1em;text-transform:uppercase;color:#6E7388;margin-right:2px}
+.bandbtn{font-family:'Space Grotesk',sans-serif;font-weight:600;font-size:12px;color:#1A1D24;background:#fff;border:1px solid #D9D2C4;border-radius:8px;padding:7px 11px 6px;cursor:pointer;display:flex;flex-direction:column;align-items:center;line-height:1.18;min-width:96px}
+.bandbtn small{font:400 9px/1.2 'JetBrains Mono',monospace;color:#6E7388;margin-top:3px}
+.bandbtn:hover{border-color:#C87041}
+.bandbtn.active{background:#C87041;border-color:#C87041;color:#fff}
+.bandbtn.active small{color:rgba(255,255,255,0.85)}
+body.standalone{max-width:1200px;margin-left:auto;margin-right:auto}
+</style></head>
+<body>
+
+<div class="vc-head">
+  <div class="vc-eye">Value calculator · illustrative</div>
+  <h1 class="vc-h">What focusing your effort is worth, on your own numbers</h1>
+  <p class="vc-sub">Adjust the inputs to your firm. The concrete number stands on your own rate. The rest is what that reclaimed focus tends to be worth.</p>
+</div>
+
+<div class="bandbar">
+  <span class="bandbar-lbl">Annual Top Line Booking Target</span>
+  <button class="bandbtn" data-band="A" onclick="bandSet('A')">$2 to $4M<small>10 to 20 people</small></button>
+  <button class="bandbtn" data-band="B" onclick="bandSet('B')">$4 to $8M<small>21 to 40 people</small></button>
+  <button class="bandbtn" data-band="C" onclick="bandSet('C')">$8 to $12M<small>41 to 60 people</small></button>
+  <button class="bandbtn" data-band="D" onclick="bandSet('D')">$12 to $20M<small>61 to 100 people</small></button>
+  <button class="bandbtn" data-band="E" onclick="bandSet('E')">$20 to $40M<small>101 to 200 people</small></button>
+  <button class="bandbtn" data-band="F" onclick="bandSet('F')">$40M+<small>200+ people</small></button>
+</div>
+
+<div class="vc-grid">
+  <div class="vc-inputs">
+    <h3>Your inputs</h3>
+    <div class="fld"><label>Growth leaders</label><input type="number" id="in_leaders" value="6" min="0" step="1"></div>
+    <div class="fld"><label>Growth-research hours reclaimed</label><input type="number" id="in_hpl" value="1000" min="0" step="50"><div class="hint">Team-wide: the leader and the team supporting their growth work.</div></div>
+    <div class="fld"><label>Blended billable rate, growth team</label><div class="pre"><input type="text" inputmode="numeric" id="in_rate" value="250"></div></div>
+    <div class="fld"><label>Monthly Redline Growth subscription</label><div class="pre"><input type="text" inputmode="numeric" id="in_sub" value="9,000"></div></div>
+    <div class="fld">
+      <div class="convrow"><label style="margin-bottom:0">Reclaimed time that converts to billable</label><span class="convval" id="o_convlbl">50%</span></div>
+      <input type="range" id="in_conv" value="50" min="0" max="100" step="5">
+    </div>
+  </div>
+
+  <div class="vc-results">
+    <div class="tier t-concrete">
+      <div class="tier-lbl">Concrete · capacity back, growth team</div>
+      <div class="bignum"><span id="o_hours">6,000</span><span class="u">hours / year</span></div>
+      <div class="subnum">About <b><span id="o_fte">4.0</span> FTE</b> of capacity returned across the growth team, leaders and the people who support their growth work. This stands on your own inputs.</div>
+    </div>
+
+    <div class="tier t-asp">
+      <div class="tier-lbl">Opportunity</div>
+      <div class="tier-desc">Capacity reclaimed can be converted to additional billable capture.</div>
+      <div class="bignum"><span id="o_add">$750,000</span><span class="u">/ year</span></div>
+      <div class="subnum"><b><span id="o_cov">6.9x</span></b> the annual subscription · payback in <b><span id="o_pay">1.7 months</span></b>, at the conversion rate you set.</div>
+      <div class="illus">Illustrative. Assumes reclaimed hours convert to billable work at the rate above.</div>
+    </div>
+
+    <div class="nbox n-focus">
+      <div class="nbox-h">Better odds on the work, not just more of it</div>
+      <ul class="nlist">
+        <li>More high-quality opportunities surfaced, not just more volume.</li>
+        <li>Better qualification in or out, which lifts conversion on what you do pursue.</li>
+        <li>More context and intelligence carried into each pursuit.</li>
+      </ul>
+    </div>
+
+    <div class="nbox n-life">
+      <div class="nbox-h">Quality of experience</div>
+      <ul class="nlist">
+        <li>Less burnout, from eliminating low-quality prospecting research and outreach effort.</li>
+        <li>Room for the firm-citizenship work they never had time for: mentoring, recruiting, thought leadership, IP.</li>
+        <li>Stronger retention, because the worst part of the job is gone.</li>
+        <li>A real pull for attracting growth leaders who would rather sell behind an engine than just their personal network.</li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<div class="vc-foot">All figures illustrative, computed on your inputs. Not a guarantee of results.</div>
+
+<script>
+var $=function(id){return document.getElementById(id);};
+function num(id){return parseFloat(($(id).value||'').toString().replace(/[^0-9.]/g,''))||0;}
+function money(id){var n=num(id);$(id).value=n?n.toLocaleString('en-US'):'';}
+function fmt(n){return Math.round(n).toLocaleString('en-US');}
+function calc(){
+  var L=+$('in_leaders').value||0,HPL=+$('in_hpl').value||0,R=num('in_rate'),
+      C=(+$('in_conv').value||0)/100,S=num('in_sub');
+  var hours=L*HPL, fte=hours/1500, gross=hours*R, add=gross*C, annualSub=S*12,
+      cov=(annualSub>0)?add/annualSub:0, pay=(add>0)?12*annualSub/add:0;
+  $('o_hours').textContent=fmt(hours);
+  $('o_fte').textContent=fte.toFixed(1);
+  $('o_add').textContent='$'+fmt(add);
+  $('o_cov').textContent=cov.toFixed(1)+'x';
+  $('o_pay').textContent=(pay<=0)?'n/a':(pay<1?'under 1 month':pay.toFixed(1)+' months');
+  $('o_convlbl').textContent=Math.round(C*100)+'%';
+  reportH();
+}
+['in_leaders','in_hpl','in_rate','in_sub','in_conv'].forEach(function(id){
+  $(id).addEventListener('input',function(){
+    if(id==='in_rate'||id==='in_sub') money(id);
+    document.querySelectorAll('.bandbtn').forEach(function(x){x.classList.remove('active');});
+    calc();
+  });
+});
+var BANDS={A:{l:2,s:3250},B:{l:4,s:6250},C:{l:6,s:12500},D:{l:9,s:18750},E:{l:18,s:31250},F:{l:30,s:75000}};
+function bandSet(b){
+  var d=BANDS[b]; if(!d) return;
+  $('in_leaders').value=d.l; $('in_sub').value=d.s.toLocaleString('en-US');
+  $('in_hpl').value=1000; $('in_rate').value='250'; $('in_conv').value=50;
+  document.querySelectorAll('.bandbtn').forEach(function(x){x.classList.toggle('active',x.getAttribute('data-band')===b);});
+  calc();
+}
+function reportH(){try{parent.postMessage({type:'resize',height:document.body.scrollHeight},'*');}catch(e){}}
+window.addEventListener('load',function(){calc();reportH();});
+window.addEventListener('resize',reportH);setTimeout(reportH,300);
+</script>
+<script>if(window.self===window.top){document.addEventListener('DOMContentLoaded',function(){document.body.classList.add('standalone');});if(document.body){document.body.classList.add('standalone');}}</script>
+</body></html>

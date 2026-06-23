@@ -1,0 +1,160 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=DM+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'DM Sans',sans-serif;color:#1A1D24;background:#FAF8F4;padding:6px 4px 18px}
+.fwrap{max-width:760px;margin:0 auto}
+.fhead{min-height:62px;margin-bottom:6px}
+.fstep{font:500 11px/1 'JetBrains Mono',monospace;letter-spacing:.12em;text-transform:uppercase;color:#C87041;margin-bottom:7px}
+.ftitle{font:600 20px/1.15 'Space Grotesk',sans-serif;color:#0F1117}
+.fsub{font:500 13px/1.3 'DM Sans',sans-serif;color:#6E7388;margin-top:3px}
+.fstage-wrap{position:relative;border:1px solid #E2DDCF;border-radius:12px;background:#fff;overflow:hidden}
+#fcanvas{display:block;width:100%;height:300px}
+.fcount{position:absolute;top:12px;right:14px;font:600 12px/1 'JetBrains Mono',monospace;letter-spacing:.04em;color:#1A1D24;background:#F0EDE4;border:1px solid #E2DDCF;border-radius:999px;padding:7px 13px}
+.fcaption{font-size:13.5px;line-height:1.6;color:#464B55;margin:14px 2px 0;min-height:66px}
+.fdossier{margin:14px 2px 0;border:1px solid #E2DDCF;border-left:3px solid #C87041;border-radius:10px;background:#fff;padding:14px 16px;display:none;gap:14px;align-items:flex-start}
+.fdossier.show{display:flex}
+.fdoc{flex:0 0 auto;width:40px;height:50px;position:relative}
+.fdoc svg{width:40px;height:50px}
+.fdtext{flex:1}
+.fdtitle{font:600 13px/1 'Space Grotesk',sans-serif;color:#0F1117;margin-bottom:8px}
+.fdrow{font-size:12.5px;line-height:1.5;color:#464B55}
+.fdrow b{color:#0F1117;font-weight:600}
+.fctrl{display:flex;align-items:center;justify-content:space-between;margin-top:16px;gap:12px}
+.fbtn{font:600 13px/1 'DM Sans',sans-serif;border-radius:8px;padding:11px 20px;cursor:pointer;border:1px solid #C87041;background:#C87041;color:#fff}
+.fbtn.ghost{background:none;color:#C87041}
+.fbtn:disabled{opacity:.32;cursor:default}
+.fdots{display:flex;gap:7px}
+.fdots i{width:8px;height:8px;border-radius:50%;background:#D8D2C4;display:block}
+.fdots i.on{background:#C87041}
+
+/* v7 widow control */
+h1,h2,h3,h4,.page-title,.card-statement,.eng-mh,.eng-th,.eng-tn,.ph,.pn,.acc-title,.blk,.vh,.mh,.cyclelab,.sig-head,.lab,.ft-cap,.def{text-wrap:balance}
+
+/* standalone (open full view) gets side margins; embed stays full-width */
+body.standalone{max-width:1200px;margin-left:auto;margin-right:auto}
+</style></head>
+<body>
+<div class="fwrap">
+  <div class="fhead">
+    <div class="fstep" id="fstep">Step 1 of 5</div>
+    <div class="ftitle" id="ftitle"></div>
+    <div class="fsub" id="fsub"></div>
+  </div>
+  <div class="fstage-wrap">
+    <canvas id="fcanvas"></canvas>
+    <div class="fcount" id="fcount"></div>
+  </div>
+  <div class="fcaption" id="fcaption"></div>
+  <div class="fdossier" id="fdossier">
+    <div class="fdoc"><svg viewBox="0 0 40 50"><path d="M4 2h22l10 10v36a0 0 0 0 1 0 0H4z" fill="#FBF3EC" stroke="#C87041" stroke-width="2" stroke-linejoin="round"/><path d="M26 2v10h10" fill="none" stroke="#C87041" stroke-width="2" stroke-linejoin="round"/><line x1="10" y1="22" x2="30" y2="22" stroke="#C87041" stroke-width="2"/><line x1="10" y1="30" x2="30" y2="30" stroke="#C87041" stroke-width="2"/><line x1="10" y1="38" x2="24" y2="38" stroke="#C87041" stroke-width="2"/></svg></div>
+    <div class="fdtext">
+      <div class="fdtitle">One account, one dossier for the growth team</div>
+      <div class="fdrow"><b>Trigger:</b> why now. <b>Buying group:</b> who decides. <b>Context:</b> what matters to them. <b>Opening:</b> the way in.</div>
+    </div>
+  </div>
+  <div class="fctrl">
+    <button class="fbtn ghost" id="fback" onclick="step(-1)">Back</button>
+    <div class="fdots" id="fdotsnav"></div>
+    <button class="fbtn" id="fnext" onclick="step(1)">Next</button>
+    <button class="fbtn ghost" id="freset" onclick="resetFunnel()">Start over</button>
+  </div>
+</div>
+<script>
+var AMBER="#C87041", BLUE="#5D7E8A", GREEN="#8A9B72", FAINT="#AEB3BC", INK="#3A3F49";
+var STAGES=[
+ {title:"TAM \u00b7 Total Addressable Market", sub:"Every firm you could conceivably serve", count:"~6,000 accounts",
+  cap:"The whole universe of accounts you could sell to. Far too many to work directly, and most will never fit or be in the market. Good targeting starts by narrowing this down on purpose."},
+ {title:"SAM \u00b7 Serviceable Addressable Market", sub:"Your Ideal Account Profile, the IAP", count:"~850 accounts",
+  cap:"The slice you can actually serve, filtered to fit: sector, size, geography, and the work you do best. This is your real field. The rest fades to background."},
+ {title:"SOM \u00b7 Serviceable Obtainable Market", sub:"Winnable now, by timing and signal", count:"~120 accounts",
+  cap:"Of the accounts that fit, only a fraction are in the market in any given quarter, roughly one buyer in twenty. These few are where a growth leader's hours actually pay off now."},
+ {title:"ICP \u00b7 Ideal Customer Profile", sub:"The people who decide, inside one account", count:"the few who matter",
+  cap:"Now the unit changes, from accounts to people. Inside a target account, a handful of people shape the decision. The ICP is who to reach, not just where."},
+ {title:"The Account Dossier", sub:"Rep-ready, one per account", count:"~120 dossiers",
+  cap:"Each winnable account becomes a dossier, delivered into the workflow your team already uses. This runs across every account in the SOM, not one at a time by hand."}
+];
+var C=document.getElementById('fcanvas'), X=C.getContext('2d');
+var W=700,H=300,dpr=Math.max(1,window.devicePixelRatio||1);
+var N=420, dots=[], samSlots=[], somSlots=[], contacts=[], acct={x:0,y:0};
+var stage=0, fieldA=1, fieldAT=1, zoomA=0, zoomAT=0, raf=0;
+
+function fit(){ W=C.clientWidth||700; C.width=W*dpr; C.height=H*dpr; X.setTransform(dpr,0,0,dpr,0,0); }
+function rnd(a,b){return a+Math.random()*(b-a);}
+function slots(n,cx,cy,w,h){var cols=Math.max(1,Math.round(Math.sqrt(n*w/h))),gx=w/cols,gy=h/Math.ceil(n/cols),out=[];for(var i=0;i<n;i++){var c=i%cols,r=Math.floor(i/cols);out.push({x:cx-w/2+gx*(c+0.5)+rnd(-gx*0.22,gx*0.22),y:cy-h/2+gy*(r+0.5)+rnd(-gy*0.22,gy*0.22)});}return out;}
+
+function build(){
+ dots=[]; var fi=0, qi=0;
+ for(var i=0;i<N;i++){
+   var fit_=(i%6===0), som=fit_&&(fi%5===0);
+   var d={homeX:rnd(10,W-10),homeY:rnd(12,H-12),x:0,y:0,op:0,color:FAINT,tx:0,ty:0,top:0,fit:fit_,som:som,si:0,qi:0};
+   if(fit_){ d.si=fi; fi++; if(som){ d.qi=qi; qi++; } }
+   d.x=d.homeX; d.y=d.homeY; dots.push(d);
+ }
+ samSlots=slots(fi, W*0.5, H*0.5, Math.min(W*0.46,320), H*0.62);
+ somSlots=slots(qi, W*0.5, H*0.5, Math.min(W*0.28,180), H*0.42);
+ acct={x:W*0.5,y:H*0.5};
+ contacts=[]; var R=Math.min(W,H)*0.33;
+ for(var k=0;k<12;k++){ var a=-Math.PI/2+k*(Math.PI*2/12); contacts.push({x:acct.x+Math.cos(a)*R,y:acct.y+Math.sin(a)*R,buy:(k%3===0)}); }
+}
+
+function applyStage(s){
+ stage=s; var st=STAGES[s];
+ document.getElementById('fstep').textContent="Step "+(s+1)+" of 5";
+ document.getElementById('ftitle').textContent=st.title;
+ document.getElementById('fsub').textContent=st.sub;
+ document.getElementById('fcount').textContent=st.count;
+ document.getElementById('fcaption').textContent=st.cap;
+ document.getElementById('fdossier').classList.toggle('show', s===4);
+ document.getElementById('fback').disabled=(s===0);
+ document.getElementById('fnext').disabled=(s===4);
+ var nav=document.getElementById('fdotsnav'); nav.innerHTML='';
+ for(var i=0;i<5;i++){ var d=document.createElement('i'); if(i<=s)d.className='on'; nav.appendChild(d); }
+ fieldAT = s<=2?1:0; zoomAT = s>=3?1:0;
+ dots.forEach(function(d){
+   if(s===0){ d.tx=d.homeX; d.ty=d.homeY; d.color=d.fit?AMBER:FAINT; d.top=d.fit?0.55:0.30; }
+   else if(s===1){ if(d.fit){ var p=samSlots[d.si]; d.tx=p.x; d.ty=p.y; d.color=AMBER; d.top=0.95; } else { d.tx=d.homeX; d.ty=d.homeY; d.color=FAINT; d.top=0.06; } }
+   else { if(d.som){ var q=somSlots[d.qi]; d.tx=q.x; d.ty=q.y; d.color=BLUE; d.top=0.97; } else if(d.fit){ var p2=samSlots[d.si]; d.tx=p2.x; d.ty=p2.y; d.color=AMBER; d.top=0.13; } else { d.tx=d.homeX; d.ty=d.homeY; d.color=FAINT; d.top=0.03; } }
+ });
+ if(!raf) raf=requestAnimationFrame(tick);
+}
+
+function hex(h,a){var n=parseInt(h.slice(1),16);return "rgba("+(n>>16&255)+","+(n>>8&255)+","+(n&255)+","+a+")";}
+function dot(x,y,r,c,a){ if(a<=0.004)return; X.beginPath(); X.arc(x,y,r,0,6.2832); X.fillStyle=hex(c,a); X.fill(); }
+
+function drawZoom(g){
+ contacts.forEach(function(c){ X.beginPath(); X.moveTo(acct.x,acct.y); X.lineTo(c.x,c.y); X.strokeStyle=hex(INK,0.10*g); X.lineWidth=1; X.stroke(); });
+ contacts.forEach(function(c){ dot(c.x,c.y,c.buy?7:5, c.buy?GREEN:FAINT, (c.buy?0.95:0.5)*g); });
+ dot(acct.x,acct.y,11,INK,0.9*g);
+ X.fillStyle=hex(INK,0.9*g); X.font="600 10px 'JetBrains Mono', monospace"; X.textAlign="center"; X.fillText("1 ACCOUNT",acct.x,acct.y+26);
+ if(stage===4){ var minx=1e9,miny=1e9,maxx=-1e9,maxy=-1e9; contacts.forEach(function(c){ if(c.buy){minx=Math.min(minx,c.x);miny=Math.min(miny,c.y);maxx=Math.max(maxx,c.x);maxy=Math.max(maxy,c.y);} });
+   X.strokeStyle=hex(GREEN,0.7*g); X.lineWidth=1.5; X.setLineDash([5,4]);
+   X.strokeRect(minx-14,miny-14,(maxx-minx)+28,(maxy-miny)+28); X.setLineDash([]);
+   X.fillStyle=hex(GREEN,0.95*g); X.font="600 9px 'JetBrains Mono', monospace"; X.textAlign="left"; X.fillText("BUYING GROUP",minx-14,miny-20); }
+}
+
+function draw(){
+ X.clearRect(0,0,W,H);
+ if(fieldA>0.01){ for(var i=0;i<dots.length;i++){ var d=dots[i]; dot(d.x,d.y,3.1,d.color,d.op*fieldA); } }
+ if(zoomA>0.01){ drawZoom(zoomA); }
+}
+
+function tick(){
+ var k=0.2, moving=false;
+ for(var i=0;i<dots.length;i++){ var d=dots[i]; d.x+=(d.tx-d.x)*k; d.y+=(d.ty-d.y)*k; d.op+=(d.top-d.op)*k; if(Math.abs(d.tx-d.x)>0.4||Math.abs(d.top-d.op)>0.006) moving=true; }
+ fieldA+=(fieldAT-fieldA)*k; zoomA+=(zoomAT-zoomA)*k;
+ if(Math.abs(fieldAT-fieldA)>0.006||Math.abs(zoomAT-zoomA)>0.006) moving=true;
+ draw(); reportH();
+ if(moving){ raf=requestAnimationFrame(tick); } else { raf=0; }
+}
+
+function step(n){ var s=Math.max(0,Math.min(4,stage+n)); if(s!==stage) applyStage(s); }
+function resetFunnel(){ if(stage!==0) applyStage(0); }
+function reportH(){ try{ var h=document.body.scrollHeight; parent.postMessage({type:'resize',height:h},'*'); }catch(e){} }
+
+function boot(){ fit(); build(); applyStage(0); reportH(); }
+var rt; window.addEventListener('resize',function(){ clearTimeout(rt); rt=setTimeout(function(){ fit(); build(); applyStage(stage); },150); });
+window.addEventListener('load',boot); boot();
+</script>
+<script>if(window.self===window.top){document.documentElement&&document.addEventListener('DOMContentLoaded',function(){document.body.classList.add('standalone');});if(document.body){document.body.classList.add('standalone');}}</script>
+</body></html>
