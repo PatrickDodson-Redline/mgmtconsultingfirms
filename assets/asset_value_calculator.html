@@ -20,7 +20,7 @@ body{font-family:'DM Sans',sans-serif;color:#1A1D24;background:#FAF8F4;padding:8
 .fld input[type=number]:focus{outline:none;border-color:#C87041;background:#fff}
 .fld .pre{position:relative}
 .fld .pre input{padding-left:22px}
-.fld .pre::before{content:'$';position:absolute;left:10px;top:8px;font-family:'JetBrains Mono',monospace;font-size:13px;color:#6E7388}
+.fld .pre::before{content:'$';position:absolute;left:10px;top:50%;transform:translateY(-50%);font-family:'JetBrains Mono',monospace;font-size:13px;color:#6E7388}
 .fld input[type=range]{width:100%;accent-color:#C87041;margin-top:4px}
 .fld .hint{font-size:10.5px;color:#6E7388;line-height:1.4;margin-top:4px}
 .convrow{display:flex;justify-content:space-between;align-items:baseline}
@@ -59,14 +59,15 @@ body{font-family:'DM Sans',sans-serif;color:#1A1D24;background:#FAF8F4;padding:8
 .bandbtn:hover{border-color:#C87041}
 .bandbtn.active{background:#C87041;border-color:#C87041;color:#fff}
 .bandbtn.active small{color:rgba(255,255,255,0.85)}
+.ro{background:#F0ECE2!important;color:#6E7388!important;cursor:not-allowed}.subrow{display:grid;grid-template-columns:1fr 1fr;gap:10px}.subrow .fld{margin-bottom:13px}
 body.standalone{max-width:1200px;margin-left:auto;margin-right:auto}
-</style></head>
+</style><style>p,li,span,div,td,h1,h2,h3,h4{text-wrap:pretty}</style></head>
 <body>
 
 <div class="vc-head">
   <div class="vc-eye">Value calculator · illustrative</div>
   <h1 class="vc-h">What focusing your effort is worth, on your own numbers</h1>
-  <p class="vc-sub">Adjust the inputs to your firm. The concrete number stands on your own rate. The rest is what that reclaimed focus tends to be worth.</p>
+  <p class="vc-sub">Adjust the inputs to your firm. The concrete number stands on your own rate.<br>The rest is what that reclaimed focus tends to be worth.</p>
 </div>
 
 <div class="bandbar">
@@ -82,29 +83,27 @@ body.standalone{max-width:1200px;margin-left:auto;margin-right:auto}
 <div class="vc-grid">
   <div class="vc-inputs">
     <h3>Your inputs</h3>
-    <div class="fld"><label>Growth leaders</label><input type="number" id="in_leaders" value="6" min="0" step="1"></div>
-    <div class="fld"><label>Growth-research hours reclaimed</label><input type="number" id="in_hpl" value="1000" min="0" step="50"><div class="hint">Team-wide: the leader and the team supporting their growth work.</div></div>
-    <div class="fld"><label>Blended billable rate, growth team</label><div class="pre"><input type="text" inputmode="numeric" id="in_rate" value="250"></div></div>
-    <div class="fld"><label>Monthly Redline Growth subscription</label><div class="pre"><input type="text" inputmode="numeric" id="in_sub" value="9,000"></div></div>
-    <div class="fld">
-      <div class="convrow"><label style="margin-bottom:0">Reclaimed time that converts to billable</label><span class="convval" id="o_convlbl">50%</span></div>
-      <input type="range" id="in_conv" value="50" min="0" max="100" step="5">
-    </div>
+    <div class="fld"><label>Growth leaders</label><input type="number" id="in_leaders" value="6" min="0" step="1"><div class="hint">Context only, for the per-leader read on reclaimed time.</div></div>
+    <div class="fld"><label>Blended billable rate, growth team</label><div class="pre"><input type="text" inputmode="numeric" id="in_rate" value="250"></div><div class="hint">Converts the growth budget into hours. Hours are the unit the model runs on.</div></div>
+    <div class="fld"><div class="convrow"><label style="margin-bottom:0">Research share of growth time</label><span class="convval" id="o_splitlbl">50%</span></div><input type="range" id="in_split" value="50" min="0" max="100" step="5"><div class="hint">Growth time splits between research, the targeting and qualification the engine can carry, and engagement: networking, prospecting, and active opportunity support that stays with your people. <span id="o_baseline">2,000</span> hrs/yr research baseline.</div></div>
+    <div class="fld"><div class="convrow"><label style="margin-bottom:0">Research time reclaimed by the engine</label><span class="convval" id="o_sharelbl">50%</span></div><input type="range" id="in_share" value="50" min="0" max="100" step="5"></div>
+    <div class="fld"><label>Growth-research hours reclaimed</label><input type="text" id="in_hpl" class="ro" readonly value="1,000"><div class="hint">Research baseline times the reclaim share above.</div></div>
+    <div class="subrow"><div class="fld"><label>Monthly subscription</label><div class="pre"><input type="text" inputmode="numeric" id="in_sub" value="12,500"></div></div><div class="fld"><label>Annual subscription</label><div class="pre"><input type="text" id="in_sub_annual" class="ro" readonly value="150,000"></div></div></div>
   </div>
 
   <div class="vc-results">
     <div class="tier t-concrete">
       <div class="tier-lbl">Concrete · capacity back, growth team</div>
-      <div class="bignum"><span id="o_hours">6,000</span><span class="u">hours / year</span></div>
-      <div class="subnum">About <b><span id="o_fte">4.0</span> FTE</b> of capacity returned across the growth team, leaders and the people who support their growth work. This stands on your own inputs.</div>
+      <div class="bignum"><span id="o_hours">1,000</span><span class="u">hours / year</span></div>
+      <div class="subnum">About <b><span id="o_fte">0.7</span> FTE</b> of capacity returned across the growth team, leaders and the junior staff who carry the bulk of the hours. This is the research time the engine takes off them.</div>
     </div>
 
     <div class="tier t-asp">
       <div class="tier-lbl">Opportunity</div>
-      <div class="tier-desc">Capacity reclaimed can be converted to additional billable capture.</div>
-      <div class="bignum"><span id="o_add">$750,000</span><span class="u">/ year</span></div>
-      <div class="subnum"><b><span id="o_cov">6.9x</span></b> the annual subscription · payback in <b><span id="o_pay">1.7 months</span></b>, at the conversion rate you set.</div>
-      <div class="illus">Illustrative. Assumes reclaimed hours convert to billable work at the rate above.</div>
+      <div class="tier-desc">Reclaimed research time, redeployed to billable client work at your blended rate.</div>
+      <div class="bignum"><span id="o_add">$250,000</span><span class="u">/ year</span></div>
+      <div class="subnum"><b><span id="o_cov">1.7x</span></b> the annual subscription · payback in <b><span id="o_pay">7.2 months</span></b>.</div>
+      <div class="illus">Illustrative. Values reclaimed hours at your blended billable rate, assuming they redeploy to billable work.</div>
     </div>
 
     <div class="nbox n-focus">
@@ -128,43 +127,49 @@ body.standalone{max-width:1200px;margin-left:auto;margin-right:auto}
   </div>
 </div>
 
-<div class="vc-foot">All figures illustrative, computed on your inputs. Not a guarantee of results.</div>
+<div class="vc-foot"><b style="color:#464B55">How the model works.</b> Hours are the unit; the blended rate converts dollars to hours. Total growth time is set at 10% of your annual booked target, the firm-wide effort that goes into winning new work, weighted toward growth leaders but carried in volume by junior staff. That time splits between research, the targeting and qualification the engine can run, and engagement, the networking and active-opportunity work that stays with your people. The first slider sets that split. The engine reclaims a share of the research half, set by the second slider. Reclaimed hours are then valued at your blended billable rate, assuming they redeploy to billable work. All figures illustrative, computed on your inputs. Not a guarantee of results.</div>
 
 <script>
 var $=function(id){return document.getElementById(id);};
 function num(id){return parseFloat(($(id).value||'').toString().replace(/[^0-9.]/g,''))||0;}
 function money(id){var n=num(id);$(id).value=n?n.toLocaleString('en-US'):'';}
 function fmt(n){return Math.round(n).toLocaleString('en-US');}
+var BENCH=0.10, T=10000000;
 function calc(){
-  var L=+$('in_leaders').value||0,HPL=+$('in_hpl').value||0,R=num('in_rate'),
-      C=(+$('in_conv').value||0)/100,S=num('in_sub');
-  var hours=L*HPL, fte=hours/1500, gross=hours*R, add=gross*C, annualSub=S*12,
-      cov=(annualSub>0)?add/annualSub:0, pay=(add>0)?12*annualSub/add:0;
-  $('o_hours').textContent=fmt(hours);
+  var R=num('in_rate')||1, split=(+$('in_split').value||0)/100, reclaim=(+$('in_share').value||0)/100,
+      monthly=num('in_sub'), annualSub=monthly*12;
+  var totalH=T*BENCH/R, researchBase=totalH*split, reclaimed=researchBase*reclaim,
+      fte=reclaimed/1500, add=reclaimed*R, cov=(annualSub>0)?add/annualSub:0, pay=(add>0)?12*annualSub/add:0;
+  $('in_hpl').value=fmt(reclaimed);
+  $('in_sub_annual').value=fmt(annualSub);
+  $('o_baseline').textContent=fmt(researchBase);
+  $('o_hours').textContent=fmt(reclaimed);
   $('o_fte').textContent=fte.toFixed(1);
   $('o_add').textContent='$'+fmt(add);
   $('o_cov').textContent=cov.toFixed(1)+'x';
   $('o_pay').textContent=(pay<=0)?'n/a':(pay<1?'under 1 month':pay.toFixed(1)+' months');
-  $('o_convlbl').textContent=Math.round(C*100)+'%';
+  $('o_splitlbl').textContent=Math.round(split*100)+'%';
+  $('o_sharelbl').textContent=Math.round(reclaim*100)+'%';
   reportH();
 }
-['in_leaders','in_hpl','in_rate','in_sub','in_conv'].forEach(function(id){
+['in_rate','in_sub','in_leaders'].forEach(function(id){
   $(id).addEventListener('input',function(){
     if(id==='in_rate'||id==='in_sub') money(id);
     document.querySelectorAll('.bandbtn').forEach(function(x){x.classList.remove('active');});
     calc();
   });
 });
-var BANDS={A:{l:2,s:3250},B:{l:4,s:6250},C:{l:6,s:12500},D:{l:9,s:18750},E:{l:18,s:31250},F:{l:30,s:75000}};
+['in_split','in_share'].forEach(function(id){ $(id).addEventListener('input',calc); });
+var BANDS={A:{t:3e6,l:2,s:3250},B:{t:6e6,l:4,s:6250},C:{t:10e6,l:6,s:12500},D:{t:16e6,l:9,s:18750},E:{t:30e6,l:18,s:31250},F:{t:50e6,l:30,s:75000}};
 function bandSet(b){
   var d=BANDS[b]; if(!d) return;
-  $('in_leaders').value=d.l; $('in_sub').value=d.s.toLocaleString('en-US');
-  $('in_hpl').value=1000; $('in_rate').value='250'; $('in_conv').value=50;
+  T=d.t; $('in_leaders').value=d.l; $('in_sub').value=d.s.toLocaleString('en-US');
+  $('in_rate').value='250'; $('in_split').value=50; $('in_share').value=50;
   document.querySelectorAll('.bandbtn').forEach(function(x){x.classList.toggle('active',x.getAttribute('data-band')===b);});
   calc();
 }
 function reportH(){try{parent.postMessage({type:'resize',height:document.body.scrollHeight},'*');}catch(e){}}
-window.addEventListener('load',function(){calc();reportH();});
+window.addEventListener('load',function(){bandSet('C');reportH();});
 window.addEventListener('resize',reportH);setTimeout(reportH,300);
 </script>
 <script>if(window.self===window.top){document.addEventListener('DOMContentLoaded',function(){document.body.classList.add('standalone');});if(document.body){document.body.classList.add('standalone');}}</script>
